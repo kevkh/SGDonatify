@@ -7,7 +7,7 @@ How to start?
 	1. Client(frontend) - mainly work on the "src" folder
 	2. Server(backend) - connected to mongoDB 
 
-(Testing accounts) (Check db if email username is wrong, all the pwd shud be 123)
+(Testing accounts) (Check mongodb atlas if email username is wrong, all the pwd shud be 123)
 1. (Donatee: bbc@gmail.com, pwd: 123)
 2. (Donor: tom@gmail.com pwd: 123)
 3. (Admin: admin@gmail.com, pwd 123) //login through Donor Login
