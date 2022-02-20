@@ -8,6 +8,7 @@ import postRoutes from "./routes/forms.js";
 import userRoutes from "./routes/users.js";
 import donorRoutes from "./routes/donor.js";
 import donateeRoutes from "./routes/donatee.js";
+import donationListingsRoutes from "./routes/donationListings.js";
 // import agentRoutes from "./routes/agent.js";
 
 
@@ -27,6 +28,7 @@ app.use("/forms", postRoutes); // localhost:5000/forms
 app.use("/user", userRoutes); // a route for the User
 app.use("/donor", donorRoutes);
 app.use("/donatee", donateeRoutes);
+app.use("/donationlisting", donationListingsRoutes);
 
 // Heroku api, ignore this part
 // app.get('/', (req, res) => {

@@ -82,4 +82,7 @@ export const fetchDonatee = () => API.get("/donatees");
 //delete Donatee
 export const deleteDonatee = (userID) => API.delete(`/donatee/${userID}`);
 
+//get donation listings
+export const getDonationListings = () => API.get('/donationlisting');
+
 

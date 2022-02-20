@@ -108,6 +108,7 @@ return (
         height="100"
       />
       </Typography>
+      <Link to ="/DisplayListings" style={{textDecoration:'none'}}><Button variant="contained" color="primary"> Search Donation Listings </Button></Link>
       {/* <img
         className={classes.image}
         src={mypic}

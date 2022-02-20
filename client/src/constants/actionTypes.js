@@ -3,6 +3,7 @@ export const CREATE = "CREATE";
 export const UPDATE = "UPDATE";
 export const DELETE = "DELETE";
 export const FETCH_ALL = "FETCH_ALL";
+export const FETCH_ALL_DONATION = "FETCH_ALL_DONATION";
 //export const LIKE = "LIKE";
 
 //Authentication
