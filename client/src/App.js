@@ -40,6 +40,7 @@ import EditDonateeProfile from "./components/Pages/EditDonateeProfile";
 
 //donation Listing
 import IndividualDonationDetails from "./components/DonationListing/IndividualDonationDetails";
+import LocateCC from "./components/Pages/LocateCC";
 
 function App () {
 
@@ -82,6 +83,7 @@ return (
 
         <Route exact path="/DisplayListings"> <DisplayListings/></Route>
         <Route exact path="/DisplayListings/:donationId"> <IndividualDonationDetails/></Route>
+        <Route exact path="/LocateCC"> <LocateCC/></Route>
       </Switch>
     </Box>
   </Router>

@@ -109,6 +109,7 @@ return (
       />
       </Typography>
       <Link to ="/DisplayListings" style={{textDecoration:'none'}}><Button variant="contained" color="primary"> Search Donation Listings </Button></Link>
+      <Link to ="/LocateCC" style={{textDecoration:'none'}} ><Button variant="contained" color="primary"> Locate CC </Button></Link>
       {/* <img
         className={classes.image}
         src={mypic}

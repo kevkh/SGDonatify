@@ -1,54 +1,48 @@
-import { useState, React} from 'react'
+import { useState, React, useEffect} from 'react'
 import GoogleMapReact from 'google-map-react'
 import LocationMarker from './LocationMarker'       
 import LocationInfoBox from './LocationInfoBox'    
+import { Box } from '@mui/material'
 
-const Map = ({ property , center, zoom }) => {
+const Map = ({communityCentre, lat, long}) => {
 
-    // console.log('Is it fetching? see below')
-    // console.log(property)
-
-    const storePropertyInfo = (ev) => {
-        localStorage.setItem("property", JSON.stringify(ev))
-    }
-
-    const [load, setLoad] = useState(true)
+    const [center,setCenter] = useState([lat,long])
+    const zoom = 15
     const [locationInfo, setLocationInfo] = useState(null)
-    property = property.filter((ev) => ev.latitude !== 0 && ev.longitude !== 0)
-    const markers = property.map((ev) => {
+
+    const markers = communityCentre.map((cc) => {
+        return <LocationMarker lat = {cc.LATITUDE} lng = {cc.LONGITUDE}
+        onClick = {() => {
+            setLocationInfo({building: cc.BUILDING, address: cc.ADDRESS})
+        }}
+        />
         
-            return <LocationMarker lat = {ev.latitude} lng = {ev.longitude} 
-            onClick={() => 
-                setLocationInfo({ _id: ev._id, town: ev.town, block: ev.block, street_name: ev.street_name, resale_price: ev.resale_price},
-                storePropertyInfo(ev)
-                )} />
-            
     })
 
+    useEffect (() => {
+
+        setCenter([lat,long])
+
+    },[lat,long])
+
     return (
-        <div className="map">
+        <Box className="map" sx={{maxWidth: "50%", height:900, ml:2}} >
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyDudsRZJAg4b86eEptTGXVWdS0u0B4bifs' }}
-                defaultCenter={ center }
+                center={ center }
                 defaultZoom={ zoom }
             >
 
-              {/* <LocationMarker lat ={center.lat} lng = {center.lng} /> */}
-                {markers}
+                {markers} 
             </GoogleMapReact>
             {locationInfo && <LocationInfoBox info={locationInfo} setLocationInfo={setLocationInfo} />}
-        </div>
+       
+        </Box> 
     )
 }
 
 
 
-Map.defaultProps = {
-    center: {
-        lat: 1.35547,
-        lng: 103.851959
-    },
-    zoom: 13
-}
+
 
 export default Map
