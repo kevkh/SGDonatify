@@ -1,5 +1,5 @@
 import Map from "../Property/Map.js"
-import { Box, Stack } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 import axios from "axios"
 import React, { useState, useEffect } from 'react'
 import Skeleton from '@mui/material/Skeleton'
@@ -18,10 +18,11 @@ const LocateCC = () => {
     const [search, setSearch] = useState("")
     const [text, setText] = useState("")
     const [closeAlert, setCloseAlert] = useState(false)
+    const [markersInView,setMarkersInView] = useState(null)
 
     const removeNonCC = (cc) => {
 
-       return ! ((cc.SEARCHVAL.includes("SPARKLETOTS")) || (cc.SEARCHVAL.includes("DBS")))
+       return !( (cc.SEARCHVAL.includes("SPARKLETOTS")) || (cc.SEARCHVAL.includes("DBS")) || (cc.SEARCHVAL.includes("(U/C)")) )
         
     }
 
@@ -110,9 +111,16 @@ const LocateCC = () => {
                             <AlertTitle>Error</AlertTitle>
                             <strong> Invalid postal code. Please try again. </strong>
                         </Alert>}
+                {markersInView?.map((marker)=>{
+
+                    return  <Stack sx={{mt:2,mb:2}} >
+                            <Typography>{marker.BUILDING} </Typography>
+                            <Typography>{marker.ADDRESS} </Typography>
+                            </Stack>
+                })}
                 </Stack>
             </Box>
-            {load ? <Skeleton variant="rectangular" animation="wave" width={"50%"} height={900} sx={{ml:2}} /> : <Map communityCentre={communityCentre} lat={lat} long={long} />}
+            {load ? <Skeleton variant="rectangular" animation="wave" width={"50%"} height={900} sx={{ml:2}} /> : <Map communityCentre={communityCentre} lat={lat} long={long} setMarkersInView={setMarkersInView}/>}
         </Box>
     )
 }
