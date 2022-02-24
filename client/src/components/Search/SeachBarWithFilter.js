@@ -7,7 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Grid, Box, Typography, Button, Paper } from '@mui/material';
-
+import SearchIcon from '@mui/icons-material/Search'
+import InputAdornment from '@mui/material/InputAdornment'
 
 const SeachBarWithFilter = ({ sort, setSort, setText}) => {
 
@@ -32,15 +33,16 @@ const SeachBarWithFilter = ({ sort, setSort, setText}) => {
         <Paper fullWidth elevation={5} sx={{borderRadius:100}}>
             <Grid container spacing={2}>
                 <Grid item xs={4} sx={{ mb: 2, ml: 2 }}>
-                    <TextField
-                        sx={{ minWidth: "100%", height: "100%" }}
-                        variant="outlined"
-                        placeholder="Search Donations"
-                        value={search}
-                        onChange={handleTextField}
-                        onKeyUp={handleEnter}
-                    >
-                    </TextField>
+                        <TextField
+                            sx={{ minWidth: "100%", height: "100%" }}
+                            variant="outlined"
+                            placeholder="Search Donations"
+                            value={search}
+                            onChange={handleTextField}
+                            onKeyUp={handleEnter}
+                            InputProps = {{startAdornment: (<InputAdornment position="start"> <SearchIcon /></InputAdornment>)}}
+                            >
+                        </TextField>
                 </Grid>
                 <Grid item sx={{ flexGrow: 1 }}>
                 </Grid>
@@ -51,6 +53,7 @@ const SeachBarWithFilter = ({ sort, setSort, setText}) => {
                             value={sort}
                             onChange={handleSort}
                             input={<OutlinedInput label="Sort" />}
+                            sx={{borderRadius:10}}
                         >
                             <MenuItem value="Newest">Newest</MenuItem>
                             <MenuItem value="Oldest">Oldest</MenuItem>

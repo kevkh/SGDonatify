@@ -1,13 +1,20 @@
 import Map from "../Property/Map.js"
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Select, Stack, Typography } from '@mui/material'
 import axios from "axios"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import AlertTitle from '@mui/material/AlertTitle'
+import SearchIcon from '@mui/icons-material/Search'
+import InputAdornment from '@mui/material/InputAdornment'
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl';
+import ccLogo from "../../images/ccLogo.png"
 
 const LocateCC = () => {
 
@@ -19,6 +26,37 @@ const LocateCC = () => {
     const [text, setText] = useState("")
     const [closeAlert, setCloseAlert] = useState(false)
     const [markersInView,setMarkersInView] = useState(null)
+    const [townSelected,setTownSelected] = useState("")
+    const [variableChanged, setVariableChanged] = useState(0) // 1 = text 2 = townSelected
+
+
+    const towns = [
+        "Sembawang",
+        "Woodlands",
+        "Yishun",
+        "Ang Mo Kio",
+        "Hougang",
+        "Punggol",
+        "Sengkang",
+        "Serangoon",
+        "Bedok",
+        "Pasir Ris",
+        "Tampines",
+        "Bukit Batok",
+        "Bukit Panjang",
+        "Choa Chu Kang",
+        "Clementi",
+        "Jurong East",
+        "Jurong West",
+        "Bishan",
+        "Bukit Merah",
+        "Bukit Timah",
+        "Geylang",
+        "Marine Parade",
+        "Queenstown",
+        "Toa Payoh"
+        ]
+    towns.sort()
 
     const removeNonCC = (cc) => {
 
@@ -31,8 +69,17 @@ const LocateCC = () => {
     }
 
     const handleEnter = (e) => {
-        if (e.keyCode === 13)
+
+        if (e.keyCode === 13) {
+            setVariableChanged(1)
             setText(search)
+        }
+    }
+
+    const handleTownChange = (e) => {
+
+        setVariableChanged(2)
+        setTownSelected(e.target.value)
     }
 
     useEffect (() => {
@@ -72,51 +119,83 @@ const LocateCC = () => {
 
     useEffect (() => {
 
-        const getCordinates = async () => {
-            if (text != "")
-                {
-                    const res = await axios.get(`https://developers.onemap.sg/commonapi/search?searchVal=${text}&returnGeom=Y&getAddrDetails=Y`)
-                    if (res.data.results.length < 1)
-                        setCloseAlert(true)
-                    else
-                    {
-                        setCloseAlert(false)
-                        setLat(parseFloat(res.data.results[0]?.LATITUDE))
-                        setLong(parseFloat(res.data.results[0]?.LONGITUDE))
+        const setCoordinates =  (res) => {
 
-                    }
+            if (res.data.results.length < 1)
+                setCloseAlert(true)
+            else {
+                setCloseAlert(false)
+                setLat(parseFloat(res.data.results[0]?.LATITUDE))
+                setLong(parseFloat(res.data.results[0]?.LONGITUDE))
+
+            }
+        }
+
+        const getCordinates = async () => {
+
+            if (variableChanged == 1) {
+                if (text.length != 6 ||  parseInt(text) == NaN)
+                {
+                    setCloseAlert(true)
+                    return
                 }
+                const res = await axios.get(`https://developers.onemap.sg/commonapi/search?searchVal=${text}&returnGeom=Y&getAddrDetails=Y`)
+                setCoordinates(res)
+            }
+            else if (variableChanged == 2) {
+                const res = await axios.get(`https://developers.onemap.sg/commonapi/search?searchVal=${townSelected}&returnGeom=Y&getAddrDetails=Y`)
+                setCoordinates(res)
+            }
+
         }
 
         getCordinates()
 
-    },[text])
+    },[text,townSelected])
 
     return (
         <Box sx={{ display: 'flex'}}>
             <Box sx={{ flexGrow: 1}}>
                 <Stack>
-                <TextField
-                        fullWidth
-                        variant="outlined"
-                        placeholder="Search Community Center Via Postal Code"
-                        value={search}
-                        onChange={handleTextField}
-                        onKeyUp={handleEnter}
-                    >
-                    </TextField>
+                    <Box sx={{ display: 'flex'}}>
+                       <TextField
+                            variant="outlined"
+                            placeholder="Search Community Center Via Postal Code"
+                            value={search}
+                            onChange={handleTextField}
+                            onKeyUp={handleEnter}
+                            InputProps={{ startAdornment: (<InputAdornment position="start"> <SearchIcon /></InputAdornment>) }}
+                            sx={{width:'80%'}}
+                            
+                        />
+                        <FormControl sx={{ml:2,width:'30%'}}>
+                            <InputLabel>Search by Town</InputLabel>
+                            <Select
+                                value={townSelected}
+                                onChange={handleTownChange}
+                                input={<OutlinedInput label="Search by Town" />}
+                            >
+                            {towns.map( (town) => (<MenuItem value={town}>{town}</MenuItem>) )}
+                            </Select>
+                        </FormControl>
+                    </Box>
                 {closeAlert &&
-                        <Alert sx={{ mt: 2, maxWidth:"30%"}} severity="error" action={<IconButton size='small' onClick={() => { setCloseAlert(false) }}> <CloseIcon fontSize="inherit" /> </IconButton>}
+                        <Alert sx={{ mt: 2, mb: 2, maxWidth:"30%"}} severity="error" action={<IconButton size='small' onClick={() => { setCloseAlert(false) }}> <CloseIcon fontSize="inherit" /> </IconButton>}
                             >
                             <AlertTitle>Error</AlertTitle>
                             <strong> Invalid postal code. Please try again. </strong>
                         </Alert>}
                 {markersInView?.map((marker)=>{
 
-                    return  <Stack sx={{mt:2,mb:2}} >
-                            <Typography>{marker.BUILDING} </Typography>
-                            <Typography>{marker.ADDRESS} </Typography>
-                            </Stack>
+                return <Stack sx={{ mt: 1, mb: 1, p: 1, backgroundColor: 'white', borderRadius: 5 }} >
+                            <Box sx={{ display: "flex" }}>
+                                <img src={ccLogo} />
+                                <Box sx={{ml:1}}>
+                                    <Typography>{marker.BUILDING} </Typography>
+                                    <Typography>{marker.ADDRESS} </Typography>
+                                </Box>
+                            </Box>
+                        </Stack>
                 })}
                 </Stack>
             </Box>
