@@ -48,7 +48,7 @@ function App () {
 
 return (
   <Router>
-    <Box sx={{width:'90%',pl:10}}>
+    <Box sx={{width:'100%'}}>
       <Navbar />
 
       <Switch>

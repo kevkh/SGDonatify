@@ -92,7 +92,7 @@ const Navbar = () => {
 }, [location]); // when location change, set the user
 
 return (
-  <AppBar className={classes.appBar} position="static" color="inherit">
+  <AppBar className={classes.appBar} position="static"color="inherit">
     <div className={classes.brandContainer}>
       <Typography
         component={Link}
@@ -108,30 +108,30 @@ return (
         height="100"
       />
       </Typography>
-      <Link to ="/DisplayListings" style={{textDecoration:'none'}}><Button variant="contained" color="primary"> Search Donation Listings </Button></Link>
-      <Link to ="/LocateCC" style={{textDecoration:'none'}} ><Button variant="contained" color="primary"> Locate CC </Button></Link>
-      {/* <img
-        className={classes.image}
-        src={mypic}
-        alt="mypic"
-        height="60"
-      /> */}
-      {/* <Box sx={{ ml: 2 }} >
-        <Button variant="contained" onClick={handleAnchorClick}> View Past No. of applications</Button>
-        <Popover
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleAnchorClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-        >
-          <iframe width="800" height="800" src="https://data.gov.sg/dataset/number-of-applications-registered-for-resale-flats/resource/dea41bef-7116-43ba-9f2f-f13bfbf876d2/view/ae7cd44a-5866-4750-95d3-10e538ac4c84"
-            frameBorder="0.5">
-          </iframe>
-        </Popover>
-      </Box> */}
+      {/* <Link to ="/DisplayListings" style={{textDecoration:'none'}}><Button variant="contained" color="primary"> Search Donation Listings </Button></Link>
+      <Link to ="/LocateCC" style={{textDecoration:'none'}} ><Button variant="contained" color="primary"> Locate CC </Button></Link> */}
+                                                                                                                                                                                  {/* <img
+                                                                                                                                                                                    className={classes.image}
+                                                                                                                                                                                    src={mypic}
+                                                                                                                                                                                    alt="mypic"
+                                                                                                                                                                                    height="60"
+                                                                                                                                                                                  /> */}
+                                                                                                                                                                                  {/* <Box sx={{ ml: 2 }} >
+                                                                                                                                                                                    <Button variant="contained" onClick={handleAnchorClick}> View Past No. of applications</Button>
+                                                                                                                                                                                    <Popover
+                                                                                                                                                                                      open={open}
+                                                                                                                                                                                      anchorEl={anchorEl}
+                                                                                                                                                                                      onClose={handleAnchorClose}
+                                                                                                                                                                                      anchorOrigin={{
+                                                                                                                                                                                        vertical: 'bottom',
+                                                                                                                                                                                        horizontal: 'left',
+                                                                                                                                                                                      }}
+                                                                                                                                                                                    >
+                                                                                                                                                                                      <iframe width="800" height="800" src="https://data.gov.sg/dataset/number-of-applications-registered-for-resale-flats/resource/dea41bef-7116-43ba-9f2f-f13bfbf876d2/view/ae7cd44a-5866-4750-95d3-10e538ac4c84"
+                                                                                                                                                                                        frameBorder="0.5">
+                                                                                                                                                                                      </iframe>
+                                                                                                                                                                                    </Popover>
+                                                                                                                                                                                  </Box> */}
      
 
     </div>
@@ -174,11 +174,11 @@ return (
           )}
           <Typography className={classes.userName} variant="h6">
 
-                  {/* {user?.result.type === "user" ? (     
-                  userProfile?.name
-                  ) : (user?.result.type === "donor"?      
-                  (donorProfile?.name):(user?.result.name)
-                  )} */}
+                                                                                                                                                                                    {/* {user?.result.type === "user" ? (     
+                                                                                                                                                                                    userProfile?.name
+                                                                                                                                                                                    ) : (user?.result.type === "donor"?      
+                                                                                                                                                                                    (donorProfile?.name):(user?.result.name)
+                                                                                                                                                                                    )} */}
                   
                   {user?.result.type === "donatee" ? (     
                   donateeProfile?.name
@@ -225,10 +225,10 @@ return (
       ) : (
         // else (not login)
         <div>
-           {/* <Button component={Link} to="/" className={classes.purple} variant="contained" endIcon={<SendIcon />}>
-               Search for Forms
-           </Button> */}
-          <Button
+                                                                                                                                                                                    {/* <Button component={Link} to="/" className={classes.purple} variant="contained" endIcon={<SendIcon />}>
+                                                                                                                                                                                        Search for Forms
+                                                                                                                                                                                    </Button> */}
+          {/* <Button
             component={Link}
             to="/donor"
             variant="contained"
@@ -244,16 +244,16 @@ return (
             color="primary"
           >
             Donatee Sign In
-          </Button>
-
-          {/* <Button
-            component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
-          >
-            User Sign In
           </Button> */}
+
+                                                                                                                                                                                            {/* <Button
+                                                                                                                                                                                              component={Link}
+                                                                                                                                                                                              to="/auth"
+                                                                                                                                                                                              variant="contained"
+                                                                                                                                                                                              color="primary"
+                                                                                                                                                                                            >
+                                                                                                                                                                                              User Sign In
+                                                                                                                                                                                            </Button> */}
         </div>
       )}
     </Toolbar>
