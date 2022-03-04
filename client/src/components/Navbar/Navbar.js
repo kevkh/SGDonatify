@@ -12,7 +12,7 @@ import Box from '@mui/material/Box'
 import axios from 'axios';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-
+import Searchbar from "./Searchbar";
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -93,6 +93,8 @@ const Navbar = () => {
   setUser(JSON.parse(localStorage.getItem("profile")));
 }, [location]); // when location change, set the user
 
+
+
 return (
   <AppBar className={classes.appBar} position="static" color="inherit">
       
@@ -104,16 +106,23 @@ return (
         align="center"
       >*/
       <Container disableGutters = "true" maxWidth = "xl">
-        <Grid margin = "0" container spacing={1}>
-          <Grid item xs={3} className={classes.verticalCenter}>
-            <img className={classes.image} src={mypic} alt="mypic"/>
-            <Typography className={classes.heading} variant="h4"  component="div">
-              SGDONATIFY
-            </Typography>
+        <Grid margin = "0" container>
+          <Grid padding = "0" item xs={3}>
+            <Link className={classes.verticalCenter}  to ="/DisplayListings">
+              <img className={classes.image} src={mypic} alt="mypic"/>
+              <Typography className={classes.heading} variant="h5"  component="div">
+                SGDONATIFY
+              </Typography>
+            </Link>
           </Grid>
-          <Button component={Link} to="/DonorList" className={classes.purple}  >
-              Admin Dashboard
-          </Button>
+          <Grid className={classes.searchBar} item xs={6}>
+            <Searchbar/>
+          </Grid>
+          <Grid item xs={3}>
+            <Button component={Link} to="/DonorList" className={classes.purple}  >
+                Admin Dashboard
+            </Button>
+          </Grid>
         </Grid>
       </Container>
       /*

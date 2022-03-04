@@ -17,14 +17,17 @@ export default makeStyles((theme) => ({
     color: 'rgba(0,183,255, 1)',
     display: 'block',
     float: 'left',
-    marginTop:'auto',
-    marginBottom:'auto',
+    margin: 'auto 0',
     fontWeight: 600 
   },
   image: {
     height: '100px',
     display: 'block',
     float: 'left'
+  },
+  searchBar: {
+    padding: "0 50px",
+    margin: 'auto 0',
   },
   toolbar: {
     display: 'flex',
