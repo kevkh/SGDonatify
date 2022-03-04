@@ -10,6 +10,8 @@ import * as actionType from "../../constants/actionTypes";
 import useStyles from "./styles";
 import Box from '@mui/material/Box'
 import axios from 'axios';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -92,22 +94,30 @@ const Navbar = () => {
 }, [location]); // when location change, set the user
 
 return (
-  <AppBar className={classes.appBar} position="static"color="inherit">
-    <div className={classes.brandContainer}>
-      <Typography
+  <AppBar className={classes.appBar} position="static" color="inherit">
+      
+      {/* <Typography
         component={Link}
         to="/"
         className={classes.heading}
         variant="h1"
         align="center"
-      >
-       <img
-        className={classes.image}
-        src={mypic}
-        alt="mypic"
-        height="100"
-      />
-      </Typography>
+      >*/
+      <Container disableGutters = "true" maxWidth = "xl">
+        <Grid margin = "0" container spacing={1}>
+          <Grid item xs={3} className={classes.verticalCenter}>
+            <img className={classes.image} src={mypic} alt="mypic"/>
+            <Typography className={classes.heading} variant="h4"  component="div">
+              SGDONATIFY
+            </Typography>
+          </Grid>
+          <Button component={Link} to="/DonorList" className={classes.purple}  >
+              Admin Dashboard
+          </Button>
+        </Grid>
+      </Container>
+      /*
+      </Typography> */}
       {/* <Link to ="/DisplayListings" style={{textDecoration:'none'}}><Button variant="contained" color="primary"> Search Donation Listings </Button></Link>
       <Link to ="/LocateCC" style={{textDecoration:'none'}} ><Button variant="contained" color="primary"> Locate CC </Button></Link> */}
                                                                                                                                                                                   {/* <img
@@ -134,10 +144,10 @@ return (
                                                                                                                                                                                   </Box> */}
      
 
-    </div>
+
     
     {/* User Logic here */}
-    <Toolbar className={classes.toolbar}>
+    {/* <Toolbar className={classes.toolbar}>
       {user?.result ? ( // if user exists, (login)
         <div className={classes.profile}>
           {
@@ -172,7 +182,7 @@ return (
               {user?.result.name.charAt(0)}
             </Avatar>
           )}
-          <Typography className={classes.userName} variant="h6">
+          <Typography className={classes.userName} variant="h6"> */}
 
                                                                                                                                                                                     {/* {user?.result.type === "user" ? (     
                                                                                                                                                                                     userProfile?.name
@@ -180,7 +190,7 @@ return (
                                                                                                                                                                                     (donorProfile?.name):(user?.result.name)
                                                                                                                                                                                     )} */}
                   
-                  {user?.result.type === "donatee" ? (     
+                  {/* {user?.result.type === "donatee" ? (     
                   donateeProfile?.name
                   ) : (user?.result.type === "donor"?      
                   (donorProfile?.name): (user?.result.name) // else admin
@@ -224,7 +234,7 @@ return (
         </div>
       ) : (
         // else (not login)
-        <div>
+        <div> */}
                                                                                                                                                                                     {/* <Button component={Link} to="/" className={classes.purple} variant="contained" endIcon={<SendIcon />}>
                                                                                                                                                                                         Search for Forms
                                                                                                                                                                                     </Button> */}
@@ -254,9 +264,9 @@ return (
                                                                                                                                                                                             >
                                                                                                                                                                                               User Sign In
                                                                                                                                                                                             </Button> */}
-        </div>
+        {/* </div>
       )}
-    </Toolbar>
+    </Toolbar> */}
   </AppBar>
 );
 };
