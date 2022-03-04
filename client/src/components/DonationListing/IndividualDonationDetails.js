@@ -57,20 +57,25 @@ const IndividualDonationDetails = () => {
                     <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
                     <Grid columns={2} container spacing={0}  rowSpacing={2} >
                         <Grid item xs={1}>
-                            <TermsnConditions id={id} amount="5"/>
+                            <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
 
                         <Grid item xs={1}>
-                            <TermsnConditions id={id} amount="10"/>
+                            <TermsnConditions custom={false} id={id} buttonValue="$10" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
 
                         <Grid item xs={1}>
-                            <TermsnConditions id={id} amount="50"/>
+                            <TermsnConditions custom={false} id={id} buttonValue="$50" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
 
                         <Grid item xs={1}>
-                            <TermsnConditions id={id} amount="1000"/>
+                            <TermsnConditions custom={false} id={id} buttonValue="$1000" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
+
+                        <Grid item xs={2}>
+                            <TermsnConditions custom id={id} buttonValue="Custom Amount" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                        </Grid>
+
                     </Grid >
                 </Stack>
             </Grid>

@@ -4,26 +4,68 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import { Box,Button } from '@mui/material'
+import { Box,Button, TextField } from '@mui/material'
 import {useState } from 'react'
 import {useDispatch} from 'react-redux'
 import {updateDonation} from '../../actions/donationListing.js'
+import Alert from '@mui/material/Alert'
 
-const TermsnConditions = ({id, amount}) => {
+const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
-  const dispatch = useDispatch()
-  const [openDialog, setOpenDialog] = useState(false)
-  const handleDialogOpen = () => setOpenDialog(true)
-  const handleDialogClose = () => setOpenDialog(false)
+    const dispatch = useDispatch()
+    const [openDialog, setOpenDialog] = useState(false)
+    const [textFieldValue,setTextFieldValue] = useState("")
+    const [displayAlert,setDisplayAlert] = useState(false)
 
-  const handleDialogCloseandUpdateDonation = () => {
-    dispatch(updateDonation(id, {amount}))
-    setOpenDialog(false)
-  }
+    const handleDialogOpen = () => setOpenDialog(true)
+    const handleDialogClose = () => {
+        if (custom)
+            setTextFieldValue("")
+            setDisplayAlert(false)
+        setOpenDialog(false)
+    }
+
+    const handleDialogCloseandUpdateDonation = () => {
+        if (custom)
+        {
+            if (!checkCustomAmount())
+                setDisplayAlert(true)
+            else
+            {
+                setDisplayAlert(false)
+                const amount = textFieldValue
+                dispatch(updateDonation(id, {amount}))
+                setOpenDialog(false)
+                setTextFieldValue("")
+            }
+        }
+        else
+        {
+            const amount = buttonValue.substring(1)
+            dispatch(updateDonation(id, { amount }))
+            setOpenDialog(false)
+        }
+        
+    }
+
+    const handleTextField = (e) => {
+        setTextFieldValue(e.target.value)
+    }
+
+    const checkCustomAmount = () => {
+        const validInt = parseInt(textFieldValue)
+        const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
+        if (validInt >= 1 && validInt <= validAmount)
+            return true
+        else
+            return false
+    }
+
+    const closeDisplayAlert = () => setDisplayAlert(false)
 
   return (
     <Box>
-      <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen} >Donate ${amount}  </Button>
+      <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}  </Button>
       <Dialog
         open={openDialog}
         onClose={handleDialogClose}
@@ -31,6 +73,14 @@ const TermsnConditions = ({id, amount}) => {
         <DialogTitle>
           {"Terms & Conditions"}
         </DialogTitle>
+         {custom && 
+         <TextField
+            label="Donation Amount"
+            value={textFieldValue}
+            onChange={handleTextField}
+            sx={{ml:2,mr:2}}
+          />}
+         {displayAlert && <Alert severity="error" sx={{my:1}} onClick={closeDisplayAlert} >Invalid value. Please try again</Alert>}
         <DialogContent>
           <DialogContentText>
             The user agree to donate the amount stated and no refunds will be given once the terms and conditions is accepted by the user.
