@@ -16,6 +16,8 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     const [openDialog, setOpenDialog] = useState(false)
     const [textFieldValue,setTextFieldValue] = useState("")
     const [displayAlert,setDisplayAlert] = useState(false)
+    const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
+    const buttonValueInt = parseInt(buttonValue.substring(1))
 
     const handleDialogOpen = () => setOpenDialog(true)
     const handleDialogClose = () => {
@@ -41,7 +43,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
         }
         else
         {
-            const amount = buttonValue.substring(1)
+            const amount = buttonValueInt
             dispatch(updateDonation(id, { amount }))
             setOpenDialog(false)
         }
@@ -54,7 +56,6 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
     const checkCustomAmount = () => {
         const validInt = parseInt(textFieldValue)
-        const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
         if (validInt >= 1 && validInt <= validAmount)
             return true
         else
@@ -65,7 +66,8 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
   return (
     <Box>
-      <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}  </Button>
+      {buttonValueInt <= validAmount || (custom && !(donationValue[0] == donationValue[1]))? <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}</Button>:
+      <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen} disabled>Donate {buttonValue} </Button>}
       <Dialog
         open={openDialog}
         onClose={handleDialogClose}
@@ -80,7 +82,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
             onChange={handleTextField}
             sx={{ml:2,mr:2}}
           />}
-         {displayAlert && <Alert severity="error" sx={{my:1}} onClick={closeDisplayAlert} >Invalid value. Please try again</Alert>}
+         {displayAlert && <Alert severity="error" sx={{my:1}} onClick={closeDisplayAlert} >Invalid value. Please enter an integer value between $1 and ${validAmount}</Alert>}
         <DialogContent>
           <DialogContentText>
             The user agree to donate the amount stated and no refunds will be given once the terms and conditions is accepted by the user.
