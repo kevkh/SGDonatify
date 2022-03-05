@@ -26,8 +26,12 @@ export default makeStyles((theme) => ({
     float: 'left'
   },
   searchBar: {
-    padding: "0 50px",
+
     margin: 'auto 0',
+  },
+  profileButton:{
+    margin: 'auto 0',
+    minHeight: "40px"
   },
   toolbar: {
     display: 'flex',

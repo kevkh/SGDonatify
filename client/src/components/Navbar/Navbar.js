@@ -13,6 +13,8 @@ import axios from 'axios';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Searchbar from "./Searchbar";
+import ProfilePanel from "./ProfilePanel";
+
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
@@ -106,8 +108,8 @@ return (
         align="center"
       >*/
       <Container disableGutters = "true" maxWidth = "xl">
-        <Grid margin = "0" container>
-          <Grid padding = "0" item xs={3}>
+        <Grid  container>
+          <Grid item xs={3}>
             <Link className={classes.verticalCenter}  to ="/DisplayListings">
               <img className={classes.image} src={mypic} alt="mypic"/>
               <Typography className={classes.heading} variant="h5"  component="div">
@@ -118,10 +120,8 @@ return (
           <Grid className={classes.searchBar} item xs={6}>
             <Searchbar/>
           </Grid>
-          <Grid item xs={3}>
-            <Button component={Link} to="/DonorList" className={classes.purple}  >
-                Admin Dashboard
-            </Button>
+          <Grid className={classes.verticalCenter} item xs={3}>
+            <ProfilePanel />
           </Grid>
         </Grid>
       </Container>
