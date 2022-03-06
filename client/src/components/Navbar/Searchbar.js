@@ -1,18 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect,useRef } from 'react'
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import { useHistory } from "react-router-dom";
 const Searchbar = () => {
     const [search,setSearch] = useState("")
-    const [text,setText] = useState("")
+    let history = useHistory();
+
+   
+
     const handleTextField = (e) => {
         setSearch(e.target.value.toLowerCase())
+        
     }
 
     const handleEnter = (e) => {
         if (e.keyCode === 13)
-            setText(search)
+        {
+            localStorage.setItem('searchText',search);
+            
+            history.push("/displaylistings");
+            window.location.reload();
+        }
+    
     }
+
+
     return(<TextField
         sx={{ minWidth: "100%", height: "100%" }}
         variant="outlined"

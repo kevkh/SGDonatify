@@ -24,14 +24,15 @@ const DisplayListings = () => {
     const [pagenatedDonationListings, setpagenatedDonationListings] = useState([])
     const [closeAlert, setCloseAlert] = useState()
     const [sort,setSort] = useState("")
-    const [text,setText] = useState("")
+    const text = localStorage.getItem('searchText')
+
     
     const [pagenationLength, setPagenationLength] = useState(0)
     const [page,setPage] = useState(1)
 
 
     const handleChange = (event, value) => {
-
+       
         if (value >= 1 && value <= pagenationLength) {
             setPage(value)
             const indexOfLastPost = value * 15
@@ -73,7 +74,7 @@ const DisplayListings = () => {
     }
 
     const filterDonations = (text) => {
-
+      
         if (text === "")
             filteredDonationListings = [...donationListings]
         else
@@ -89,7 +90,7 @@ const DisplayListings = () => {
 
     
     useEffect(() => {
-
+        
         filterDonations(text)
         sortDonations(sort)
 
@@ -110,10 +111,10 @@ const DisplayListings = () => {
     
 
     return (
-
+        
         <Box sx={{}}>  
         <Box>
-            <SeachBarWithFilter sort={sort} setSort={setSort} setText={setText} ></SeachBarWithFilter>
+            <SeachBarWithFilter sort={sort} setSort={setSort} ></SeachBarWithFilter>
         </Box>
                 
             <Box sx={{my:2}}>
