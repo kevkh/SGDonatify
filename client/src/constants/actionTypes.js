@@ -4,6 +4,7 @@ export const UPDATE = "UPDATE";
 export const DELETE = "DELETE";
 export const FETCH_ALL = "FETCH_ALL";
 export const FETCH_ALL_DONATION = "FETCH_ALL_DONATION";
+export const UPDATE_DONATION_VALUE = "UPDATE_DONATION_VALUE";
 //export const LIKE = "LIKE";
 
 //Authentication

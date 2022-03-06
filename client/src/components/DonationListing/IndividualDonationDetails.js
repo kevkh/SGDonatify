@@ -6,6 +6,7 @@ import {getDonation} from '../../actions/donationListing.js'
 import CardMedia from '@mui/material/CardMedia';
 import {useEffect } from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
+import TermsnConditions from './TermsnConditions.js'
 
 const IndividualDonationDetails = () => {
 
@@ -56,20 +57,25 @@ const IndividualDonationDetails = () => {
                     <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
                     <Grid columns={2} container spacing={0}  rowSpacing={2} >
                         <Grid item xs={1}>
-                            <Link to="?" style={{ textDecoration: 'none' }}><Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" >Donate $5</Button></Link>
+                            <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
 
                         <Grid item xs={1}>
-                            <Link to="?" style={{ textDecoration: 'none' }}><Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" >Donate $10</Button></Link>
+                            <TermsnConditions custom={false} id={id} buttonValue="$10" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
 
                         <Grid item xs={1}>
-                            <Link to="?" style={{ textDecoration: 'none' }}><Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" >Donate $50</Button></Link>
+                            <TermsnConditions custom={false} id={id} buttonValue="$50" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
 
                         <Grid item xs={1}>
-                            <Link to="?" style={{ textDecoration: 'none' }}><Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" >Donate $1000</Button></Link>
+                            <TermsnConditions custom={false} id={id} buttonValue="$1000" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
                         </Grid>
+
+                        <Grid item xs={2}>
+                            <TermsnConditions custom id={id} buttonValue="Custom Amount" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                        </Grid>
+
                     </Grid >
                 </Stack>
             </Grid>
