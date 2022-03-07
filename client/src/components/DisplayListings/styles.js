@@ -19,14 +19,15 @@ export default makeStyles((theme) => ({
      
   },
   paginationContainer: {
-    height:"100%",
+    height:"56px",
     display: "block",
     float: "right",
     backgroundColor : 'white',
     borderRadius:30,
+
   },
   pagination:{
-    margin:"auto 0"
+    margin:"auto 0",
   }
 
   

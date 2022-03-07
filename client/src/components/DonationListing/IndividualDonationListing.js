@@ -14,17 +14,19 @@ const individualDonationListing = ({singleListing, index}) => {
 
     return (
    
-      <Grid item xs="auto">
+      <Grid item xs={4}>
         <Card sx={{minWidth:"100%",height:"100%", my:2}}>
+        <Link to={`/DisplayListings/${singleListing._id}`} target={"_blank"} rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        
             <Box sx={{ position: 'relative'}}>
             <CardActionArea>
-                <Link to={`/DisplayListings/${singleListing._id}`} target={"_blank"} rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                
                 <CardMedia
                 component="img"
                 height="400"
                 image="https://picsum.photos/id/239/750/500"
                 />
-                </Link>
+                
             </CardActionArea>
             </Box>
 
@@ -42,8 +44,10 @@ const individualDonationListing = ({singleListing, index}) => {
                     </Box>
                 <Typography sx={{mt:10}} variant="h4">${singleListing.totalAmountCollected} collected of ${singleListing.donationValue}</Typography>
             </Stack>
+            </Link>
         </Card>
-        </Grid>
+        
+    </Grid>
     )
 }
 

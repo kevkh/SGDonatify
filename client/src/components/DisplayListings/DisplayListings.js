@@ -15,7 +15,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import IndividualDonationListing from "../DonationListing/IndividualDonationListing"
 import Container from '@mui/material/Container';
 import useStyles from "./styles";
-
+import { shadows } from '@mui/system';
 const DisplayListings = () => {
    
     const classes = useStyles();
@@ -115,13 +115,14 @@ const DisplayListings = () => {
         
         // <Box sx={{}}>  
         // <Box>
+        <div>
         <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px"}}>
             <Grid  container>
                 <Grid item xs={3}>
-                    <Filter sort={sort} setSort={setSort} ></Filter>
+                    <Filter  sx={{ boxShadow: 3 }} sort={sort} setSort={setSort} ></Filter>
                 </Grid>
                 <Grid item xs={9}>
-                    <div className={classes.paginationContainer}>
+                    <div sx={{ boxShadow: 3 }} className={classes.paginationContainer}>
                         <div className={classes.verticalCenter}>
                            {pagenatedDonationListings.length >= 1 && <Pagination className={classes.pagination} size="large" count={pagenationLength} color="primary" page={page} onChange={handleChange} showFirstButton showLastButton />}
                         </div>
@@ -129,6 +130,26 @@ const DisplayListings = () => {
                 </Grid>
             </Grid>
         </Container>
+        <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px", mb:5}}>
+            <Grid container spacing={5}>
+            {pagenatedDonationListings.map((singleListing, index) => (<IndividualDonationListing singleListing={singleListing} key={index}/>))}
+            </Grid>
+        </Container>
+        <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px",mb:5}}>
+            <Grid  container>
+                <Grid item xs={3}>
+                    {/* <Filter  sx={{ boxShadow: 3 }} sort={sort} setSort={setSort} ></Filter> */}
+                </Grid>
+                <Grid item xs={9}>
+                    <div sx={{ boxShadow: 3 }} className={classes.paginationContainer}>
+                        <div className={classes.verticalCenter}>
+                           {pagenatedDonationListings.length >= 1 && <Pagination className={classes.pagination} size="large" count={pagenationLength} color="primary" page={page} onChange={handleChange} showFirstButton showLastButton />}
+                        </div>
+                    </div>
+                </Grid>
+            </Grid>
+        </Container>
+        </div>
         // </Box>
                 
             // <Box sx={{my:2}}>
@@ -140,12 +161,12 @@ const DisplayListings = () => {
         //                     <AlertTitle>Error</AlertTitle>
         //                     <strong> No listings found. Please try again. </strong>
         //                 </Alert>}
-        //         <Grid container spacing={2} rowSpacing={5} columnSpacing={15}>
+                
 
-        //             {/* {pagenatedDonationListings.length < 1 ? <CircularProgress/> :   */}
-        //              {pagenatedDonationListings.map((singleListing, index) => (<IndividualDonationListing singleListing={singleListing} key={index}/>))}
+                   // {pagenatedDonationListings.length < 1 ? <CircularProgress/> :   
+                   
 
-        //         </Grid>
+                
         //     {/* </Box> */}
         //     <Box sx={{my:5}}>
         //         {pagenatedDonationListings.length >= 1 && <Pagination sx={{ paddingLeft:"45%"}} size="large" count={pagenationLength} color="primary" page={page} onChange={handleChange} showFirstButton showLastButton />}
