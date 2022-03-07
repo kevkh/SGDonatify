@@ -17,7 +17,8 @@ import Container from '@mui/material/Container';
 import useStyles from "./styles";
 
 const DisplayListings = () => {
-
+   
+    const classes = useStyles();
     const dispatch = useDispatch()
     const donationListings = useSelector(state => state.donationListings)
     var filteredDonationListings = []
@@ -115,13 +116,23 @@ const DisplayListings = () => {
         // <Box sx={{}}>  
         // <Box>
         <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px"}}>
-            <Filter sort={sort} setSort={setSort} ></Filter>
+            <Grid  container>
+                <Grid item xs={3}>
+                    <Filter sort={sort} setSort={setSort} ></Filter>
+                </Grid>
+                <Grid item xs={9}>
+                    <div className={classes.paginationContainer}>
+                        <div className={classes.verticalCenter}>
+                           {pagenatedDonationListings.length >= 1 && <Pagination className={classes.pagination} size="large" count={pagenationLength} color="primary" page={page} onChange={handleChange} showFirstButton showLastButton />}
+                        </div>
+                    </div>
+                </Grid>
+            </Grid>
         </Container>
         // </Box>
                 
-        //     <Box sx={{my:2}}>
-        //         {pagenatedDonationListings.length >= 1 && <Pagination sx={{ paddingLeft:"45%"}} size="large" count={pagenationLength} color="primary" page={page} onChange={handleChange} showFirstButton showLastButton />}
-        //     </Box>
+            // <Box sx={{my:2}}>
+            //         </Box>
         //      {/* <Box sx={{ display: 'flex', flexWrap:'wrap', justifyContent:"space-evenly", flexDirection: 'row'}}> */}
         //             {pagenatedDonationListings.length < 1 && closeAlert &&
         //                 <Alert sx={{ mt: 2, maxWidth:"15%"}} severity="error" action={<IconButton size='small' onClick={() => { setCloseAlert(false) }}> <CloseIcon fontSize="inherit" /> </IconButton>}
