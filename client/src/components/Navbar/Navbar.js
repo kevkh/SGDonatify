@@ -112,7 +112,7 @@ return (
       <Container disableGutters = "true" maxWidth = "xl">
         <Grid  container>
           <Grid item xs={3}>
-            <Link className={classes.header}  to ="/">
+            <Link className={classes.header}  to ="/displaylistings">
                 <div className={classes.verticalCenter}>
                   <img className={classes.image} src={mypic} alt="mypic"/>
                   <Typography className={classes.headerTitle} variant="h5"  component="div">
