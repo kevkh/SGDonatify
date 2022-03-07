@@ -12,8 +12,12 @@ export default makeStyles((theme) => ({
   verticalCenter: {
     justifyContent: "center",
     display: "flex",
+    height: "100%"
   },
-  heading: {
+  header:{
+    display: "inline-block"
+  },
+  headerTitle: {
     color: 'rgba(0,183,255, 1)',
     display: 'block',
     float: 'left',
@@ -28,6 +32,11 @@ export default makeStyles((theme) => ({
   searchBar: {
 
     margin: 'auto 0',
+  },
+  profilePanel:{
+    height:"100%",
+    display:"block",
+    float:"right"
   },
   profileButton:{
     margin: 'auto 0',

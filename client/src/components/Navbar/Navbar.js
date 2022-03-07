@@ -110,18 +110,24 @@ return (
       <Container disableGutters = "true" maxWidth = "xl">
         <Grid  container>
           <Grid item xs={3}>
-            <Link className={classes.verticalCenter}  to ="/DisplayListings">
-              <img className={classes.image} src={mypic} alt="mypic"/>
-              <Typography className={classes.heading} variant="h5"  component="div">
-                SGDONATIFY
-              </Typography>
+            <Link className={classes.header}  to ="/DisplayListings">
+                <div className={classes.verticalCenter}>
+                  <img className={classes.image} src={mypic} alt="mypic"/>
+                  <Typography className={classes.headerTitle} variant="h5"  component="div">
+                    SGDONATIFY
+                  </Typography>
+                </div>
             </Link>
           </Grid>
           <Grid className={classes.searchBar} item xs={6}>
             <Searchbar/>
           </Grid>
-          <Grid className={classes.verticalCenter} item xs={3}>
-            <ProfilePanel />
+          <Grid  item xs={3} sx={{paddingRight:"10px"}}>
+            <div className={classes.profilePanel}>
+              <div className={classes.verticalCenter}>
+                <ProfilePanel />
+              </div>
+            </div>
           </Grid>
         </Grid>
       </Container>

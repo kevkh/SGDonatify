@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import DisplayListings from './components/Pages/DisplayListings'
+import DisplayListings from './components/DisplayListings/DisplayListings'
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Auth from "./components/Auth/Auth";
