@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import { useHistory } from "react-router-dom";
-const Searchbar = () => {
+const Searchbar = ({setText}) => {
     const [search,setSearch] = useState("")
     let history = useHistory();
 
@@ -17,10 +17,8 @@ const Searchbar = () => {
     const handleEnter = (e) => {
         if (e.keyCode === 13)
         {
-            localStorage.setItem('searchText',search);
-            
+            setText(search)
             history.push("/displaylistings");
-            window.location.reload();
         }
     
     }

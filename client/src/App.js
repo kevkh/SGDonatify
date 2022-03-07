@@ -44,12 +44,12 @@ import LocateCC from "./components/Pages/LocateCC";
 
 function App () {
 
-
+const [text,setText] = useState("")
 
 return (
   <Router>
     <Box sx={{width:'100%'}}>
-      <Navbar />
+      <Navbar setText={setText} />
 
       <Switch>
         <Route path="/createForm" exact component={Home} />
@@ -81,7 +81,7 @@ return (
         <Route path="/donateeList" exact component={DonateeList} />
 
 
-        <Route exact path="/DisplayListings"> <DisplayListings/></Route>
+        <Route exact path="/DisplayListings"> <DisplayListings text={text}/></Route>
         <Route exact path="/DisplayListings/:donationId"> <IndividualDonationDetails/></Route>
         <Route exact path="/LocateCC"> <LocateCC/></Route>
       </Switch>
