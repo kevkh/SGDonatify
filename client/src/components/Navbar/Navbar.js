@@ -15,7 +15,7 @@ import Grid from '@mui/material/Grid';
 import Searchbar from "./Searchbar";
 import ProfilePanel from "./ProfilePanel";
 
-const Navbar = () => {
+const Navbar = ({setText}) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const location = useLocation(); // when location change, set the user
@@ -25,6 +25,8 @@ const Navbar = () => {
   const [userProfile, setUserProfile] = useState('')
   const [donorProfile, setDonorProfile] = useState('')
   const [donateeProfile, setDonateeProfile] = useState('')
+  const [search,setSearch] = useState("")
+
   const handleAnchorClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -110,7 +112,7 @@ return (
       <Container disableGutters = "true" maxWidth = "xl">
         <Grid  container>
           <Grid item xs={3}>
-            <Link className={classes.header}  to ="/DisplayListings">
+            <Link className={classes.header}  to ="/displaylistings">
                 <div className={classes.verticalCenter}>
                   <img className={classes.image} src={mypic} alt="mypic"/>
                   <Typography className={classes.headerTitle} variant="h5"  component="div">
@@ -120,7 +122,7 @@ return (
             </Link>
           </Grid>
           <Grid className={classes.searchBar} item xs={6}>
-            <Searchbar/>
+            <Searchbar setText={setText} />
           </Grid>
           <Grid  item xs={3} sx={{paddingRight:"10px"}}>
             <div className={classes.profilePanel}>

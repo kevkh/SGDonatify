@@ -16,7 +16,7 @@ import IndividualDonationListing from "../DonationListing/IndividualDonationList
 import Container from '@mui/material/Container';
 import useStyles from "./styles";
 import { shadows } from '@mui/system';
-const DisplayListings = () => {
+const DisplayListings = ({text}) => {
    
     const classes = useStyles();
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const DisplayListings = () => {
     const [pagenatedDonationListings, setpagenatedDonationListings] = useState([])
     const [closeAlert, setCloseAlert] = useState()
     const [sort,setSort] = useState("")
-    const text = localStorage.getItem('searchText')
+    
 
     
     const [pagenationLength, setPagenationLength] = useState(0)
