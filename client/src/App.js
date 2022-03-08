@@ -57,7 +57,7 @@ return (
         <Route path="/donorHub" exact component={DonorHub} />
         <Route path="/donorHub/:id" children={<DonorDetail />}></Route>
         <Route path="/reset" component={Reset} />
-        <Route path="/donor" exact component={DonorAuth} />
+        <Route exact path="/donor"> <DonorAuth /></Route>
         <Route path="/donorList" exact component={DonorList} />
         <Route path="/blacklist" exact component={Blacklist} />
         <Route path="/approvedList" exact component={ApprovedList} />

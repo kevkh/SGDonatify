@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
   Container,
-} from "@material-ui/core";
+} from '@mui/material';
 import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import emailjs from "emailjs-com";

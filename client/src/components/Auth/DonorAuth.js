@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import {
   Avatar,
-  Button,
   Paper,
   Grid,
   Typography,
-  Container,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -15,6 +15,10 @@ import { donorSignin, donorSignup } from "../../actions/donorAuth";
 import useStyles from "./styles";
 import Input from "./Input";
 import FileBase from "react-file-base64";
+
+
+
+
 
 // initial states
 const initialState = {
@@ -77,6 +81,7 @@ const DonorAuth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
+    
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
@@ -87,7 +92,7 @@ const DonorAuth = () => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            {isSignup && ( // only if signedup, show details. // Grid below is transferred to input.js
+            {/* {isSignup && ( // only if signedup, show details. // Grid below is transferred to input.js
               <>
                 <Input
                   name="firstName"
@@ -119,7 +124,7 @@ const DonorAuth = () => {
                   />
                 </div>
               </>
-            )}
+            )} */}
 
             <Input
               name="email"
@@ -164,6 +169,8 @@ const DonorAuth = () => {
         </form>
       </Paper>
     </Container>
+
+
   );
 };
 
