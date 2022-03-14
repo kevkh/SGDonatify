@@ -1,9 +1,9 @@
 import express from "express";
-import {getDonationListing, updateDonation} from "../controllers/donationListing.js"
+import {getUncompletedDonationListing, updateDonation,getAllDonationListing} from "../controllers/donationListing.js"
 
 const router = express.Router();
 
-router.get("/",getDonationListing)
+router.get("/",getUncompletedDonationListing)
 router.patch("/:listingId",updateDonation);
 
 export default router;

@@ -12,7 +12,7 @@ export const donorSignin = (formData, router) => async (dispatch) => {
 
     if(data.result.type === "admin")
     {
-      router.push("/DonorList");
+      router.push("/ViewRequests");
     }
     else
     {

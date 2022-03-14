@@ -21,10 +21,10 @@ const AdminProfile = ({anchorRef, logout, user, open, handleToggle, handleClose,
       <Button 
         variant="contained"
         color = "primary"
-        component={Link} to="/donorlist"
+        component={Link} to="/ViewRequests"
         className={classes.logonProfileButton}>
         
-        View Approvals
+        View Requests
       </Button>
                   
       <Stack direction="row">

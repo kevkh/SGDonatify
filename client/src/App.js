@@ -42,6 +42,9 @@ import EditDonateeProfile from "./components/Pages/EditDonateeProfile";
 import IndividualDonationDetails from "./components/DonationListing/IndividualDonationDetails";
 import LocateCC from "./components/Pages/LocateCC";
 
+//admin
+import ViewRequests from "./components/Admin/ViewRequests";
+
 function App () {
 
 const [text,setText] = useState("")
@@ -84,6 +87,8 @@ return (
         <Route exact path="/DisplayListings"> <DisplayListings text={text}/></Route>
         <Route exact path="/DisplayListings/:donationId"> <IndividualDonationDetails/></Route>
         <Route exact path="/LocateCC"> <LocateCC/></Route>
+
+        <Route exact path="/ViewRequests"> <ViewRequests/></Route>
       </Switch>
     </Box>
   </Router>
