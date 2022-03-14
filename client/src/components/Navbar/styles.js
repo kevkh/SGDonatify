@@ -39,11 +39,11 @@ export default makeStyles((theme) => ({
     float:"right"
   },
   profileButton:{
-    margin: 'auto 0',
+    margin: 'auto 0 auto 5px',
     minHeight: "40px",
   },
   logonProfileButton:{
-    margin: 'auto 2px',
+    margin: 'auto 0 auto 5px',
     height: "50px",
  
   },

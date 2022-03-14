@@ -16,16 +16,9 @@ import Searchbar from "./Searchbar";
 import ProfilePanel from "./ProfilePanel";
 
 const Navbar = ({setText}) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  
-  const location = useLocation(); // when location change, set the user
  
   const classes = useStyles();
-  const [userProfile, setUserProfile] = useState('')
-  const [donorProfile, setDonorProfile] = useState('')
-  const [donateeProfile, setDonateeProfile] = useState('')
-  const [search,setSearch] = useState("")
-
+ 
 
 
 

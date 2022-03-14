@@ -24,6 +24,11 @@ const ProfilePanel = () => {
     //     if (decodedToken.exp * 1000 < new Date().getTime()) logout(); // logout once token expired
     // }
 
+    // Auto-refresh
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem("profile")));
+      }, [location]);
+
     const logout = (event) => {
         dispatch({ type: actionType.LOGOUT }); // logout
         history.push("/displaylistings"); // redirect back to displaylistings
@@ -53,19 +58,19 @@ const ProfilePanel = () => {
 
     if (user?.result.type === "donor" ){
         return(   
-            <DonorProfile user={user} setUser={setUser} logout={logout} location={location} anchorRef={anchorRef} open={open} handleToggle={handleToggle} handleClose={handleClose} handleListKeyDown={handleListKeyDown}/>
+            <DonorProfile user={user}  logout={logout} anchorRef={anchorRef} open={open} handleToggle={handleToggle} handleClose={handleClose} handleListKeyDown={handleListKeyDown}/>
         );
     }
-    // if (user?.result.type === "donatee" ){
-    //     return(   
-    //         <DonateeProfile />
-    //     );
-    // }
-    // if (user?.result.type === "admin" ){
-    //     return(   
-    //         <AdminProfile />
-    //     );
-    // }
+    if (user?.result.type === "donatee" ){
+        return(   
+            <DonateeProfile user={user} logout={logout}  anchorRef={anchorRef} open={open} handleToggle={handleToggle} handleClose={handleClose} handleListKeyDown={handleListKeyDown}/>
+        );
+    }
+    if (user?.result.type === "admin" ){
+        return(   
+            <AdminProfile user={user} logout={logout}  anchorRef={anchorRef} open={open} handleToggle={handleToggle} handleClose={handleClose} handleListKeyDown={handleListKeyDown}/>
+        );
+    }
     // if not login
     return(   
         <UserProfile anchorRef={anchorRef} open={open} handleToggle={handleToggle} handleClose={handleClose} handleListKeyDown={handleListKeyDown}/>

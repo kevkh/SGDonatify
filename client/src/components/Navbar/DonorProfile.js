@@ -14,28 +14,14 @@ import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
-const DonorPanel = ({anchorRef, logout, user, setUser, location, open, handleToggle, handleClose, handleListKeyDown}) => {
-
-    const [donorProfile, setDonorProfile] = useState('')
-   
-    // Auto-refresh
-    useEffect(() => {
-      async function fetchDonorData() {
-          let response = await axios.get(`http://localhost:5000/donor/${user?.result._id}`)
-          setDonorProfile(response.data)
-          console.log("AAA "+ response.data.name)
-      }
-      fetchDonorData()
-      setUser(JSON.parse(localStorage.getItem("profile")));
-    }, [location]);
-    
+const DonorProfile = ({anchorRef, logout, user, open, handleToggle, handleClose, handleListKeyDown}) => {
     const classes = useStyles();
     return(
       <div className={classes.verticalCenter}>
       <Button 
         variant="contained"
         color = "primary"
-        sx={{ mr: 2 }}
+        component={Link} to="/donorhub"
         className={classes.logonProfileButton}>
         
         View My Donations
@@ -52,7 +38,7 @@ const DonorPanel = ({anchorRef, logout, user, setUser, location, open, handleTog
                   onClick={handleToggle}
                   variant="outlined"
                   color = "primary"
-                  startIcon = {<Avatar alt="Travis Howard" src={donorProfile.profile_pic} />}
+                  startIcon = {<Avatar alt="Travis Howard" src={user.result.profile_pic} />}
                   className={classes.logonProfileButton}
                   endIcon={<KeyboardArrowDownIcon />}>
                   {user.result.name}
@@ -82,8 +68,8 @@ const DonorPanel = ({anchorRef, logout, user, setUser, location, open, handleTog
                           aria-labelledby="composition-button"
                           onKeyDown={handleListKeyDown}
                           >
-                           <MenuItem  onClick={handleClose} component={Link} to="/profile">MY PROFILE</MenuItem>
-                
+                            <MenuItem  onClick={handleClose} component={Link} to="/profile">MY PROFILE</MenuItem>
+                            <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
                             <MenuItem onClick={logout}>LOGOUT</MenuItem>
                           </MenuList>
                       </ClickAwayListener>
@@ -96,4 +82,4 @@ const DonorPanel = ({anchorRef, logout, user, setUser, location, open, handleTog
       </div>
   );
 }
-export default DonorPanel;
+export default DonorProfile;

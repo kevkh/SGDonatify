@@ -16,14 +16,16 @@ const UserProfile = ({anchorRef, open, handleToggle, handleClose, handleListKeyD
     const classes = useStyles();
     
     return(
-        <Stack direction="row" spacing={2}>
-                <ButtonGroup disableElevation variant="contained">
-                  <Button 
+        <div className={classes.verticalCenter}>
+        <Button 
                     variant="contained"
                     color = "primary"
                     className={classes.profileButton}>
                     SIGNUP
                   </Button>
+        <Stack direction="row" spacing={2}>
+               
+                  
                   <Button
                   ref={anchorRef}
                   id="composition-button"
@@ -37,7 +39,7 @@ const UserProfile = ({anchorRef, open, handleToggle, handleClose, handleListKeyD
                   endIcon={<KeyboardArrowDownIcon />}>
                   LOGIN
                   </Button>
-                </ButtonGroup>
+                
                 <Popper open={open}
                 anchorEl={anchorRef.current}
                 role={undefined}
@@ -69,6 +71,7 @@ const UserProfile = ({anchorRef, open, handleToggle, handleClose, handleListKeyD
                 </Popper>
            
         </Stack>
+        </div>
     );
 }
 
