@@ -1,4 +1,5 @@
-import { Paper, Button } from "@material-ui/core";
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import { Link,useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateProfile } from "../../actions/donorAuth";
@@ -134,6 +135,7 @@ const Profile = () => {
       )}
     </div>
   );
+
 };
 
 export default Profile;

@@ -36,8 +36,8 @@ const DisplayListings = ({text}) => {
        
         if (value >= 1 && value <= pagenationLength) {
             setPage(value)
-            const indexOfLastPost = value * 15
-            const indexOfFirstPost = indexOfLastPost - 15
+            const indexOfLastPost = value * 6
+            const indexOfFirstPost = indexOfLastPost - 6
             setpagenatedDonationListings(donationListings.slice(indexOfFirstPost, indexOfLastPost))
             window.scrollTo(0, 0)
         }
@@ -98,10 +98,10 @@ const DisplayListings = ({text}) => {
         if (filteredDonationListings.length < 1)
             setCloseAlert(true)
         else
-            setPagenationLength(Math.ceil(filteredDonationListings.length / 15))
+            setPagenationLength(Math.ceil(filteredDonationListings.length / 6))
         
-        var endIndex = 15
-        if (filteredDonationListings.length < 15)
+        var endIndex = 6
+        if (filteredDonationListings.length < 6)
         endIndex = filteredDonationListings.length
         setpagenatedDonationListings(filteredDonationListings.slice(0, endIndex))
         setPage(1)

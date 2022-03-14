@@ -40,8 +40,14 @@ export default makeStyles((theme) => ({
   },
   profileButton:{
     margin: 'auto 0',
-    minHeight: "40px"
+    minHeight: "40px",
   },
+  logonProfileButton:{
+    margin: 'auto 2px',
+    height: "50px",
+ 
+  },
+
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-end',

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
 import {  Link, useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import decode from "jwt-decode";
+
+
 import SendIcon from '@mui/icons-material/Send';
 import Popover from '@mui/material/Popover'
 import mypic from "../../images/donatify.jpg";
-import * as actionType from "../../constants/actionTypes";
+
 import useStyles from "./styles";
 import Box from '@mui/material/Box'
 import axios from 'axios';
@@ -17,85 +17,70 @@ import ProfilePanel from "./ProfilePanel";
 
 const Navbar = ({setText}) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const dispatch = useDispatch();
+  
   const location = useLocation(); // when location change, set the user
-  const history = useHistory();
+ 
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [userProfile, setUserProfile] = useState('')
   const [donorProfile, setDonorProfile] = useState('')
   const [donateeProfile, setDonateeProfile] = useState('')
   const [search,setSearch] = useState("")
 
-  const handleAnchorClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
-  const handleAnchorClose = () => {
-    setAnchorEl(null);
-  };
-
-  const logout = () => {
-    dispatch({ type: actionType.LOGOUT }); // logout
-    history.push("/auth"); // redirect back to auth
-    setUser(null);
-  };
-
-  const open = Boolean(anchorEl);
 
 
   // Auto-refresh
-  useEffect(() => {
-    if (user?.result.type === "user" )
-    {
-      async function fetchUserData() {
-        console.log(user?.result.name);
-        let response = await axios.get(`http://localhost:5000/user/${user?.result._id}`)
-        setUserProfile(response.data)
-      }
-    fetchUserData()
-    }
-    else if(user?.result.type === "donor" )
-    {
-      async function fetchDonorData() {
-      let response = await axios.get(`http://localhost:5000/donor/${user?.result._id}`)
-      setDonorProfile(response.data)
-      console.log(response.data.name);
-    }
-    fetchDonorData()
-  }
-  else if(user?.result.type === "donatee" )
-    {
-      async function fetchDonateeData() {
-      let response = await axios.get(`http://localhost:5000/donatee/${user?.result._id}`)
-      setDonateeProfile(response.data)
-      console.log(response.data.name);
-    }
-    fetchDonateeData()
-  }
+//   useEffect(() => {
+//     if (user?.result.type === "user" )
+//     {
+//       async function fetchUserData() {
+//         console.log(user?.result.name);
+//         let response = await axios.get(`http://localhost:5000/user/${user?.result._id}`)
+//         setUserProfile(response.data)
+//       }
+//     fetchUserData()
+//     }
+//     else if(user?.result.type === "donor" )
+//     {
+//       async function fetchDonorData() {
+//       let response = await axios.get(`http://localhost:5000/donor/${user?.result._id}`)
+//       setDonorProfile(response.data)
+//       console.log(response.data.name);
+//     }
+//     fetchDonorData()
+//   }
+//   else if(user?.result.type === "donatee" )
+//     {
+//       async function fetchDonateeData() {
+//       let response = await axios.get(`http://localhost:5000/donatee/${user?.result._id}`)
+//       setDonateeProfile(response.data)
+//       console.log(response.data.name);
+//     }
+//     fetchDonateeData()
+//   }
 
-  else if(user?.result.type === "admin" )
-    {
-      async function fetchDonorData() {
-      let response = await axios.get(`http://localhost:5000/donor/${user?.result._id}`) // fetch from donor also
-      setDonorProfile(response.data)
-      console.log(response.data.name);
-    }
-    fetchDonorData()
-  }
+//   else if(user?.result.type === "admin" )
+//     {
+//       async function fetchDonorData() {
+//       let response = await axios.get(`http://localhost:5000/donor/${user?.result._id}`) // fetch from donor also
+//       setDonorProfile(response.data)
+//       console.log(response.data.name);
+//     }
+//     fetchDonorData()
+//   }
 
-  const token = user?.token; // check if token exists
+//   const token = user?.token; // check if token exists
 
-  // JSON web token (Manual login)
-  if (token) {
-    const decodedToken = decode(token); // check when the token expires
+//   // // JSON web token (Manual login)
+//   // if (token) {
+//   //   const decodedToken = decode(token); // check when the token expires
 
-    if (decodedToken.exp * 1000 < new Date().getTime()) logout(); // logout once token expired
-  }
+//   //   if (decodedToken.exp * 1000 < new Date().getTime()) logout(); // logout once token expired
+//   // }
 
-  // Google acc login
-  setUser(JSON.parse(localStorage.getItem("profile")));
-}, [location]); // when location change, set the user
+//   // Google acc login
+//   setUser(JSON.parse(localStorage.getItem("profile")));
+// }, [location]); // when location change, set the user
 
 
 
