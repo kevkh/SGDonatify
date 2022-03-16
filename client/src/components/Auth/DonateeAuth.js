@@ -18,21 +18,20 @@ import FileBase from "react-file-base64";
 
 // initial states
 const initialState = {
-    firstName: "",
-    lastName: "",
-    CEA: "",
-    type: "donatee",
-    phoneNumber: "",
-    donatee_status: "Pending",
-    agency: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    profile_pic: "",
-    overallRating: "0",
-    ratingList: [],
-    reviewList: [],
-    description: "Hi, I'm new here.",
+  firstName: "",
+  lastName: "",
+  type: "donatee",
+  phoneNumber: "",
+  donatee_status: "Pending",
+  gender: "",
+  dob: "",
+  address: "",
+  income_docs: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  profile_pic: "",
+  description: "Hi, I'm a donatee.",
 };
 
 const DonateeAuth = () => {
@@ -157,7 +156,7 @@ const DonateeAuth = () => {
               <Button onClick={switchMode}>
                 {isSignup
                   ? "Already have an account? Sign in"
-                  : "Don't have an account? Sign Up"}
+                  : "Don't have an account? Sign Up" }
               </Button>
             </Grid>
           </Grid>

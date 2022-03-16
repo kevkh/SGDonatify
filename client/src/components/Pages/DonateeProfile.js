@@ -24,7 +24,7 @@ const DonateeProfile = () => {
   console.log("reupload", reupload);
 
   useEffect(() => {
-    history.push('/profile')
+    history.push('/donateeProfile')
     async function fetchData() {
       console.log(user.result._id);
       let response = await axios.get(
@@ -85,23 +85,32 @@ const DonateeProfile = () => {
               <label>Name:</label>
               <h1>{donateeProfile.name}</h1>
             </Paper>
+
             <Paper>
-              <label>CEA number:</label>
-              <h4>{donateeProfile.CEA}</h4>
+              <label>Email:</label>
+              <h1>{donateeProfile.email}</h1>
             </Paper>
+
             <Paper>
-              <label>Agency:</label>
-              <h4>{donateeProfile.agency}</h4>
+              <label>Phone Number:</label>
+              <h1>{donateeProfile.phoneNumber}</h1>
             </Paper>
+
             <Paper>
-              <label>Ranking:</label>
-              <h4>{donateeProfile.overallRating}</h4>
+              <label>DOB:</label>
+              <h1>{donateeProfile.dob}</h1>
             </Paper>
+
             <Paper>
-              <label>Description:</label>
-              <h4>{donateeProfile.description}</h4>
-              {/* <Link to="/profile/description">Add description</Link> */}
+              <label>Address:</label>
+              <h1>{donateeProfile.address}</h1>
             </Paper>
+
+            <Paper>
+              <label>Household Income Documents:</label>
+              <h1>{donateeProfile.income_docs}</h1>
+            </Paper>
+            
             <Button
               component={Link}
               to={{

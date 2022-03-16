@@ -44,39 +44,25 @@ export const donateeSignin = async (req, res) => {
 // Sign up func
 export const donateeSignup = async (req, res) => {
   const {
-    // email,
-    // phoneNumber,
-    // donatee_status,
-    // password,
-    // confirmPassword,
-    // type,
-    // firstName,
-    // lastName,
-    // profile_pic,
-    email,
-    CEA,
-    agency,
+    firstName,
+    lastName,
+    type,
     phoneNumber,
     donatee_status,
+    email,
     password,
     confirmPassword,
-    firstName,
-    type,
-    lastName,
     profile_pic,
-    overallRating,
-    ratingList,
-    reviewList,
-    description,
+    description  
+
   } = req.body;
 
   try {
     // Retrieve the existing user
     const existingUser = await donateeModel.findOne({ email });
-    const existingCEA = await donateeModel.findOne({ CEA });
 
-    if (existingUser || existingCEA)
-      return res.status(400).json({ message: "Email/CEA already exists" });
+    if (existingUser)
+      return res.status(400).json({ message: "Email already exists" });
 
     // Check if pwd matches
     if (password !== confirmPassword)
@@ -86,29 +72,17 @@ export const donateeSignup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Pass in the data, combine first and lastname
-    const result = await donateeModel.create({
-      // email,
-      // password: hashedPassword,
-      // name: `${firstName} ${lastName}`,
-      // type,
-      // email,
-      // phoneNumber,
-      // donatee_status,
-      // confirmPassword,
-      // profile_pic,
-      email,
-      password: hashedPassword,
+    const result = await donateeModel.create({   
       name: `${firstName} ${lastName}`,
-      CEA,
       type,
       phoneNumber,
       donatee_status,
-      agency,
+      email,
+      password: hashedPassword,
+      confirmPassword,
       profile_pic,
-      overallRating,
-      ratingList,
-      reviewList,
       description,
+
     });
 
     // create token
@@ -130,28 +104,19 @@ export const donateeUpdateProfile = async (req, res) => {
 
   // edit attributes here
   const {
-    // profile_pic,
-    // name,
-    // type,
-    // phoneNumber,
-    // donatee_status,
-    // agency,
-    // email,
-    // password,
-
-    profile_pic,
     name,
-    CEA,
     type,
     phoneNumber,
     donatee_status,
-    agency,
     email,
     password,
-    overallRating,
-    ratingList,
-    reviewList,
+    profile_pic,
     description,
+    gender, 
+    dob,
+    address,
+    income_docs
+
   } = req.body;
 
   // check if id is valid
@@ -159,30 +124,20 @@ export const donateeUpdateProfile = async (req, res) => {
     return res.status(404).send(`No donatee with id: ${id}`);
 
   const updatedProfile = {
-    // profile_pic,
-    // name,
-    // type,
-    // phoneNumber,
-    // donatee_status,
-    // agency,
-    // email,
-    // password,
-    // _id: id,
-
-    profile_pic,
     name,
-    CEA,
     type,
     phoneNumber,
     donatee_status,
-    agency,
     email,
     password,
-    overallRating,
-    ratingList,
-    reviewList,
+    profile_pic,
     description,
+    gender, 
+    dob,
+    address,
+    income_docs,
     _id: id,
+
   };
 
   await donateeModel.findByIdAndUpdate(id, updatedProfile, { new: true });

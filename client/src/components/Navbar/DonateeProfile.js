@@ -21,10 +21,10 @@ const DonateeProfile = ({anchorRef, logout, user, open, handleToggle, handleClos
       <Button 
         variant="contained"
         color = "primary"
-      
+        component={Link} to="/createForm"
         className={classes.logonProfileButton}>
         
-        View My Requests
+        View My Donations
       </Button>
                   
       <Stack direction="row">
@@ -68,9 +68,9 @@ const DonateeProfile = ({anchorRef, logout, user, open, handleToggle, handleClos
                           aria-labelledby="composition-button"
                           onKeyDown={handleListKeyDown}
                           >
-                            <MenuItem  onClick={handleClose} component={Link} to="/profile">MY PROFILE</MenuItem>
+                            <MenuItem  onClick={handleClose} component={Link} to="/donateeProfile">MY PROFILE</MenuItem>
                             <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
-                            <MenuItem onClick={logout}>LOGOUT</MenuItem>
+                            <MenuItem  onClick={logout}>LOGOUT</MenuItem>
                           </MenuList>
                       </ClickAwayListener>
                       </Paper>

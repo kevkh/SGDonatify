@@ -87,22 +87,35 @@ const Profile = () => {
               <h1>{donorProfile.name}</h1>
             </Paper>
             <Paper>
-              <label>CEA number:</label>
-              <h4>{donorProfile.CEA}</h4>
+              <label>Email:</label>
+              <h4>{donorProfile.email}</h4>
             </Paper>
             <Paper>
-              <label>Agency:</label>
-              <h4>{donorProfile.agency}</h4>
+              <label>Phone Number:</label>
+              <h4>{donorProfile.phoneNumber}</h4>
             </Paper>
             <Paper>
-              <label>Ranking:</label>
-              <h4>{donorProfile.overallRating}</h4>
+              <label>Gender:</label>
+              <h4>{donorProfile.gender}</h4>
             </Paper>
             <Paper>
-              <label>Description:</label>
-              <h4>{donorProfile.description}</h4>
-              {/* <Link to="/profile/description">Add description</Link> */}
+              <label>Date of birth:</label>
+              <h4>{donorProfile.dob}</h4>
             </Paper>
+            <Paper>
+              <label>Address: </label>
+              <h4>{donorProfile.address}</h4>
+            </Paper>
+            <Paper>
+              <label>Credit Card Number: </label>
+              <h4>{donorProfile.ccNum}</h4>
+            </Paper>
+            <Paper>
+              <label>CSV: </label>
+              <h4>{donorProfile.csv}</h4>
+            </Paper>
+
+           
             <Button
               component={Link}
               to={{
