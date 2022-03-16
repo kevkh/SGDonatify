@@ -21,10 +21,11 @@ const DisplayListings = ({text}) => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const donationListings = useSelector(state => state.donationListings)
-    var filteredDonationListings = []
+    const [filteredDonationListings,setFilteredDonationListings] = useState([])
     const [pagenatedDonationListings, setpagenatedDonationListings] = useState([])
     const [closeAlert, setCloseAlert] = useState()
     const [sort,setSort] = useState("")
+    const [update,setUpdate] = useState(true)
     
 
     
@@ -38,7 +39,7 @@ const DisplayListings = ({text}) => {
             setPage(value)
             const indexOfLastPost = value * 6
             const indexOfFirstPost = indexOfLastPost - 6
-            setpagenatedDonationListings(donationListings.slice(indexOfFirstPost, indexOfLastPost))
+            setpagenatedDonationListings(filteredDonationListings.slice(indexOfFirstPost, indexOfLastPost))
             window.scrollTo(0, 0)
         }
       }
@@ -76,10 +77,10 @@ const DisplayListings = ({text}) => {
 
     const filterDonations = (text) => {
       
-        if (text === "")
-            filteredDonationListings = [...donationListings]
+        if (text == "")
+        setFilteredDonationListings(donationListings.filter((listing)=> listing.status == 'Approved'))//[...donationListings]//
         else
-            filteredDonationListings = donationListings.filter((listing)=> listing.name.toLowerCase() === text)
+        setFilteredDonationListings(donationListings.filter((listing)=> listing.status == 'Approved' && listing.name.toLowerCase() == text))
         
     }
 
@@ -89,12 +90,16 @@ const DisplayListings = ({text}) => {
 
     },[])
 
+    useEffect (() => {
+
+        filterDonations(text)
+
+    },[donationListings,sort,text])
+
     
     useEffect(() => {
-        
-        filterDonations(text)
-        sortDonations(sort)
 
+        sortDonations(sort)
         if (filteredDonationListings.length < 1)
             setCloseAlert(true)
         else
@@ -108,7 +113,7 @@ const DisplayListings = ({text}) => {
 
         setCloseAlert(true)
 
-    }, [donationListings,sort,text])
+    }, [sort,filteredDonationListings])
     
 
     return (

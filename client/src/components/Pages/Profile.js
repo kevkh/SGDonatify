@@ -123,16 +123,7 @@ const Profile = () => {
             </Button>
           </div>
         </section>
-      ) : (
-        <Button
-          component={Link}
-          to="/reset"
-          className={classes.purple}
-          variant="contained"
-        >
-          Reset Password
-        </Button>
-      )}
+      ) : <></>}
     </div>
   );
 

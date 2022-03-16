@@ -84,6 +84,7 @@ export const deleteDonatee = (userID) => API.delete(`/donatee/${userID}`);
 
 //get donation listings
 export const getDonationListings = () => API.get('/donationlisting');
-export const donationValueUpdate = (userID, amount) => API.patch(`/donationlisting/${userID}`,amount);
+export const donationValueUpdate = (userID,amount) => API.patch(`/donationlisting/${userID}`,amount);
+export const createDonation = (form) => API.post('/donationlisting',form);
 
 

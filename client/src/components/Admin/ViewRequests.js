@@ -27,23 +27,21 @@ const ViewRequests = () => {
         let tempdonationRequests = []
         switch (sort) {
             case "all":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue != listing.totalAmountCollected)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
-                setSortedDonationRequests(tempdonationRequests)
+                setSortedDonationRequests([...donationRequests])
                 break
             case "pending":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue > 3000)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
+                tempdonationRequests = donationRequests.filter((listing) => listing.status ==  "Pending")
+                tempdonationRequests.sort((a,b)=> a.name> b.name)
                 setSortedDonationRequests(tempdonationRequests)
                 break
             case "approved":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue > 10000)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
+                tempdonationRequests = donationRequests.filter((listing) => listing.status ==  "Approved")
+                tempdonationRequests.sort((a,b)=>a.name> b.name)
                 setSortedDonationRequests(tempdonationRequests)
                 break
             case "rejected":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue > 90000)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
+                tempdonationRequests = donationRequests.filter((listing) => listing.status ==  "Rejected")
+                tempdonationRequests.sort((a,b)=>a.name> b.name)
                 setSortedDonationRequests(tempdonationRequests)
                 break
             default:
@@ -68,13 +66,13 @@ const ViewRequests = () => {
 
   return (
       <Box sx={{ ml: '15%',mr: '15%'}}>
-          <Box >
-              <Button variant="contained" sx={{ borderRadius: 10, mr: 2}} onClick={()=>sortDonations('all')}>ALL</Button>
-              <Button variant="contained" sx={{ borderRadius: 10, mr: 2}} onClick={()=>sortDonations('pending')}>PENDING</Button>
-              <Button variant="contained" sx={{ borderRadius: 10, mr: 2}} onClick={()=>sortDonations('approved')}>APPROVED</Button>
+          <Box sx={{display:'flex', columnGap:2 }} >
+              <Button variant="contained" sx={{ borderRadius: 10}} onClick={()=>sortDonations('all')}>ALL</Button>
+              <Button variant="contained" sx={{ borderRadius: 10}} onClick={()=>sortDonations('pending')}>PENDING</Button>
+              <Button variant="contained" sx={{ borderRadius: 10}} onClick={()=>sortDonations('approved')}>APPROVED</Button>
               <Button variant="contained" sx={{ borderRadius: 10}} onClick={()=>sortDonations('rejected')}>REJECTED</Button>
           </Box>
-            <Grid container spacing={3} sx={{mt:2}}>
+            <Grid container spacing={3} sx={{mt:2, mb:2}}>
                 {sortedDonationRequests?.map((singleListing, index) => (<DonationRequest singleListing={singleListing} key={index} />))}
             </Grid>
       </Box>

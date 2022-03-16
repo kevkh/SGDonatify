@@ -34,8 +34,9 @@ const individualDonationListing = ({singleListing, index}) => {
             <Stack spacing={3} sx={{ m:3 }}>
 
                 <Typography variant="h3">{singleListing.name}</Typography>
-                <Typography sx={{ wordWrap: "break-word" }} variant='h5' align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus hendrerit
-                arcu nec dignissim. Vestibulum elementum urna eget rutrum maximus. Nullam ornare tellus augue, eu luctus sem iaculis ut.</Typography>
+                <Typography sx={{ wordWrap: "break-word" }} variant='h5' align="justify">This is a description. This is a description. This is a description. This is a description.
+                    This is a description.This is a description. This is a description. This is a description. This is a description. This is a description. This is a description.
+                    This is a description. This is a description.</Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Box sx={{ width: '100%', mr: 1 }}>
                             <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
