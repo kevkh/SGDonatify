@@ -8,8 +8,8 @@ How to start?
 	2. Server(backend) - connected to mongoDB 
 
 (Testing accounts) (Check mongodb atlas if email username is wrong, all the pwd shud be 123)
-1. (Donatee: bbc@gmail.com, pwd: 123)
-2. (Donor: tom@gmail.com pwd: 123)
+1. (Donatee: donatee@gmail.com, pwd: 123)
+2. (Donor: donor@gmail.com pwd: 123)
 3. (Admin: admin@gmail.com, pwd 123) //login through Donor Login
 
 
