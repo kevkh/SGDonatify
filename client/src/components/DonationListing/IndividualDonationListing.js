@@ -12,6 +12,8 @@ const individualDonationListing = ({singleListing, index}) => {
     const progress = Math.round(value*10)/10
     const date = new Date(singleListing.dateCreated)
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oc", "Nov", "Dec"]
+    const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
+    This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
 
     return (
    
@@ -34,9 +36,7 @@ const individualDonationListing = ({singleListing, index}) => {
             <Stack spacing={3} sx={{ m:3 }}>
 
                 <Typography variant="h3">{singleListing.name}</Typography>
-                <Typography sx={{ wordWrap: "break-word" }} variant='h5' align="justify">This is a description. This is a description. This is a description. This is a description.
-                    This is a description.This is a description. This is a description. This is a description. This is a description. This is a description. This is a description.
-                    This is a description. This is a description.</Typography>
+                <Typography sx={{ wordWrap: "break-word"}} variant='h5' align="justify">{singleListing.description == undefined? placeholderDescription: singleListing.description}</Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Box sx={{ width: '100%', mr: 1 }}>
                             <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />

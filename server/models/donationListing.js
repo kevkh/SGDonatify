@@ -7,7 +7,8 @@ const donationListingSchema = mongoose.Schema({
     totalAmountCollected: {type: Number},
     status: {type:String},
     createdBy: {type:String},
-    createdById: {type:String}
+    createdById: {type:String},
+    description: {type:String}
     
   
   });

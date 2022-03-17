@@ -20,7 +20,8 @@ const CreateDonationListing = () => {
         totalAmountCollected: 0,
         status: "Pending",
         createdBy: "",
-        createdById: userId
+        createdById: userId,
+        description: ""
     });
 
     const clear = () => {
@@ -31,7 +32,8 @@ const CreateDonationListing = () => {
             totalAmountCollected: 0,
             status: "Pending",
             createdBy: "",
-            createdById: ""
+            createdById: "",
+            description: ""
         });
       };
 
@@ -42,9 +44,12 @@ const CreateDonationListing = () => {
         if (postData.name === "") {
           alert("Please enter a title!");
         }else if(postData.donationValue === ""){
-          alert("Please enter a description!");
-        }else if(postData.createdBy === ""){
-          alert("Please select a town!");
+          alert("Please enter a donation value!")
+        }else if(postData.description === ""){
+          alert("Please enter a description!")
+        }
+        else if(postData.createdBy === ""){
+          alert("Please enter creator name!")
         }
         setPostData({ ...postData})
         dispatch(createDonation({postData}))
@@ -76,6 +81,15 @@ const CreateDonationListing = () => {
           fullWidth
           value={postData.donationValue}
           onChange={(e) => setPostData({ ...postData, donationValue: parseInt(e.target.value) })}
+        />
+
+        <TextField
+          name="Description"
+          variant="filled"
+          label="Description"
+          fullWidth
+          value={postData.description}
+          onChange={(e) => setPostData({ ...postData, description: e.target.value })}
         />
         <TextField
           name="Created By"

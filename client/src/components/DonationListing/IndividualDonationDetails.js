@@ -25,6 +25,9 @@ const IndividualDonationDetails = () => {
     const isAdmin = user?.result?.type === 'admin'
     const isDonor = user?.result?.type === 'donor'
 
+    const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
+    This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
+
     useEffect (() => {
 
         dispatch(getDonation())
@@ -43,7 +46,7 @@ const IndividualDonationDetails = () => {
 
     }
 
-    
+    console.log(donationDetails[0]?.description)
 
     return (
    
@@ -73,9 +76,7 @@ const IndividualDonationDetails = () => {
                     </Box>}
                     <Typography variant="h3">{donationDetails[0]?.name}</Typography>
                     <Typography variant='h5'>{date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
-                    <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">This is a description. This is a description. This is a description. This is a description.
-                    This is a description.This is a description. This is a description. This is a description. This is a description. This is a description. This is a description.
-                    This is a description. This is a description.</Typography>
+                    <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">{donationDetails[0]?.description == undefined? placeholderDescription: donationDetails[0]?.description}</Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Box sx={{ width: '100%', mr: 1 }}>
                             <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
