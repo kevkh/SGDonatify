@@ -79,9 +79,9 @@ const DonateeProfile = ({anchorRef, logout, user, open, handleToggle, handleClos
                           aria-labelledby="composition-button"
                           onKeyDown={handleListKeyDown}
                           >
-                            <MenuItem  onClick={handleClose} component={Link} to="/profile">MY PROFILE</MenuItem>
+                            <MenuItem  onClick={handleClose} component={Link} to="/donateeProfile">MY PROFILE</MenuItem>
                             <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
-                            <MenuItem onClick={logout}>LOGOUT</MenuItem>
+                            <MenuItem  onClick={logout}>LOGOUT</MenuItem>
                           </MenuList>
                       </ClickAwayListener>
                       </Paper>

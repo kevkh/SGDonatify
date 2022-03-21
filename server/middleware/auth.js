@@ -21,11 +21,11 @@ const auth = async (req, res, next) => {
     if (token && isCustomAuth) {      
       decodedData = jwt.verify(token, secret);  // gives username and id of user
 
-      req.userId = decodedData?.id;  // store diff user id, thus we will know which user like whose's listings
+      //req.userId = decodedData?.id;  // store diff user id, thus we will know which user like whose's listings
     } else {
       decodedData = jwt.decode(token);  // the google token, dont need secret
 
-      req.userId = decodedData?.sub;  // sub is google's way of differentiating diff users id
+      //req.userId = decodedData?.sub;  // sub is google's way of differentiating diff users id
     }    
 
     next();  // Ok to click the listing if the user has permission/its his own listing

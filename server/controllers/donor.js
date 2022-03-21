@@ -44,39 +44,32 @@ export const donorSignin = async (req, res) => {
 // Sign up func
 export const donorSignup = async (req, res) => {
   const {
-    // email,
-    // phoneNumber,
-    // donor_status,
-    // password,
-    // confirmPassword,
-    // type,
-    // firstName,
-    // lastName,
-    // profile_pic,
-    email,
-    CEA,
-    agency,
+
+    firstName,
+    lastName,
+    type,
     phoneNumber,
     donor_status,
+    email,
     password,
     confirmPassword,
-    firstName,
-    type,
-    lastName,
     profile_pic,
-    overallRating,
-    ratingList,
-    reviewList,
     description,
+    gender,
+    dob,
+    address,
+    ccNum,
+    csv,
+    
   } = req.body;
 
   try {
     // Retrieve the existing user
     const existingUser = await donorModel.findOne({ email });
-    const existingCEA = await donorModel.findOne({ CEA });
 
-    if (existingUser || existingCEA)
-      return res.status(400).json({ message: "Email/CEA already exists" });
+
+    if (existingUser)
+      return res.status(400).json({ message: "Email already exists" });
 
     // Check if pwd matches
     if (password !== confirmPassword)
@@ -87,28 +80,22 @@ export const donorSignup = async (req, res) => {
 
     // Pass in the data, combine first and lastname
     const result = await donorModel.create({
-      // email,
-      // password: hashedPassword,
-      // name: `${firstName} ${lastName}`,
-      // type,
-      // email,
-      // phoneNumber,
-      // donor_status,
-      // confirmPassword,
-      // profile_pic,
-      email,
-      password: hashedPassword,
+      
       name: `${firstName} ${lastName}`,
-      CEA,
       type,
       phoneNumber,
       donor_status,
-      agency,
+      email,
+      password: hashedPassword,
+      confirmPassword,
       profile_pic,
-      overallRating,
-      ratingList,
-      reviewList,
       description,
+      gender,
+      dob,
+      address,
+      ccNum,
+      csv,
+
     });
 
     // create token
@@ -130,28 +117,21 @@ export const donorUpdateProfile = async (req, res) => {
 
   // edit attributes here
   const {
-    // profile_pic,
-    // name,
-    // type,
-    // phoneNumber,
-    // donor_status,
-    // agency,
-    // email,
-    // password,
-
-    profile_pic,
+  
     name,
-    CEA,
     type,
     phoneNumber,
     donor_status,
-    agency,
     email,
     password,
-    overallRating,
-    ratingList,
-    reviewList,
+    profile_pic,
     description,
+    gender,
+    dob,
+    address,
+    ccNum,
+    csv,
+
   } = req.body;
 
   // check if id is valid
@@ -159,30 +139,23 @@ export const donorUpdateProfile = async (req, res) => {
     return res.status(404).send(`No donor with id: ${id}`);
 
   const updatedProfile = {
-    // profile_pic,
-    // name,
-    // type,
-    // phoneNumber,
-    // donor_status,
-    // agency,
-    // email,
-    // password,
-    // _id: id,
-
-    profile_pic,
+    
     name,
-    CEA,
     type,
     phoneNumber,
     donor_status,
-    agency,
     email,
     password,
-    overallRating,
-    ratingList,
-    reviewList,
+    //confirmPassword,
+    profile_pic,
     description,
+    gender,
+    dob,
+    address,
+    ccNum,
+    csv,
     _id: id,
+
   };
 
   await donorModel.findByIdAndUpdate(id, updatedProfile, { new: true });

@@ -6,7 +6,12 @@ import {
   Avatar,
   Paper,
   Grid,
-  Typography,
+  Typography, 
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel
+
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -16,27 +21,23 @@ import useStyles from "./styles";
 import Input from "./Input";
 import FileBase from "react-file-base64";
 
-
-
-
-
 // initial states
 const initialState = {
   firstName: "",
   lastName: "",
-  CEA: "",
   type: "donor",
   phoneNumber: "",
   donor_status: "Pending",
-  agency: "",
   email: "",
   password: "",
   confirmPassword: "",
   profile_pic: "",
-  overallRating: "0",
-  ratingList: [],
-  reviewList: [],
-  description: "Hi, I'm new here.",
+  description: "Hi, I'm a donor.",
+  gender: "",
+  dob: "",
+  address: "",
+  ccNum: "",
+  csv: "",
 };
 
 const DonorAuth = () => {
@@ -92,7 +93,7 @@ const DonorAuth = () => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            {/* {isSignup && ( // only if signedup, show details. // Grid below is transferred to input.js
+           {isSignup && ( // only if signedup, show details. // Grid below is transferred to input.js
               <>
                 <Input
                   name="firstName"
@@ -107,6 +108,22 @@ const DonorAuth = () => {
                   handleChange={handleChange}
                   half
                 />
+
+                {/* <FormControl fullWidth>
+                  <InputLabel id="gender">Gender</InputLabel>
+                  <Select
+                    labelId="gender"
+                    id="gender"
+                    value={form.gender}
+                    label="Gender"
+                    onChange={(e) => setForm({ ...form, gender: e.target.value })} 
+                  
+                  >
+                    <MenuItem value={"Male"}>Male</MenuItem>
+                    <MenuItem value={"Female"}>Female</MenuItem>
+                    
+                  </Select>
+                </FormControl> */}
                
                 <Input
                   name="phoneNumber"
@@ -114,6 +131,8 @@ const DonorAuth = () => {
                   handleChange={handleChange}
                   type="text"
                 />
+
+                
                 <div className={classes.fileInput}>
                   <FileBase
                     type="file"
@@ -124,7 +143,7 @@ const DonorAuth = () => {
                   />
                 </div>
               </>
-            )} */}
+            )} 
 
             <Input
               name="email"

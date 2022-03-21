@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { updateProfile } from '../../actions/donorAuth'
 import { useParams, Link, useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { Paper, Button, TextField } from "@material-ui/core";
+import { Paper, Button, TextField, FormControl, MenuItem, Select } from "@material-ui/core";
 
 
 export const EditProfile = () => {
@@ -23,17 +23,22 @@ export const EditProfile = () => {
 
     const [Name, setName] = useState('')
     const [Email, setEmail] = useState('')
-    const [CEA, setCEA] = useState('')
-    const [Agency, setAgency] = useState('')
     const [Number, setNumber] = useState('')
-    const [Des, setDes] = useState('');
+    const [Gender, setGender] = useState('')
+    const [DOB, setDOB] = useState('')
+    const [Address, setAddress] = useState('')
+    const [CCNum, setCCNum] = useState('')
+    const [CSV, setCSV] = useState('')
+
 
     let name = donorProfile.name
     let email = donorProfile.email
-    let cea = donorProfile.CEA
-    let agency = donorProfile.agency
     let number = donorProfile.phoneNumber
-    let des = donorProfile.description
+    let gender = donorProfile.gender
+    let dob = donorProfile.dob
+    let address = donorProfile.address
+    let ccnum = donorProfile.ccNum
+    let csv = donorProfile.csv
 
     const handleChangeName = (e) => {
         e.preventDefault();
@@ -47,48 +52,61 @@ export const EditProfile = () => {
         email = e.target.value
         donorProfile.email = email
     };
-    const handleChangeCEA = (e) => {
-        e.preventDefault();
-        setCEA(e.target.value);
-        cea = e.target.value
-        donorProfile.CEA = cea
-    };
-    const handleChangeAgency = (e) => {
-        e.preventDefault();
-        setAgency(e.target.value);
-        agency = e.target.value
-        donorProfile.agency = agency
-    };
     const handleChangeNumber = (e) => {
         e.preventDefault();
         setNumber(e.target.value);
         number = e.target.value
         donorProfile.phoneNumber = number
     };
-    const handleChangeDes = (e) => {
+    const handleChangeGender = (e) => {
         e.preventDefault();
-        setDes(e.target.value);
-        des = e.target.value
-        donorProfile.description = des
+        setGender(e.target.value);
+        gender = e.target.value
+        donorProfile.gender = gender
     };
+    const handleChangeDOB = (e) => {
+        e.preventDefault();
+        setDOB(e.target.value);  
+        dob = e.target.value
+        donorProfile.dob = dob
+    };
+    const handleChangeAddress = (e) => {
+        e.preventDefault();
+        setAddress(e.target.value);
+        address = e.target.value
+        donorProfile.address = address
+    };
+
+    const handleChangeCCNum = (e) => {
+        e.preventDefault();
+        setCCNum(e.target.value);
+        ccnum = e.target.value
+        donorProfile.ccNum = ccnum
+    };
+
+    const handleChangeCSV = (e) => {
+        e.preventDefault();
+        setCSV(e.target.value);
+        csv = e.target.value
+        donorProfile.csv = csv
+    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateProfile(id, donorProfile))
         console.log(donorProfile.name);
-        alert('Profile Updated')
+        alert('Donor Profile Updated')
         history.push("/profile");
 
-
     };
-
 
     return (
         <div>
             <Paper>
                 <form >
                     <div style={{ textAlign: 'left' }}>
-                        <div key={donorProfile.CEA}>
+                        <div key={donorProfile.email}>
                             <h2> Name : <input
                                 type='string'
                                 name='name'
@@ -103,33 +121,49 @@ export const EditProfile = () => {
                                 value={donorProfile.email}
                                 required
                             /></h2>
-                            <h2> Agency : <input
-                                type='string'
-                                name='agency'
-                                onChange={handleChangeAgency}
-                                value={donorProfile.agency}
-                                required
-                            /></h2>
-                            <h2> CEA Number : <input
-                                type='string'
-                                name='CEA'
-                                onChange={handleChangeCEA}
-                                value={donorProfile.CEA}
-                                required
-                            /></h2>
                             <h2> Phone Number : <input
                                 type='string'
-                                name='PhoneNumber'
+                                name='number'
                                 onChange={handleChangeNumber}
                                 value={donorProfile.phoneNumber}
                                 required
                             /></h2>
-                            <h2> Description : <TextField
-                                name="description"
+                            <h2> Gender : <input
+                                type='string'
+                                name='gender'
+                                onChange={handleChangeGender}
+                                value={donorProfile.gender}
+                                required
+                            /></h2>
+                            <h2> Date of birth: <input
+                                type='string'
+                                name='dob'
+                                onChange={handleChangeDOB}
+                                value={donorProfile.dob}
+                                required
+                            /></h2>
+                            <h2> Address : <TextField
+                                name="Address"
                                 variant="outlined"
                                 fullWidth
-                                value={donorProfile.description}
-                                onChange={handleChangeDes}
+                                value={donorProfile.address}
+                                onChange={handleChangeAddress}
+                            /></h2>
+
+                            <h2> Credit Card Number: <TextField
+                                name="Credit Card Number"
+                                variant="outlined"
+                                fullWidth
+                                value={donorProfile.ccNum}
+                                onChange={handleChangeCCNum}
+                            /></h2>
+
+                            <h2> CSV: <TextField
+                                name="CSV"
+                                variant="outlined"
+                                fullWidth
+                                value={donorProfile.csv}
+                                onChange={handleChangeCSV}
                             /></h2>
 
 

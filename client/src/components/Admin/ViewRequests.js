@@ -78,7 +78,7 @@ const ViewRequests = () => {
     },[])
     
     useEffect (() => {
-
+      
         sortDonations("")
 
     }, [donationRequests])
@@ -88,10 +88,10 @@ const ViewRequests = () => {
   return (
       <Box sx={{ ml: '15%',mr: '15%'}}>
           <Box sx={{display:'flex', columnGap:2 }} >
-              <Button variant={btnAll} sx={{ borderRadius: 10}} onClick={()=>sortDonations('all')}>ALL</Button>
-              <Button variant={btnPending} sx={{ borderRadius: 10}} onClick={()=>sortDonations('pending')}>PENDING</Button>
-              <Button variant={btnApproved} sx={{ borderRadius: 10}} onClick={()=>sortDonations('approved')}>APPROVED</Button>
-              <Button variant={btnRejected} sx={{ borderRadius: 10}} onClick={()=>sortDonations('rejected')}>REJECTED</Button>
+              <Button variant={btnAll} sx={{ borderRadius: 10, backgroundColor: (btnAll === "contained"? "" : "white")}} onClick={()=>sortDonations('all')}>ALL</Button>
+              <Button variant={btnPending} sx={{ borderRadius: 10,  backgroundColor: (btnPending === "contained"? "" : "white")}} onClick={()=>sortDonations('pending')}>PENDING</Button>
+              <Button variant={btnApproved} sx={{ borderRadius: 10,  backgroundColor: (btnApproved === "contained"? "" : "white")}} onClick={()=>sortDonations('approved')}>APPROVED</Button>
+              <Button variant={btnRejected} sx={{ borderRadius: 10,  backgroundColor: (btnRejected === "contained"? "" : "white")}} onClick={()=>sortDonations('rejected')}>REJECTED</Button>
           </Box>
             <Grid container spacing={3} sx={{mt:2, mb:2}}>
                 {sortedDonationRequests?.map((singleListing, index) => (<DonationRequest singleListing={singleListing} key={index} />))}

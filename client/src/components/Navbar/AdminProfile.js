@@ -42,10 +42,8 @@ const AdminProfile = ({anchorRef, logout, user, open, handleToggle, handleClose,
                   className={classes.logonProfileButton}
                   endIcon={<KeyboardArrowDownIcon />}>
                   {user.result.name}
-                  </Button>
-                  
-                  
-             
+            </Button>
+                       
               <Popper open={open}
               anchorEl={anchorRef.current}
               role={undefined}
@@ -70,7 +68,7 @@ const AdminProfile = ({anchorRef, logout, user, open, handleToggle, handleClose,
                           >
                             <MenuItem  onClick={handleClose} component={Link} to="/profile">MY PROFILE</MenuItem>
                             <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
-                            <MenuItem onClick={logout}>LOGOUT</MenuItem>
+                            <MenuItem  onClick={logout}>LOGOUT</MenuItem>
                           </MenuList>
                       </ClickAwayListener>
                       </Paper>
