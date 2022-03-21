@@ -46,6 +46,7 @@ import LocateCC from "./components/Pages/LocateCC";
 import ViewRequests from "./components/Admin/ViewRequests";
 import CreateRequests from "./components/DonationListing/CreateDonationListing";
 import ViewMyRequests from "./components/DonationListing/ViewMyRequests";
+import ViewMyDonations from "./components/DonationListing/ViewMyDonations";
 
 function App () {
 
@@ -93,6 +94,7 @@ return (
         <Route exact path="/ViewRequests"> <ViewRequests/></Route>
         <Route exact path="/CreateRequests"> <CreateRequests/></Route>
         <Route exact path="/ViewMyRequests"> <ViewMyRequests/></Route>
+        <Route exact path="/ViewMyDonations"> <ViewMyDonations/></Route>
       </Switch>
     </Box>
   </Router>

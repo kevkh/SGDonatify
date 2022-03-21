@@ -4,7 +4,6 @@ import { Box, Card, Stack, Typography, Container, Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDonation } from '../../actions/donationListing.js'
-import IndividualDonationListing from '../DonationListing/IndividualDonationListing.js';
 import DonationRequest from './DonationRequest.js';
 
 const ViewRequests = () => {

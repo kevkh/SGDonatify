@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import LinearProgress from '@mui/material/LinearProgress';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
+import Chip from '@mui/material/Chip';
 
-
-const individualDonationListing = ({singleListing, index}) => {
+const individualDonationListing = ({singleListing, index, showDonatedAmount, donationDetails}) => {
 
     const value = (singleListing.totalAmountCollected/singleListing.donationValue)*100
     const progress = Math.round(value*10)/10
@@ -35,7 +35,10 @@ const individualDonationListing = ({singleListing, index}) => {
 
             <Stack spacing={3} sx={{ m:3 }}>
 
-                <Typography variant="h3">{singleListing.name}</Typography>
+                <Box sx={{ display: 'flex' }} >
+                    <Typography variant="h3" sx={{ flexGrow: 1 }} >{singleListing.name}</Typography>
+                    {showDonatedAmount && <Chip variant="contained" color='success' label={`+ $${donationDetails[singleListing._id]}`}></Chip>}
+                </Box>
                 <Typography sx={{ wordWrap: "break-word"}} variant='h5' align="justify">{singleListing.description == undefined? placeholderDescription: singleListing.description}</Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Box sx={{ width: '100%', mr: 1 }}>

@@ -21,7 +21,7 @@ const DonorProfile = ({anchorRef, logout, user, open, handleToggle, handleClose,
       <Button 
         variant="contained"
         color = "primary"
-        component={Link} to="/donorhub"
+        component={Link} to="/ViewMyDonations"
         className={classes.logonProfileButton}>
         
         View My Donations

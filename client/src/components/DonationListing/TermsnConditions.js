@@ -8,6 +8,7 @@ import { Box,Button, TextField } from '@mui/material'
 import {useState } from 'react'
 import {useDispatch} from 'react-redux'
 import {updateDonation} from '../../actions/donationListing.js'
+import {updateDonorDonationDetails} from '../../actions/donorAuth.js'
 import Alert from '@mui/material/Alert'
 
 const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
@@ -18,6 +19,8 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     const [displayAlert,setDisplayAlert] = useState(false)
     const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
     const buttonValueInt = parseInt(buttonValue.substring(1))
+    const user = JSON.parse(localStorage.getItem('profile'))
+
 
     const handleDialogOpen = () => setOpenDialog(true)
     const handleDialogClose = () => {
@@ -38,6 +41,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
                 setDisplayAlert(false)
                 const amount = textFieldValue
                 dispatch(updateDonation(id, {type, amount}))
+                dispatch(updateDonorDonationDetails(user.result._id, {id, amount}))
                 setOpenDialog(false)
                 setTextFieldValue("")
             }
@@ -46,6 +50,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
         {
             const amount = buttonValueInt
             dispatch(updateDonation(id, {type, amount }))
+            dispatch(updateDonorDonationDetails(user.result._id, {id, amount }))
             setOpenDialog(false)
         }
         

@@ -55,6 +55,15 @@ export const updateDonorPwd = (userId, profile) => async (dispatch) => {
   }
 };
 
+export const updateDonorDonationDetails = (userId, donationDetails) => async (dispatch) => {
+  try {
+    const { data } = await api.donorUpdateDonationDetails(userId, donationDetails)
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 export const getDonor = () => async (dispatch) => {
   try {

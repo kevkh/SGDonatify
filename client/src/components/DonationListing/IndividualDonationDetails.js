@@ -46,8 +46,6 @@ const IndividualDonationDetails = () => {
 
     }
 
-    console.log(donationDetails[0]?.description)
-
     return (
    
         <Grid sx={{ml:"15%"}} container spacing={20}>
