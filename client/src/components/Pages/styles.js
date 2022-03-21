@@ -47,7 +47,9 @@ export default makeStyles((theme) => ({
     backgroundColor: deepOrange[500],
    
   },
-
+  map:{
+    width:"100%"
+  }
 
 
 }));

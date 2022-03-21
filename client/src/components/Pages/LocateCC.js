@@ -1,5 +1,5 @@
 import Map from "../Property/Map.js"
-import { Box, Select, Stack, Typography } from '@mui/material'
+import { Box, Select, Stack, Typography,Grid } from '@mui/material'
 import axios from "axios"
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from '@mui/material/Skeleton'
@@ -15,9 +15,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl';
 import ccLogo from "../../images/ccLogo.png"
+import Container from '@mui/material/Container';
+import useStyles from "./styles";
 
 const LocateCC = () => {
 
+    const classes = useStyles();
     const [communityCentre,setCommunityCentre] = useState(null)
     const [load,setLoad] = useState(true)
     const [lat, setLat] = useState(null)
@@ -154,53 +157,58 @@ const LocateCC = () => {
     },[text,townSelected])
 
     return (
-        <Box sx={{ display: 'flex'}}>
-            <Box sx={{ flexGrow: 1}}>
-                <Stack>
-                    <Box sx={{ display: 'flex'}}>
-                       <TextField
-                            variant="outlined"
-                            placeholder="Search Community Center Via Postal Code"
-                            value={search}
-                            onChange={handleTextField}
-                            onKeyUp={handleEnter}
-                            InputProps={{ startAdornment: (<InputAdornment position="start"> <SearchIcon /></InputAdornment>) }}
-                            sx={{width:'80%'}}
-                            
-                        />
-                        <FormControl sx={{ml:2,width:'30%'}}>
-                            <InputLabel>Search by Town</InputLabel>
-                            <Select
-                                value={townSelected}
-                                onChange={handleTownChange}
-                                input={<OutlinedInput label="Search by Town" />}
-                            >
-                            {towns.map( (town) => (<MenuItem value={town}>{town}</MenuItem>) )}
-                            </Select>
-                        </FormControl>
-                    </Box>
-                {closeAlert &&
-                        <Alert sx={{ mt: 2, mb: 2, maxWidth:"30%"}} severity="error" action={<IconButton size='small' onClick={() => { setCloseAlert(false) }}> <CloseIcon fontSize="inherit" /> </IconButton>}
-                            >
-                            <AlertTitle>Error</AlertTitle>
-                            <strong> Invalid postal code. Please try again. </strong>
-                        </Alert>}
-                {markersInView?.map((marker)=>{
+        <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px"}}>
+            <Grid  container>
+                <Grid item xs={6}>
+                    <Stack>
+                        <Box sx={{ display: 'flex'}}>
+                        <TextField
+                                variant="outlined"
+                                placeholder="Search Community Center Via Postal Code"
+                                value={search}
+                                onChange={handleTextField}
+                                onKeyUp={handleEnter}
+                                InputProps={{ startAdornment: (<InputAdornment position="start"> <SearchIcon /></InputAdornment>) }}
+                                sx={{width:'80%',backgroundColor: 'white'}}
+                                
+                            />
+                            <FormControl sx={{ml:2,width:'30%',  }}>
+                                <InputLabel>Search by Town</InputLabel>
+                                <Select
+                                    value={townSelected}
+                                    onChange={handleTownChange}
+                                    input={<OutlinedInput label="Search by Town" />}
+                                    sx ={{backgroundColor: 'white'}}
+                                >
+                                {towns.map( (town) => (<MenuItem value={town}>{town}</MenuItem>) )}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    {closeAlert &&
+                            <Alert sx={{ mt: 2, mb: 2, maxWidth:"30%"}} severity="error" action={<IconButton size='small' onClick={() => { setCloseAlert(false) }}> <CloseIcon fontSize="inherit" /> </IconButton>}
+                                >
+                                <AlertTitle>Error</AlertTitle>
+                                <strong> Invalid postal code. Please try again. </strong>
+                            </Alert>}
+                    {markersInView?.map((marker)=>{
 
-                return <Stack sx={{ mt: 1, mb: 1, p: 1, backgroundColor: 'white', borderRadius: 5 }} >
-                            <Box sx={{ display: "flex" }}>
-                                <img src={ccLogo} />
-                                <Box sx={{ml:1}}>
-                                    <Typography>{marker.BUILDING} </Typography>
-                                    <Typography>{marker.ADDRESS} </Typography>
+                    return <Stack sx={{ mt: 1, mb: 1, p: 1, backgroundColor: 'white', borderRadius: 5 }} >
+                                <Box sx={{ display: "flex" }}>
+                                    <img src={ccLogo} />
+                                    <Box sx={{ml:1}}>
+                                        <Typography>{marker.BUILDING} </Typography>
+                                        <Typography>{marker.ADDRESS} </Typography>
+                                    </Box>
                                 </Box>
-                            </Box>
-                        </Stack>
-                })}
-                </Stack>
-            </Box>
-            {load ? <Skeleton variant="rectangular" animation="wave" width={"50%"} height={900} sx={{ml:2}} /> : <Map communityCentre={communityCentre} lat={lat} long={long} setMarkersInView={setMarkersInView}/>}
-        </Box>
+                            </Stack>
+                    })}
+                    </Stack>
+                </Grid>
+                <Grid item xs={6}>
+                    {load ? <Skeleton variant="rectangular" animation="wave"/> : <Map communityCentre={communityCentre} lat={lat} long={long} setMarkersInView={setMarkersInView}/>}
+                </Grid>
+            </Grid>
+        </Container>
     )
 }
 
