@@ -205,7 +205,7 @@ const LocateCC = () => {
                     </Stack>
                 </Grid>
                 <Grid item xs={6}>
-                    {load ? <Skeleton variant="rectangular" animation="wave"/> : <Map communityCentre={communityCentre} lat={lat} long={long} setMarkersInView={setMarkersInView}/>}
+                    {load ? <Skeleton variant="rectangular" height={800} animation="wave"/> : <Map communityCentre={communityCentre} lat={lat} long={long} setMarkersInView={setMarkersInView}/>}
                 </Grid>
             </Grid>
         </Container>
