@@ -17,6 +17,7 @@ const ViewRequests = () => {
     const[btnPending, setBtnPending] = useState("outlined")
     const[btnApproved, setBtnApproved] = useState("outlined")
     const[btnRejected, setBtnRejected] = useState("outlined")
+
     const compareDate = (a, b, flag) => {
 
         const dateA = new Date(a.dateCreated)
@@ -31,17 +32,15 @@ const ViewRequests = () => {
         let tempdonationRequests = []
         switch (sort) {
             case "all":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue != listing.totalAmountCollected)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
-                setSortedDonationRequests(tempdonationRequests)
+                setSortedDonationRequests([...donationRequests])
                 setBtnAll("contained")
                 setBtnPending("outlined")
                 setBtnApproved("outlined")
                 setBtnRejected("outlined")
                 break
             case "pending":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue > 3000)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
+                tempdonationRequests = donationRequests.filter((listing) => listing.status ==  "Pending")
+                tempdonationRequests.sort((a,b)=> a.name> b.name)
                 setSortedDonationRequests(tempdonationRequests)
                 setBtnAll("outlined")
                 setBtnPending("contained")
@@ -49,8 +48,8 @@ const ViewRequests = () => {
                 setBtnRejected("outlined")
                 break
             case "approved":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue > 10000)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
+                tempdonationRequests = donationRequests.filter((listing) => listing.status ==  "Approved")
+                tempdonationRequests.sort((a,b)=>a.name> b.name)
                 setSortedDonationRequests(tempdonationRequests)
                 setBtnAll("outlined")
                 setBtnPending("outlined")
@@ -58,8 +57,8 @@ const ViewRequests = () => {
                 setBtnRejected("outlined")
                 break
             case "rejected":
-                tempdonationRequests = donationRequests.filter((listing) => listing.donationValue > 90000)
-                tempdonationRequests.sort((a,b)=>compareDate(a,b,true))
+                tempdonationRequests = donationRequests.filter((listing) => listing.status ==  "Rejected")
+                tempdonationRequests.sort((a,b)=>a.name> b.name)
                 setSortedDonationRequests(tempdonationRequests)
                 setBtnAll("outlined")
                 setBtnPending("outlined")
@@ -88,13 +87,13 @@ const ViewRequests = () => {
 
   return (
       <Box sx={{ ml: '15%',mr: '15%'}}>
-          <Box >
-              <Button variant={btnAll} sx={{ borderRadius: 10, mr: 2, backgroundColor: (btnAll === "contained"? "" : "white")}} onClick={()=>sortDonations('all')}>ALL</Button>
-              <Button variant={btnPending} sx={{ borderRadius: 10, mr: 2,  backgroundColor: (btnPending === "contained"? "" : "white")}} onClick={()=>sortDonations('pending')}>PENDING</Button>
-              <Button variant={btnApproved} sx={{ borderRadius: 10, mr: 2,  backgroundColor: (btnApproved === "contained"? "" : "white")}} onClick={()=>sortDonations('approved')}>APPROVED</Button>
+          <Box sx={{display:'flex', columnGap:2 }} >
+              <Button variant={btnAll} sx={{ borderRadius: 10, backgroundColor: (btnAll === "contained"? "" : "white")}} onClick={()=>sortDonations('all')}>ALL</Button>
+              <Button variant={btnPending} sx={{ borderRadius: 10,  backgroundColor: (btnPending === "contained"? "" : "white")}} onClick={()=>sortDonations('pending')}>PENDING</Button>
+              <Button variant={btnApproved} sx={{ borderRadius: 10,  backgroundColor: (btnApproved === "contained"? "" : "white")}} onClick={()=>sortDonations('approved')}>APPROVED</Button>
               <Button variant={btnRejected} sx={{ borderRadius: 10,  backgroundColor: (btnRejected === "contained"? "" : "white")}} onClick={()=>sortDonations('rejected')}>REJECTED</Button>
           </Box>
-            <Grid container spacing={3} sx={{mt:2}}>
+            <Grid container spacing={3} sx={{mt:2, mb:2}}>
                 {sortedDonationRequests?.map((singleListing, index) => (<DonationRequest singleListing={singleListing} key={index} />))}
             </Grid>
       </Box>
