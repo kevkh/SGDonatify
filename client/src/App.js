@@ -44,6 +44,8 @@ import LocateCC from "./components/Pages/LocateCC";
 
 //admin
 import ViewRequests from "./components/Admin/ViewRequests";
+import CreateRequests from "./components/DonationListing/CreateDonationListing";
+import ViewMyRequests from "./components/DonationListing/ViewMyRequests";
 
 function App () {
 
@@ -89,6 +91,8 @@ return (
         <Route exact path="/LocateCC"> <LocateCC/></Route>
 
         <Route exact path="/ViewRequests"> <ViewRequests/></Route>
+        <Route exact path="/CreateRequests"> <CreateRequests/></Route>
+        <Route exact path="/ViewMyRequests"> <ViewMyRequests/></Route>
       </Switch>
     </Box>
   </Router>

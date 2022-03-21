@@ -23,3 +23,13 @@ export const updateDonation =  (id, amount) => async(dispatch) => {
     }
 
 }
+
+export const createDonation =  (form) => async(dispatch) => {
+    try{
+        const {data}  = await api.createDonation(form);
+    }catch(error){
+        console.log(error.message);
+ 
+    }
+
+}

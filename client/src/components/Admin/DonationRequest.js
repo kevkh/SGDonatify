@@ -16,12 +16,14 @@ const date = new Date(singleListing.dateCreated)
           <Box sx={{ backgroundColor: 'white', mr: 2, display: 'flex', borderRadius: 3 }}>
               <Stack sx={{ ml: 1,mr:3 }}>
                   <Avatar sx={{ my: 1,ml:1, width: '75px', height: '75px' }} />
-                  <Button disabled variant="contained">Pending</Button>
+                  <Typography variant="h5">{singleListing.status}</Typography>
+                  {/* <Button disabled variant="contained">Pending</Button> */}
               </Stack>
               <Stack sx={{ flexGrow: 1 }}>
                   <Typography variant="h3">{singleListing.name}</Typography>
-                  <Typography variant="h4">By {singleListing.name}</Typography>
+                  <Typography variant="h4">By {singleListing.createdBy}</Typography>
                   <Typography variant="h4">Posted on {date.getDate()} {months[date.getMonth()]} {date.getFullYear()}</Typography>
+                  
               </Stack>
           </Box>
           </Link>

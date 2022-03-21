@@ -4,7 +4,11 @@ const donationListingSchema = mongoose.Schema({
     name: {type:String},
     donationValue: { type: Number },
     dateCreated: { type: Date},
-    totalAmountCollected: {type: Number}
+    totalAmountCollected: {type: Number},
+    status: {type:String},
+    createdBy: {type:String},
+    createdById: {type:String},
+    description: {type:String}
     
   
   });

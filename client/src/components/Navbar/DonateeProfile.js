@@ -13,20 +13,31 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import ButtonGroup from '@mui/material/ButtonGroup';
-
+import { Box } from '@mui/material'
 const DonateeProfile = ({anchorRef, logout, user, open, handleToggle, handleClose, handleListKeyDown}) => {
     const classes = useStyles();
     return(
       <div className={classes.verticalCenter}>
+      <Box sx={{display:'flex'}}>
+      <Button 
+      sx={{ml:1,my:2}}
+      variant ='contained' 
+      component={Link} to="/CreateRequests"
+
+      >
+       Create Requests
+      </Button>
+      
       <Button 
         variant="contained"
         color = "primary"
-        component={Link} to="/createForm"
-        className={classes.logonProfileButton}>
-        
-        View My Donations
+        sx={{ml:1,my:2}}
+       component={Link} to="/ViewMyRequests">
+       View My Requests
       </Button>
-                  
+      </Box>
+     
+     
       <Stack direction="row">
             
             <Button

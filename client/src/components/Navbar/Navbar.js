@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Searchbar from "./Searchbar";
 import ProfilePanel from "./ProfilePanel";
+import LocateCC from "../Pages/LocateCC";
 
 const Navbar = ({setText}) => {
  
@@ -99,9 +100,13 @@ return (
                 </div>
             </Link>
           </Grid>
-          <Grid className={classes.searchBar} item xs={6}>
+          <Grid className={classes.searchBar} item xs={6}  >
             <Searchbar setText={setText} />
           </Grid>
+          {/* <Grid item xs={1} sx={{pt:4,pl:1}} >
+            <Link to="/locateCC" style={{ textDecoration: 'none', color:'black' }}>
+              <Button variant='contained' color='primary'>Locate CC</Button></Link>
+          </Grid> */}
           <Grid  item xs={3} sx={{paddingRight:"10px"}}>
             <div className={classes.profilePanel}>
               <div className={classes.verticalCenter}>

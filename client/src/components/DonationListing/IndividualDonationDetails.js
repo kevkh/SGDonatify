@@ -2,7 +2,7 @@ import React from 'react'
 import { Box,Card,Stack,Typography,Container,Grid,Button } from '@mui/material'
 import { useLocation,Link, useHistory} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
-import {getDonation} from '../../actions/donationListing.js'
+import {getDonation,updateDonation} from '../../actions/donationListing.js'
 import CardMedia from '@mui/material/CardMedia';
 import {useEffect } from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
@@ -23,6 +23,10 @@ const IndividualDonationDetails = () => {
     const progress = Math.round(value*10)/10
     const user = JSON.parse(localStorage.getItem('profile'))
     const isAdmin = user?.result?.type === 'admin'
+    const isDonor = user?.result?.type === 'donor'
+
+    const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
+    This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
 
     useEffect (() => {
 
@@ -35,7 +39,14 @@ const IndividualDonationDetails = () => {
         history.push("/ViewRequests")
     }
 
-    
+    const changeRequest = (amount) => {
+
+        const type = 'status'
+        dispatch(updateDonation(id, {type , amount }))
+
+    }
+
+    console.log(donationDetails[0]?.description)
 
     return (
    
@@ -51,24 +62,21 @@ const IndividualDonationDetails = () => {
             </Grid>
             <Grid item xs={8}>
                 <Stack spacing={4} sx={{maxWidth:"30%"}}>
-                    
-                   {isAdmin && 
-                   <Box>
+                        { isAdmin &&
                         <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mb:2}}>
                             <CancelSharpIcon color='error' fontSize="large" onClick={handleClose} />
+                        </Box>}
+                   {isAdmin && donationDetails[0]?.status == 'Pending' &&
+                   <Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row-reverse',gap:3 }}>
+                            <Button variant='contained' color='error' onClick={()=>changeRequest('Rejected')}>Reject</Button>
+                            <Button variant='contained' color='success' onClick={()=>changeRequest('Approved')}>Accept</Button>
                         </Box>
-                        <Box sx={{ display: 'flex' }}>
-                            <Typography sx={{ flexGrow: 1 }} variant='h3'>{donationDetails[0]?.name}</Typography>
-                            <Box sx={{ display: 'flex' }}>
-                                <Button variant='contained' color='success' sx={{ mr: 5 }}>Accept</Button>
-                                <Button variant='contained' color='error'>Reject</Button>
-                            </Box>
-                        </Box>
+                        
                     </Box>}
+                    <Typography variant="h3">{donationDetails[0]?.name}</Typography>
                     <Typography variant='h5'>{date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
-                    <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus hendrerit 
-                    arcu nec dignissim. Vestibulum elementum urna eget rutrum maximus. Nullam ornare tellus augue, eu luctus sem iaculis ut. Nam dignissim purus ac massa fringilla 
-                    sagittis. Phasellus congue velit vehicula eros finibus rutrum. Duis sed nunc congue mi congue suscipit.</Typography>
+                    <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">{donationDetails[0]?.description == undefined? placeholderDescription: donationDetails[0]?.description}</Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Box sx={{ width: '100%', mr: 1 }}>
                             <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
@@ -79,7 +87,7 @@ const IndividualDonationDetails = () => {
                     </Box>
                     <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
                     
-                    {!isAdmin && <Grid columns={2} container spacing={0}  rowSpacing={2} >
+                    {isDonor && <Grid columns={2} container spacing={0}  rowSpacing={2} >
                     
                        <Grid item xs={1}>
                             <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>

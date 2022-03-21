@@ -28,6 +28,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     }
 
     const handleDialogCloseandUpdateDonation = () => {
+      const type = "totalAmountCollected"
         if (custom)
         {
             if (!checkCustomAmount())
@@ -36,7 +37,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
             {
                 setDisplayAlert(false)
                 const amount = textFieldValue
-                dispatch(updateDonation(id, {amount}))
+                dispatch(updateDonation(id, {type, amount}))
                 setOpenDialog(false)
                 setTextFieldValue("")
             }
@@ -44,7 +45,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
         else
         {
             const amount = buttonValueInt
-            dispatch(updateDonation(id, { amount }))
+            dispatch(updateDonation(id, {type, amount }))
             setOpenDialog(false)
         }
         
