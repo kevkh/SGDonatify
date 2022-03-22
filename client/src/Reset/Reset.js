@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateDonorPwd } from "../actions/donorAuth";
+import { updateDonateePwd } from "../actions/donateeAuth";
 import { updatePwd } from "../actions/auth";
 import useStyles from "./styles";
 import Container from '@mui/material/Container';
@@ -16,7 +17,11 @@ import {
 
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-
+import Stack from '@mui/material/Stack'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const Reset = () => {
   const classes = useStyles();
   let user = JSON.parse(localStorage.getItem("profile"));
@@ -26,24 +31,29 @@ const Reset = () => {
   const userId = user.result._id;
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
+  const [userProfile,setUserProfile] = useState(user.result)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // dispatch(updateDonorPwd(userId, user.result))
     if (pwd === "") {
       alert("passwords cannot be empty");
     } else if (pwd !== confirmPwd) {
       alert("passwords are not same");
     } else {
-      user.result.password = pwd;
-      console.log(user.result);
-      if (user.result.type === "donor") {
-        dispatch(updateDonorPwd(userId, user.result));
+      if (user.result.type === "donatee") {
+        dispatch(updateDonateePwd(userId, userProfile));
       } else {
-        dispatch(updatePwd(userId, user.result));
+        dispatch(updateDonorPwd(userId, userProfile));
       }
       alert("password updated");
     }
   };
+
+  const handleChangePassword = (e) => {
+    setConfirmPwd(e.target.value)
+    setUserProfile({...userProfile, password:e.target.value})
+  }
 
   return (
     // <div>
@@ -79,32 +89,41 @@ const Reset = () => {
             Reset Password
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Input
+            <Stack rowGap={2}>
+              <TextField
+              variant="outlined"
                 name="password"
                 label="Password"
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
                 type={showPassword ? "text" : "password"}
-                handleShowPassword={handleShowPassword}
+                InputProps = {{endAdornment:(
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )}}
               />
              
-                <Input
+                <TextField
+                variant="outlined"
                   name="confirmPassword"
                   label="Repeat Password"
                   value={confirmPwd}
-                  onChange={(e) => setConfirmPwd(e.target.value)}
+                  onChange={handleChangePassword}
                   type="password"
                 />
-            
-            </Grid>
+            </Stack>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleSubmit}
             >
               Update Password
             </Button>
