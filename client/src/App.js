@@ -7,7 +7,7 @@ import Auth from "./components/Auth/Auth";
 import DonorAuth from "./components/Auth/DonorAuth";
 import Profile from "./components/Pages/Profile";
 import Description from "./components/Pages/Description";
-import Reset from "./components/Pages/Reset";
+import Reset from "./Reset/Reset";
 import DonorHub from "./components/Pages/DonorHub";
 import DonorDetail from "./components/Pages/DonorDetail";
 import SearchBar from './components/Search/SearchBar'
