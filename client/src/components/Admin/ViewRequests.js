@@ -82,7 +82,8 @@ const ViewRequests = () => {
     //         </Box>
     //         <Grid container spacing={3} sx={{ mt: 2 }}>
   return (
-      <Box sx={{ ml: '15%',mr: '15%'}}>
+    <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px"}}>
+        <Grid  container>
           <Box sx={{display:'flex', columnGap:2 }} >
               <Button variant={buttonValue === "all" ? "contained" : "outlined"} sx={{ borderRadius: 10, backgroundColor: (buttonValue === "all"? "" : "white")}} onClick={()=>sortDonations('all')}>ALL</Button>
               <Button variant={buttonValue === "pending" ? "contained" : "outlined"} sx={{ borderRadius: 10,  backgroundColor: (buttonValue === "pending"? "" : "white")}} onClick={()=>sortDonations('pending')}>PENDING</Button>
@@ -92,7 +93,8 @@ const ViewRequests = () => {
             <Grid container spacing={3} sx={{mt:2, mb:2}}>
                 {sortedDonationRequests?.map((singleListing, index) => (<DonationRequest singleListing={singleListing} key={index} />))}
             </Grid>
-        </Box>
+        </Grid>
+    </Container>
     )
 }
 
