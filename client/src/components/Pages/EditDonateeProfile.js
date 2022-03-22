@@ -84,9 +84,9 @@ export const EditDonateeProfile = () => {
     };
 
     const handleChangeIncomeDocs = (e) => {
-        e.preventDefault();
-        setIncomeDocs(e.target.value);
-        income_docs = e.target.value
+        // e.preventDefault();
+        setIncomeDocs(e.base64);
+        income_docs = e.base64
         donateeProfile.income_docs = income_docs
 
     };
@@ -97,10 +97,10 @@ export const EditDonateeProfile = () => {
         //setPostData({...postData, income_docs: e.target.income_docs})  // insert docs
         dispatch(updateProfile(id, donateeProfile))
         
-        console.log(donateeProfile.name);
+        // console.log(donateeProfile.name);
         alert('Donatee Profile Updated')
         history.push("/donateeProfile");
-        console.log("Check Income Doc:", donateeProfile.income_docs)
+        // console.log("Check Income Doc:", donateeProfile.income_docs)
 
     };
 
@@ -174,7 +174,7 @@ export const EditDonateeProfile = () => {
                                 multiple={false}  
                                 value={donateeProfile.income_docs}
                                 onDone={ 
-                                         {handleChangeIncomeDocs}  
+                                         handleChangeIncomeDocs
                                 }
                                 // onDone={ ({ base64 }) =>
                                 //          {handleChangeIncomeDocs}  
