@@ -168,8 +168,8 @@ const LocateCC = () => {
                                 value={search}
                                 onChange={handleTextField}
                                 onKeyUp={handleEnter}
-                                InputProps={{ startAdornment: (<InputAdornment position="start"> <SearchIcon /></InputAdornment>) }}
-                                sx={{width:'80%',backgroundColor: 'white'}}
+                                InputProps={{ startAdornment: (<InputAdornment  position="start"> <SearchIcon /></InputAdornment>) }}
+                                sx={{width:'80%',backgroundColor: 'white', borderRadius:"5%"}}
                                 
                             />
                             <FormControl sx={{ml:2,width:'30%',  }}>
