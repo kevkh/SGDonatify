@@ -4,11 +4,14 @@ import { useParams, Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Paper, Button, TextField } from "@material-ui/core";
+import FileBase from "react-file-base64";
+import useStyles from "./styles";
 
 export const EditDonateeProfile = () => {
 
     const { id } = useParams()
     const dispatch = useDispatch()
+    const classes = useStyles();
     const [donateeProfile, setDonateeProfile] = useState('')
     let history = useHistory();
     useEffect(() => {
@@ -18,6 +21,10 @@ export const EditDonateeProfile = () => {
         }
         fetchData()
     }, [])
+
+    const [postData, setPostData] = useState({
+         income_docs: ""
+    })
 
     const [Name, setName] = useState('')
     const [Email, setEmail] = useState('')
@@ -81,15 +88,19 @@ export const EditDonateeProfile = () => {
         setIncomeDocs(e.target.value);
         income_docs = e.target.value
         donateeProfile.income_docs = income_docs
+
     };
     
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        //setPostData({...postData, income_docs: e.target.income_docs})  // insert docs
         dispatch(updateProfile(id, donateeProfile))
+        
         console.log(donateeProfile.name);
-        alert('Profile Updated')
+        alert('Donatee Profile Updated')
         history.push("/donateeProfile");
+        console.log("Check Income Doc:", donateeProfile.income_docs)
 
     };
 
@@ -146,20 +157,38 @@ export const EditDonateeProfile = () => {
                             /></h2>
 
                             {/* Change to upload button  */}
-                            <h2> Household Income Docs : <TextField
+                            {/* <h2> Household Income Docs : <TextField
                                 name="income_docs"
                                 variant="outlined"
                                 fullWidth
                                 value={donateeProfile.income_docs}
                                 onChange={handleChangeIncomeDocs}
-                            /></h2>
+                            /></h2> */}
+
+                            
+
+                            <h2> Household Income Documents</h2>
+                            <div className={classes.fileInput}>
+                            <FileBase
+                                type="file"
+                                multiple={false}  
+                                value={donateeProfile.income_docs}
+                                onDone={ 
+                                         {handleChangeIncomeDocs}  
+                                }
+                                // onDone={ ({ base64 }) =>
+                                //          {handleChangeIncomeDocs}  
+                                // }
+
+                            />
+                            </div>
 
                             <Button onClick={handleSubmit} color="primary" variant="contained"  >
                                 Update
                             </Button>
                             <Button component={Link} to={{
-                                pathname: `/donateeProfile`,    // Change here???
-                            }} color="primary" variant="contained">
+                                pathname: `/donateeProfile`,    
+                            }} color="primary" variant="contained">             
                                 Back
                             </Button>
                         </div>

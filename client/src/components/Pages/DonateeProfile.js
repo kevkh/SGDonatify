@@ -108,7 +108,8 @@ const DonateeProfile = () => {
 
             <Paper>
               <label>Household Income Documents:</label>
-              <h1>{donateeProfile.income_docs}</h1>
+              {/* <h1>{donateeProfile.income_docs}</h1> */}
+              <object width="100%" height="400" data= {donateeProfile.income_docs} type="application/pdf">   </object>
             </Paper>
             
             <Button

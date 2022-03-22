@@ -2,26 +2,34 @@ import React from 'react'
 import {useEffect,useState } from 'react'
 import { Box,Card,Stack,Typography,Container,Grid,Button,Paper } from '@mui/material'
 import TextField from '@mui/material/TextField';
+import FileBase from "react-file-base64";
+import useStyles from "./styles";
 import {useSelector,useDispatch} from 'react-redux'
 import { createDonation } from '../../actions/donationListing';
+import { useParams, Link, useHistory } from 'react-router-dom'
+
 
 const CreateDonationListing = () => {
 
     const dispatch = useDispatch()
+    const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('profile'))
+    let history = useHistory();
     const userId = user.result._id
+    console.log(user?.result?.name)
     // console.log(user.result._id)
     // console.log(typeof user.result._id)
 
     const [postData, setPostData] = useState({
-        name: "",
-        donationValue: "",
-        dateCreated: "",
-        totalAmountCollected: 0,
-        status: "Pending",
-        createdBy: "",
-        createdById: userId,
-        description: ""
+          name: "",
+          donationValue: "",
+          dateCreated: "",
+          totalAmountCollected: 0,
+          status: "Pending",
+          createdBy: user?.result?.name,
+          createdById: userId,
+          description: "",
+          selectedFile: ""
     });
 
     const clear = () => {
@@ -33,7 +41,9 @@ const CreateDonationListing = () => {
             status: "Pending",
             createdBy: "",
             createdById: "",
-            description: ""
+            description: "",
+            selectedFile: ""
+
         });
       };
 
@@ -48,12 +58,13 @@ const CreateDonationListing = () => {
         }else if(postData.description === ""){
           alert("Please enter a description!")
         }
-        else if(postData.createdBy === ""){
-          alert("Please enter creator name!")
+        else if(postData.selectedFile === ""){
+          alert("Please choose a file to upload!")
         }
         setPostData({ ...postData})
         dispatch(createDonation({postData}))
         clear()
+        history.push("/ViewMyRequests");
       }
 
   return (
@@ -73,7 +84,6 @@ const CreateDonationListing = () => {
           
         />
 
-
         <TextField
           name="Donation Value Requested"
           variant="filled"
@@ -86,21 +96,21 @@ const CreateDonationListing = () => {
         <TextField
           name="Description"
           variant="filled"
-          label="Description"
+          label="Please provide a description."
           fullWidth
           value={postData.description}
           onChange={(e) => setPostData({ ...postData, description: e.target.value })}
         />
-        <TextField
-          name="Created By"
-          variant="filled"
-          label="Created By"
-          fullWidth
-          value={postData.createdBy}
-          onChange={(e) =>
-            setPostData({ ...postData, createdBy: e.target.value })
-          }
-        />
+
+        <div className={classes.fileInput}>
+          <FileBase
+            type="file"
+            multiple={false}
+            onDone={({ base64 }) =>
+              setPostData({ ...postData, selectedFile: base64 })
+            }
+          />
+        </div>
        
           <Box sx={{ mt: 2 }}>
 
@@ -119,7 +129,6 @@ const CreateDonationListing = () => {
                   color="error"
                   size="large"
                   onClick={clear}
-
               >
                   Clear
               </Button>

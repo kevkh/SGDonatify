@@ -8,9 +8,9 @@ const donationListingSchema = mongoose.Schema({
     status: {type:String},
     createdBy: {type:String},
     createdById: {type:String},
-    description: {type:String}
+    description: {type:String},
+    selectedFile: {type:String},
     
-  
   });
   
   export default mongoose.model("DonationListing", donationListingSchema);

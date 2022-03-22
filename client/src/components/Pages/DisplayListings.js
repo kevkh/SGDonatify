@@ -15,7 +15,6 @@ import {useSelector,useDispatch} from 'react-redux'
 import IndividualDonationListing from "../DonationListing/IndividualDonationListing"
 
 
-
 const DisplayListings = () => {
 
     const dispatch = useDispatch()
@@ -25,11 +24,9 @@ const DisplayListings = () => {
     const [closeAlert, setCloseAlert] = useState()
     const [sort,setSort] = useState("")
     const text = localStorage.getItem('searchText')
-
     
     const [pagenationLength, setPagenationLength] = useState(0)
     const [page,setPage] = useState(1)
-
 
     const handleChange = (event, value) => {
        
