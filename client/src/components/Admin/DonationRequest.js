@@ -15,7 +15,11 @@ const date = new Date(singleListing.dateCreated)
   return (
       <Grid item xs={4}>
           <Link to={`/DisplayListings/${singleListing._id}`} style={{ textDecoration: 'none',color:'black', }}>
-          <Box sx={{ backgroundColor: 'white',  display: 'flex', borderRadius: 3, p:3 }}>
+          <Box sx={{display: 'flex', borderRadius: 3, p:3,background: "white",  
+            '&:hover': { color: "white",
+                        background: (singleListing.status === "Pending" ? "gray": 
+                                    singleListing.status === "Approved" ? "green":
+                                    singleListing.status === "Rejected" ? "red":"")} }}>
               <Stack sx={{ ml: 1,mr:3 }}>
                   <Avatar sx={{ my: 1,ml:1, width: '75px', height: '75px' }} />
                   <Typography variant="h6"  sx={{color:'white', 
