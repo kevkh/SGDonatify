@@ -14,7 +14,7 @@ import {
   Typography, 
   TextField
 
-} from "@material-ui/core";
+} from '@mui/material';
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const Reset = () => {
