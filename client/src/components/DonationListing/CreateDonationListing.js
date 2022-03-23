@@ -17,6 +17,7 @@ const CreateDonationListing = () => {
     let history = useHistory();
     const userId = user.result._id
     console.log(user?.result?.name)
+    console.log("See income data",user?.result?.income_docs)
     // console.log(user.result._id)
     // console.log(typeof user.result._id)
 
@@ -29,7 +30,7 @@ const CreateDonationListing = () => {
           createdBy: user?.result?.name,
           createdById: userId,
           description: "",
-          selectedFile: ""
+          selectedFile: user?.result?.income_docs,
     });
 
     const clear = () => {
@@ -58,9 +59,9 @@ const CreateDonationListing = () => {
         }else if(postData.description === ""){
           alert("Please enter a description!")
         }
-        else if(postData.selectedFile === ""){
-          alert("Please choose a file to upload!")
-        }
+        // else if(postData.selectedFile === ""){
+        //   alert("Please choose a file to upload!")
+        // }
         setPostData({ ...postData})
         dispatch(createDonation({postData}))
         clear()
@@ -102,7 +103,7 @@ const CreateDonationListing = () => {
           onChange={(e) => setPostData({ ...postData, description: e.target.value })}
         />
 
-        <div className={classes.fileInput}>
+        {/* <div className={classes.fileInput}>
           <FileBase
             type="file"
             multiple={false}
@@ -110,7 +111,7 @@ const CreateDonationListing = () => {
               setPostData({ ...postData, selectedFile: base64 })
             }
           />
-        </div>
+        </div> */}
        
           <Box sx={{ mt: 2 }}>
 

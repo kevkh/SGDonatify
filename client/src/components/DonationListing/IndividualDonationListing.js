@@ -48,7 +48,7 @@ const individualDonationListing = ({singleListing, index}) => {
                 <Typography sx={{mt:10}} variant="h4">${singleListing.totalAmountCollected} collected of ${singleListing.donationValue}</Typography>
                 <Typography align='right' variant="h5">{date.getDate()} {months[date.getMonth()]} {date.getFullYear()}</Typography>
                 
-                <object width="100%" height="400" data= {singleListing.selectedFile} type="application/pdf"> </object>
+                {/* <object width="100%" height="400" data= {singleListing.selectedFile} type="application/pdf"> </object> */}
 
             </Stack>
             </Link>

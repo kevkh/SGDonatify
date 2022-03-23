@@ -145,6 +145,7 @@ const DisplayListings = ({text}) => {
                 <Grid item xs={3}>
                     {/* <Filter  sx={{ boxShadow: 3 }} sort={sort} setSort={setSort} ></Filter> */}
                 </Grid>
+                {/* Listing details here */}
                 <Grid item xs={9}>
                     <div sx={{ boxShadow: 3 }} className={classes.paginationContainer}>
                         <div className={classes.verticalCenter}>

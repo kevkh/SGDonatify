@@ -4,10 +4,11 @@ import { useLocation,Link, useHistory} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import {getDonation,updateDonation} from '../../actions/donationListing.js'
 import CardMedia from '@mui/material/CardMedia';
-import {useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
 import TermsnConditions from './TermsnConditions.js'
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+import axios from "axios";
 
 const IndividualDonationDetails = () => {
 
@@ -24,15 +25,28 @@ const IndividualDonationDetails = () => {
     const user = JSON.parse(localStorage.getItem('profile'))
     const isAdmin = user?.result?.type === 'admin'
     const isDonor = user?.result?.type === 'donor'
+    const createdBy = donationDetails[0]?.createdById  // donateeID that created the req
+    
+    const [userProfile, setUserProfile] = useState("");
 
     const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
     This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
 
     useEffect (() => {
-
+        async function fetchData() {
+            console.log(user.result._id);
+            let response = await axios.get(
+              `http://localhost:5000/donatee/${createdBy}`
+            );
+            setUserProfile(response.data);
+            console.log(response.data);
+          }
+        fetchData();
         dispatch(getDonation())
             
     },[])
+
+    
 
     const handleClose = () => {
 
@@ -47,6 +61,7 @@ const IndividualDonationDetails = () => {
     }
 
     console.log(donationDetails[0]?.description)
+    console.log(createdBy)
 
     return (
    
@@ -86,7 +101,9 @@ const IndividualDonationDetails = () => {
                         </Box>
                     </Box>
                     <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
-                    
+
+                    <object width="100%" height="400" data= {userProfile.income_docs} type="application/pdf">   </object>
+  
                     {isDonor && <Grid columns={2} container spacing={0}  rowSpacing={2} >
                     
                        <Grid item xs={1}>

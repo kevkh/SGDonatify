@@ -86,8 +86,9 @@ export const EditDonateeProfile = () => {
     const handleChangeIncomeDocs = (e) => {
         // e.preventDefault();
         setIncomeDocs(e.base64);
-        income_docs = e.base64
+        income_docs = "data:application/pdf;base64," + e.base64
         donateeProfile.income_docs = income_docs
+        
 
     };
     
@@ -165,17 +166,14 @@ export const EditDonateeProfile = () => {
                                 onChange={handleChangeIncomeDocs}
                             /></h2> */}
 
-                            
-
+                        
                             <h2> Household Income Documents</h2>
                             <div className={classes.fileInput}>
                             <FileBase
                                 type="file"
                                 multiple={false}  
                                 value={donateeProfile.income_docs}
-                                onDone={ 
-                                         handleChangeIncomeDocs
-                                }
+                                onDone={handleChangeIncomeDocs}
                                 // onDone={ ({ base64 }) =>
                                 //          {handleChangeIncomeDocs}  
                                 // }
