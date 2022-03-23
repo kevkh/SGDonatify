@@ -9,6 +9,10 @@ import LinearProgress from '@mui/material/LinearProgress';
 import TermsnConditions from './TermsnConditions.js'
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 import axios from "axios";
+import Popper from '@mui/material/Popper';
+import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
+import Fade from '@mui/material/Fade';
+import Paper from '@mui/material/Paper';
 
 const IndividualDonationDetails = () => {
 
@@ -102,7 +106,38 @@ const IndividualDonationDetails = () => {
                     </Box>
                     <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
 
-                    <object width="100%" height="400" data= {userProfile.income_docs} type="application/pdf">   </object>
+                    {/* <button aria-describedby={id} type="button" onClick={handleClick}>
+                        Click to view PDF
+                    </button>
+                    <Popper id={id} open={open} anchorEl={anchorEl}>
+                    <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
+                        <object width="100%" height="400" data= {userProfile.income_docs} type="application/pdf">   </object>
+                    </Box>
+                    </Popper> */}
+
+                    {/* Add Popper here */}
+                    <PopupState variant="popper" popupId="demo-popup-popper">
+                    {(popupState) => (
+                        <div>
+                        <Button variant="contained" {...bindToggle(popupState)}>
+                            Click to view Income Document.
+                        </Button>
+                        <Popper {...bindPopper(popupState)} transition>
+                            {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                                <Paper>
+                                <Typography sx={{ p: 2 }}>
+                                <object width="100%" height="400" data= {userProfile.income_docs} type="application/pdf">   </object>
+                                </Typography>
+                                </Paper>
+                            </Fade>
+                            )}
+                        </Popper>
+                        </div>
+                    )}
+                    </PopupState>
+
+        
   
                     {isDonor && <Grid columns={2} container spacing={0}  rowSpacing={2} >
                     
