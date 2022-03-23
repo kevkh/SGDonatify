@@ -6,10 +6,11 @@ import { useLocation,Link, useHistory} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import {getDonation,updateDonation} from '../../actions/donationListing.js'
 import CardMedia from '@mui/material/CardMedia';
-import {useEffect } from 'react'
+import {useEffect, useState } from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
 import TermsnConditions from './TermsnConditions.js'
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+import Axios from 'axios'
 
 const IndividualDonationDetails = () => {
 
@@ -26,7 +27,8 @@ const IndividualDonationDetails = () => {
     const user = JSON.parse(localStorage.getItem('profile'))
     const isAdmin = user?.result?.type === 'admin'
     const isDonor = user?.result?.type === 'donor'
-
+    const listingCreatorId = donationDetails[0]?.createdById
+    const [listingCreator, setlistingCreator] = useState(null)
     const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
     This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
 
@@ -35,6 +37,17 @@ const IndividualDonationDetails = () => {
         dispatch(getDonation())
             
     },[])
+
+    useEffect (() => {
+
+        const fetchUser = async () => {
+            let res = await Axios.get(`http://localhost:5000/donatee/${listingCreatorId}`)
+            setlistingCreator(res.data)
+        }
+
+        fetchUser()
+            
+    },[donationListings])
 
     const handleClose = () => {
 
@@ -121,19 +134,19 @@ const IndividualDonationDetails = () => {
                         }
                         <Grid sx={{mt: 1}}>
                             { isAdmin
-                              ? <Link>
+                              ? <Link to={`/Donatee/${listingCreatorId}/${id}`} style={{ textDecoration: 'none', color:'black' }}>
                                     <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
-                                        <Avatar  sx={{ height: '70px', width: '70px' }}/>
+                                        <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
                                         <Box>
-                                            <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>Hello World</Box>
+                                            <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{donationDetails[0]?.createdBy}</Box>
                                             <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
                                         </Box>
                                     </Box>
                                 </Link>
                               :  <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
-                                   <Avatar  sx={{ height: '70px', width: '70px' }}/>
+                                   <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
                                    <Box>
-                                        <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>Hello World</Box>
+                                        <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{donationDetails[0]?.createdBy}</Box>
                                         <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
                                    </Box>
                                 </Box>
