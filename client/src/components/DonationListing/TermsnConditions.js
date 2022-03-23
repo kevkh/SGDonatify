@@ -10,7 +10,8 @@ import {useDispatch} from 'react-redux'
 import {updateDonation} from '../../actions/donationListing.js'
 import {updateDonorDonationDetails} from '../../actions/donorAuth.js'
 import Alert from '@mui/material/Alert'
-
+import { deepOrange } from '@material-ui/core/colors';
+import { deepPurple } from '@material-ui/core/colors';
 const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
     const dispatch = useDispatch()
@@ -72,7 +73,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
   return (
     <Box>
-      {buttonValueInt <= validAmount || (custom && !(donationValue[0] == donationValue[1]))? <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}</Button>:
+      {buttonValueInt <= validAmount || (custom && !(donationValue[0] == donationValue[1]))? <Button sx={{ width:"100%", height:"50px", backgroundColor: deepPurple[500] }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}</Button>:
       <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen} disabled>Donate {buttonValue} </Button>}
       <Dialog
         open={openDialog}

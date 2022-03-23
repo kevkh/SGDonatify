@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box,Stack,Typography,Container,Button } from '@mui/material'
+import { Box,Stack,Typography,Container,Button, Avatar } from '@mui/material'
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card'
 import { useLocation,Link, useHistory} from 'react-router-dom'
@@ -49,7 +49,7 @@ const IndividualDonationDetails = () => {
     }
 
     return (
-        <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px"}}>
+        <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px", mb:3}}>
             <Grid container spacing={5}>
                 <Grid item xs={5}>
                     <Card>
@@ -58,6 +58,41 @@ const IndividualDonationDetails = () => {
                            
                             image="https://picsum.photos/id/239/1000/1000"
                         />
+                         <Stack spacing={3} sx={{ m:3 }}>
+
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <Box sx={{ width: '100%', mr: 1 }}>
+                                    <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
+                                </Box>
+                                <Box>
+                                    <Typography>{progress}%</Typography>
+                                </Box>
+                            </Box>
+                            <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
+                            {isDonor && <Grid  container spacing={0}  rowSpacing={2} >
+                        
+                                <Grid item xs={4} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                                <Grid item xs={4} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$10" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                                <Grid item xs={4} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$50" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                                <Grid item xs={6} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$1000" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                                <Grid item xs={6} sx={{padding: 1}}>
+                                    <TermsnConditions custom id={id} buttonValue="Custom Amount" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                            </Grid >}
+                        </Stack>
                     </Card>
                 </Grid>
                 <Grid item xs={7}>
@@ -84,45 +119,31 @@ const IndividualDonationDetails = () => {
                             </Box>
                                 
                         }
-                        <Grid sx={{my: 1}}>
-                            <Typography  variant='h5'>{date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
+                        <Grid sx={{mt: 1}}>
+                            { isAdmin
+                              ? <Link>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
+                                        <Avatar  sx={{ height: '70px', width: '70px' }}/>
+                                        <Box>
+                                            <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>Hello World</Box>
+                                            <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
+                                        </Box>
+                                    </Box>
+                                </Link>
+                              :  <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
+                                   <Avatar  sx={{ height: '70px', width: '70px' }}/>
+                                   <Box>
+                                        <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>Hello World</Box>
+                                        <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
+                                   </Box>
+                                </Box>
+                            }
                         </Grid>
-                        <Grid sx={{my: 1}}>
+                        
+                        <Grid sx={{mt: 1,}}>
                             <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">{donationDetails[0]?.description == undefined? placeholderDescription: donationDetails[0]?.description}</Typography>
                         </Grid>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Box sx={{ width: '100%', mr: 1 }}>
-                                <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
-                            </Box>
-                            <Box>
-                                <Typography>{progress}%</Typography>
-                            </Box>
-                        </Box>
-                        <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
                         
-                        {isDonor && <Grid columns={2} container spacing={0}  rowSpacing={2} >
-                        
-                        <Grid item xs={1}>
-                                <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                            </Grid>
-
-                            <Grid item xs={1}>
-                                <TermsnConditions custom={false} id={id} buttonValue="$10" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                            </Grid>
-
-                            <Grid item xs={1}>
-                                <TermsnConditions custom={false} id={id} buttonValue="$50" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                            </Grid>
-
-                            <Grid item xs={1}>
-                                <TermsnConditions custom={false} id={id} buttonValue="$1000" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                            </Grid>
-
-                            <Grid item xs={2}>
-                                <TermsnConditions custom id={id} buttonValue="Custom Amount" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                            </Grid>
-
-                        </Grid >}
                     </Stack>
                 </Grid>
             </Grid>
