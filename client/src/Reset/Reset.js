@@ -35,18 +35,22 @@ const Reset = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch(updateDonorPwd(userId, user.result))
-    if (pwd === "") {
+    if (pwd === ""){
       alert("passwords cannot be empty");
-    } else if (pwd !== confirmPwd) {
+    } 
+    else if (pwd !== confirmPwd){
       alert("passwords are not same");
-    } else {
+    } 
+    else{
       if (user.result.type === "donatee") {
         dispatch(updateDonateePwd(userId, userProfile));
-      } else {
+      } 
+      else {
         dispatch(updateDonorPwd(userId, userProfile));
       }
-      alert("password updated");
+      alert("password updated")
+      setPwd("")
+      setConfirmPwd("")
     }
   };
 
@@ -86,7 +90,7 @@ const Reset = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Reset Password
+            Change Password
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
             <Stack rowGap={2}>
@@ -103,7 +107,7 @@ const Reset = () => {
                       onClick={handleShowPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <Visibility/> : <VisibilityOff/> }
                     </IconButton>
                   </InputAdornment>
                 )}}
