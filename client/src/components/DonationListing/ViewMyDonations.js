@@ -19,8 +19,10 @@ const ViewMyDonations = () => {
         
         const fetchDonorData = async () => {
             let response = await Axios.get(`http://localhost:5000/donor/${user?.result._id}`)
+            if (response.data.donation_details){ 
             setAllDonatedListing(Object.keys(response.data.donation_details))
             setDonationDetails(response.data.donation_details)
+            }
         }
         dispatch(getDonation())
         fetchDonorData()

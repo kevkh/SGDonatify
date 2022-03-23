@@ -47,6 +47,7 @@ import ViewRequests from "./components/Admin/ViewRequests";
 import CreateRequests from "./components/DonationListing/CreateDonationListing";
 import ViewMyRequests from "./components/DonationListing/ViewMyRequests";
 import ViewMyDonations from "./components/DonationListing/ViewMyDonations";
+import ViewDonateeProfile from "./components/DonationListing/ViewDonateeProfile";
 
 function App () {
 
@@ -95,6 +96,7 @@ return (
         <Route exact path="/CreateRequests"> <CreateRequests/></Route>
         <Route exact path="/ViewMyRequests"> <ViewMyRequests/></Route>
         <Route exact path="/ViewMyDonations"> <ViewMyDonations/></Route>
+        <Route exact path="/Donatee/:donateeId/:donationId"> <ViewDonateeProfile/></Route>
       </Switch>
     </Box>
   </Router>

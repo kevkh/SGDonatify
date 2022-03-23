@@ -10,8 +10,7 @@ const CreateDonationListing = () => {
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('profile'))
     const userId = user.result._id
-    // console.log(user.result._id)
-    // console.log(typeof user.result._id)
+    const userName = user.result.name
 
     const [postData, setPostData] = useState({
         name: "",
@@ -19,7 +18,7 @@ const CreateDonationListing = () => {
         dateCreated: "",
         totalAmountCollected: 0,
         status: "Pending",
-        createdBy: "",
+        createdBy: userName,
         createdById: userId,
         description: ""
     });
@@ -31,8 +30,8 @@ const CreateDonationListing = () => {
             dateCreated: "",
             totalAmountCollected: 0,
             status: "Pending",
-            createdBy: "",
-            createdById: "",
+            createdBy: userName,
+            createdById: userId,
             description: ""
         });
       };
@@ -53,6 +52,7 @@ const CreateDonationListing = () => {
         }
         setPostData({ ...postData})
         dispatch(createDonation({postData}))
+        alert("Donation request created")
         clear()
       }
 
@@ -90,16 +90,6 @@ const CreateDonationListing = () => {
           fullWidth
           value={postData.description}
           onChange={(e) => setPostData({ ...postData, description: e.target.value })}
-        />
-        <TextField
-          name="Created By"
-          variant="filled"
-          label="Created By"
-          fullWidth
-          value={postData.createdBy}
-          onChange={(e) =>
-            setPostData({ ...postData, createdBy: e.target.value })
-          }
         />
        
           <Box sx={{ mt: 2 }}>
