@@ -2,7 +2,7 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {useEffect,useState } from 'react'
 import { Box,Card,Stack,Typography,Container,Grid,Button,Paper } from '@mui/material'
-import {getDonation} from '../../actions/donationListing.js'
+import {getAllDonation} from '../../actions/donationListing.js'
 import IndividualDonationListing from "../DonationListing/IndividualDonationListing"
 import ArticleIcon from '@mui/icons-material/Article';
 import {  Link, useHistory, useLocation } from "react-router-dom";
@@ -10,6 +10,7 @@ import { deepOrange } from '@material-ui/core/colors';
 import AddIcon from '@mui/icons-material/Add';
 import { deepPurple } from '@material-ui/core/colors';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 const ViewMyRequests = () => {
 
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const ViewMyRequests = () => {
 
     useEffect (() => {
 
-        dispatch(getDonation())
+        dispatch(getAllDonation())
 
     },[])
 
