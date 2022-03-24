@@ -58,7 +58,7 @@ const Reset = () => {
       setPwd("")
       setConfirmPwd("")
      
-      history.push('/donatee');
+      //history.push('/donatee');  // redirect 
     }
   };
 

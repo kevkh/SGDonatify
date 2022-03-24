@@ -1,5 +1,7 @@
 import React from 'react'
-import { Box,Card,Stack,Typography,Container,Grid,Button } from '@mui/material'
+import { Box,Stack,Typography,Container,Button, Avatar } from '@mui/material'
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card'
 import { useLocation,Link, useHistory} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import {getDonation,updateDonation} from '../../actions/donationListing.js'
@@ -13,6 +15,7 @@ import Popper from '@mui/material/Popper';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
+//import Axios from 'axios';
 
 const IndividualDonationDetails = () => {
 
@@ -29,28 +32,47 @@ const IndividualDonationDetails = () => {
     const user = JSON.parse(localStorage.getItem('profile'))
     const isAdmin = user?.result?.type === 'admin'
     const isDonor = user?.result?.type === 'donor'
-    const createdBy = donationDetails[0]?.createdById  // donateeID that created the req
-    
-    const [userProfile, setUserProfile] = useState("");
+    // const createdBy = donationDetails[0]?.createdById  // donateeID that created the req  
+    // const [userProfile, setUserProfile] = useState("");
 
+    const listingCreatorId = donationDetails[0]?.createdById
+    const [listingCreator, setlistingCreator] = useState(null)
     const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
     This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
 
+    // useEffect (() => {
+    //     async function fetchData() {
+    //         console.log(user.result._id);
+    //         let response = await axios.get(
+    //           `http://localhost:5000/donatee/${createdBy}`
+    //         );
+    //       //  setUserProfile(response.data);
+    //         console.log(response.data);
+    //       }
+    //     fetchData();
+    //     dispatch(getDonation())
+            
+    // },[])
+
+    // New
     useEffect (() => {
-        async function fetchData() {
-            console.log(user.result._id);
-            let response = await axios.get(
-              `http://localhost:5000/donatee/${createdBy}`
-            );
-            setUserProfile(response.data);
-            console.log(response.data);
-          }
-        fetchData();
+
         dispatch(getDonation())
             
     },[])
 
-    
+    useEffect (() => {
+
+        const fetchUser = async () => {
+            let res = await axios.get(`http://localhost:5000/donatee/${listingCreatorId}`)
+            setlistingCreator(res.data)
+        }
+
+        fetchUser()
+            
+    },[donationListings])
+
+    //////
 
     const handleClose = () => {
 
@@ -65,106 +87,108 @@ const IndividualDonationDetails = () => {
     }
 
     console.log(donationDetails[0]?.description)
-    console.log(createdBy)
+    //console.log(createdBy)
 
     return (
-   
-        <Grid sx={{ml:"15%"}} container spacing={20}>
-            <Grid item xs={4}>
-                <Card sx={{ maxWidth: 500 }}>
-                    <CardMedia
-                        component="img"
-                        height="750"
-                        image="https://picsum.photos/id/239/1000/1000"
-                    />
-                </Card>
-            </Grid>
-            <Grid item xs={8}>
-                <Stack spacing={4} sx={{maxWidth:"30%"}}>
-                        { isAdmin &&
-                        <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mb:2}}>
-                            <CancelSharpIcon color='error' fontSize="large" onClick={handleClose} />
-                        </Box>}
-                   {isAdmin && donationDetails[0]?.status == 'Pending' &&
-                   <Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'row-reverse',gap:3 }}>
-                            <Button variant='contained' color='error' onClick={()=>changeRequest('Rejected')}>Reject</Button>
-                            <Button variant='contained' color='success' onClick={()=>changeRequest('Approved')}>Accept</Button>
-                        </Box>
+        <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px", mb:3}}>
+            <Grid container spacing={5}>
+                <Grid item xs={5}>
+                    <Card>
+                        <CardMedia
+                            component="img"   
+                                                                          
+                            image="https://picsum.photos/id/239/1000/1000"
+                        />
+                         <Stack spacing={3} sx={{ m:3 }}>
+
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <Box sx={{ width: '100%', mr: 1 }}>
+                                    <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
+                                </Box>
+                                <Box>
+                                    <Typography>{progress}%</Typography>
+                                </Box>
+                            </Box>
+                            <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
+                            {isDonor && <Grid  container spacing={0}  rowSpacing={2} >
                         
-                    </Box>}
-                    <Typography variant="h3">{donationDetails[0]?.name}</Typography>
-                    <Typography variant='h5'>{date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
-                    <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">{donationDetails[0]?.description == undefined? placeholderDescription: donationDetails[0]?.description}</Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Box sx={{ width: '100%', mr: 1 }}>
-                            <LinearProgress variant="determinate" color="secondary" sx={{ height: 10, borderRadius: 1 }} value={progress} />
-                        </Box>
-                        <Box>
-                            <Typography>{progress}%</Typography>
-                        </Box>
-                    </Box>
-                    <Typography sx={{mt:10}} variant="h4">${donationDetails[0]?.totalAmountCollected} collected of ${donationDetails[0]?.donationValue}</Typography>
+                                <Grid item xs={4} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
 
-                    {/* <button aria-describedby={id} type="button" onClick={handleClick}>
-                        Click to view PDF
-                    </button>
-                    <Popper id={id} open={open} anchorEl={anchorEl}>
-                    <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
-                        <object width="100%" height="400" data= {userProfile.income_docs} type="application/pdf">   </object>
-                    </Box>
-                    </Popper> */}
+                                <Grid item xs={4} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$10" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
 
-                    {/* Add Popper here */}
-                    <PopupState variant="popper" popupId="demo-popup-popper">
-                    {(popupState) => (
-                        <div>
-                        <Button variant="contained" {...bindToggle(popupState)}>
-                            Click to view Income Document.
-                        </Button>
-                        <Popper {...bindPopper(popupState)} transition>
-                            {({ TransitionProps }) => (
-                            <Fade {...TransitionProps} timeout={350}>
-                                <Paper>
-                                <Typography sx={{ p: 2 }}>
-                                <object width="100%" height="400" data= {userProfile.income_docs} type="application/pdf">   </object>
-                                </Typography>
-                                </Paper>
-                            </Fade>
-                            )}
-                        </Popper>
-                        </div>
-                    )}
-                    </PopupState>
+                                <Grid item xs={4} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$50" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
 
-        
-  
-                    {isDonor && <Grid columns={2} container spacing={0}  rowSpacing={2} >
-                    
-                       <Grid item xs={1}>
-                            <TermsnConditions custom={false} id={id} buttonValue="$5" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                <Grid item xs={6} sx={{padding: 1}}>
+                                    <TermsnConditions custom={false} id={id} buttonValue="$1000" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                                <Grid item xs={6} sx={{padding: 1}}>
+                                    <TermsnConditions custom id={id} buttonValue="Custom Amount" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                                </Grid>
+
+                            </Grid >}
+                        </Stack>
+                    </Card>
+                </Grid>
+                <Grid item xs={7}>
+                    <Stack sx={{backgroundColor:"white", borderRadius:"5px",  padding:2}}>
+                        <Grid container sx={{mb: 1}}>
+                            
+                            
+                            <Grid item xs={11}>
+                                <Typography variant="h3">{donationDetails[0]?.name}</Typography>
+                            </Grid>
+                            { isAdmin &&
+                                <Grid item xs={1}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row-reverse', }}>
+                                        <CancelSharpIcon color='error' fontSize="large" onClick={handleClose} />
+                                    </Box>
+                                </Grid>
+                            }
                         </Grid>
-
-                        <Grid item xs={1}>
-                            <TermsnConditions custom={false} id={id} buttonValue="$10" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                        {isAdmin && donationDetails[0]?.status == 'Pending' &&
+                                
+                            <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
+                                <Button variant='contained' color='error' onClick={()=>changeRequest('Rejected')}>Reject</Button>
+                                <Button variant='contained' color='success' onClick={()=>changeRequest('Approved')}>Accept</Button>
+                            </Box>
+                                
+                        }
+                        <Grid sx={{mt: 1}}>
+                            { isAdmin
+                              ? <Link to={`/Donatee/${listingCreatorId}/${id}`} style={{ textDecoration: 'none', color:'black' }}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
+                                        <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
+                                        <Box>
+                                            <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{donationDetails[0]?.createdBy}</Box>
+                                            <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
+                                        </Box>
+                                    </Box>
+                                </Link>
+                              :  <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
+                                   <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
+                                   <Box>
+                                        <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{donationDetails[0]?.createdBy}</Box>
+                                        <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
+                                   </Box>
+                                </Box>
+                            }
                         </Grid>
-
-                        <Grid item xs={1}>
-                            <TermsnConditions custom={false} id={id} buttonValue="$50" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
+                        
+                        <Grid sx={{mt: 1,}}>
+                            <Typography sx={{wordWrap:"break-word"}} variant='h5' align="justify">{donationDetails[0]?.description == undefined? placeholderDescription: donationDetails[0]?.description}</Typography>
                         </Grid>
-
-                        <Grid item xs={1}>
-                            <TermsnConditions custom={false} id={id} buttonValue="$1000" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                        </Grid>
-
-                        <Grid item xs={2}>
-                            <TermsnConditions custom id={id} buttonValue="Custom Amount" donationValue = {[donationDetails[0]?.totalAmountCollected,donationDetails[0]?.donationValue]}/>
-                        </Grid>
-
-                    </Grid >}
-                </Stack>
+                        
+                    </Stack>
+                </Grid>
             </Grid>
-        </Grid>
+        </Container>
   )
 }
 

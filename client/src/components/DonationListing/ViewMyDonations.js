@@ -3,7 +3,7 @@ import { Box,Grid,Container, Card, Button } from '@mui/material'
 import IndividualDonationListing from './IndividualDonationListing'
 import {useSelector,useDispatch} from 'react-redux'
 import { useState, useEffect } from 'react'
-import {getDonation} from '../../actions/donationListing.js'
+import {getAllDonation} from '../../actions/donationListing.js'
 import Axios from 'axios'
 import { deepPurple } from '@material-ui/core/colors';
 import {  Link, useHistory, useLocation } from "react-router-dom";
@@ -27,7 +27,7 @@ const ViewMyDonations = () => {
             setDonationDetails(response.data.donation_details)
             }
         }
-        dispatch(getDonation())
+        dispatch(getAllDonation())
         fetchDonorData()
 
     }, [])

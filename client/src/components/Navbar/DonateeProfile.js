@@ -18,79 +18,71 @@ const DonateeProfile = ({anchorRef, logout, user, open, handleToggle, handleClos
     const classes = useStyles();
     return(
       <div className={classes.verticalCenter}>
-      <Box sx={{display:'flex'}}>
-      <Button 
-      sx={{ml:1,my:2}}
-      variant ='contained' 
-      component={Link} to="/CreateRequests"
-
-      >
-       Create Requests
-      </Button>
+     
       
-      <Button 
-        variant="contained"
-        color = "primary"
-        sx={{ml:1,my:2}}
-       component={Link} to="/ViewMyRequests">
-       View My Requests
-      </Button>
-      </Box>
-     
-     
-      <Stack direction="row">
+        
+        <Button 
+            variant="contained"
+            color = "primary"
+            className={classes.logonProfileButton}
+        component={Link} to="/ViewMyRequests">
+        View Requests
+        </Button>
+        
+        
+        <Stack direction="row">
+                
+                <Button
+                    ref={anchorRef}
+                    id="composition-button"
+                    aria-controls={open ? 'composition-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                    variant="outlined"
+                    color = "primary"
+                    startIcon = {<Avatar alt="Travis Howard" src={user.result.profile_pic} />}
+                    className={classes.logonProfileButton}
+                    endIcon={<KeyboardArrowDownIcon />}>
+                    {user.result.name}
+                    </Button>
+                    
+                    
+                
+                <Popper open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                placement="bottom-start"
+                
+                transition>
+                {({ TransitionProps, placement }) => (
+                <Grow
+                    {...TransitionProps}
+                    style={{
+                    transformOrigin:
+                        placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    }}
+                >
+                        <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList
+                            autoFocusItem={open}
+                            id="composition-menu"
+                            aria-labelledby="composition-button"
+                            onKeyDown={handleListKeyDown}
+                            >
+                                <MenuItem  onClick={handleClose} component={Link} to="/donateeProfile">MY PROFILE</MenuItem>
+                                <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
+                                <MenuItem  onClick={logout}>LOGOUT</MenuItem>
+                            </MenuList>
+                        </ClickAwayListener>
+                        </Paper>
+                    </Grow>
+                    )}
+                </Popper>
             
-            <Button
-                  ref={anchorRef}
-                  id="composition-button"
-                  aria-controls={open ? 'composition-menu' : undefined}
-                  aria-expanded={open ? 'true' : undefined}
-                  aria-haspopup="true"
-                  onClick={handleToggle}
-                  variant="outlined"
-                  color = "primary"
-                  startIcon = {<Avatar alt="Travis Howard" src={user.result.profile_pic} />}
-                  className={classes.logonProfileButton}
-                  endIcon={<KeyboardArrowDownIcon />}>
-                  {user.result.name}
-                  </Button>
-                  
-                  
-             
-              <Popper open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              placement="bottom-start"
-             
-              transition>
-              {({ TransitionProps, placement }) => (
-              <Grow
-                  {...TransitionProps}
-                  style={{
-                  transformOrigin:
-                      placement === 'bottom-start' ? 'left top' : 'left bottom',
-                  }}
-              >
-                      <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                          autoFocusItem={open}
-                          id="composition-menu"
-                          aria-labelledby="composition-button"
-                          onKeyDown={handleListKeyDown}
-                          >
-                            <MenuItem  onClick={handleClose} component={Link} to="/donateeProfile">MY PROFILE</MenuItem>
-                            <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
-                            <MenuItem  onClick={logout}>LOGOUT</MenuItem>
-                          </MenuList>
-                      </ClickAwayListener>
-                      </Paper>
-                  </Grow>
-                  )}
-              </Popper>
-         
-      </Stack>
-      </div>
+        </Stack>
+     </div>
   );
 }
 export default DonateeProfile;

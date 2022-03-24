@@ -185,6 +185,33 @@ export const donorUpdatePwd = async (req, res) => {
   res.json(updatedProfile); // save updatedprofile
 };
 
+export const donorUpdateDonationDetails = async (req, res) => {
+  try {
+
+    const userId = req.params.id
+    if (!mongoose.Types.ObjectId.isValid(userId))
+      return res.status(404).send(`No donor with id: ${userId}`)
+    
+    const user = await donorModel.findById(userId);
+    const donationDetails = user.donation_details
+    const listingId = req.body.id
+    const donatedAmount = req.body.amount
+    let newAmount = 0
+    
+    if (donationDetails[listingId])
+      newAmount = donationDetails[listingId] + parseInt(donatedAmount) 
+    else
+      newAmount = parseInt(donatedAmount)
+
+    const updatedProperty = {}
+    updatedProperty[`donation_details.${listingId}`] = newAmount
+    const updatedUser = await donorModel.findByIdAndUpdate(userId,updatedProperty ,{new:true})
+    res.status(200).json(updatedUser); // return array of objs
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getDonor = async (req, res) => {
   // add async
 

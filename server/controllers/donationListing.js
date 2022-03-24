@@ -33,8 +33,16 @@ export const updateDonation = async (req, res) => {
       {
         
         const updatedValue = donationListing.totalAmountCollected + parseInt(req.body.amount)
-        const updatedDonationListing = await donationListingModel.findByIdAndUpdate(id,{totalAmountCollected: updatedValue},{new:true})
-        res.status(200).json(updatedDonationListing); // return array of objs
+        if (updatedValue == donationListing.donationValue){
+          const updatedDonationListing = await donationListingModel.findByIdAndUpdate(id,{totalAmountCollected: updatedValue, status:'Completed'},{new:true})
+          res.status(200).json(updatedDonationListing); // return array of objs
+        }
+        else{
+          const updatedDonationListing = await donationListingModel.findByIdAndUpdate(id,{totalAmountCollected: updatedValue},{new:true})
+          res.status(200).json(updatedDonationListing); // return array of objs
+        }
+
+        
       }
       else if (req.body.type == 'status')
       {

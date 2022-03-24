@@ -7,7 +7,7 @@ import Auth from "./components/Auth/Auth";
 import DonorAuth from "./components/Auth/DonorAuth";
 import Profile from "./components/Pages/Profile";
 import Description from "./components/Pages/Description";
-import Reset from "./components/Pages/Reset";
+import Reset from "./Reset/Reset";
 import DonorHub from "./components/Pages/DonorHub";
 import DonorDetail from "./components/Pages/DonorDetail";
 import SearchBar from './components/Search/SearchBar'
@@ -46,6 +46,8 @@ import LocateCC from "./components/Pages/LocateCC";
 import ViewRequests from "./components/Admin/ViewRequests";
 import CreateRequests from "./components/DonationListing/CreateDonationListing";
 import ViewMyRequests from "./components/DonationListing/ViewMyRequests";
+import ViewMyDonations from "./components/DonationListing/ViewMyDonations";
+import ViewDonateeProfile from "./components/DonationListing/ViewDonateeProfile";
 
 function App () {
 
@@ -93,6 +95,8 @@ return (
         <Route exact path="/ViewRequests"> <ViewRequests/></Route>
         <Route exact path="/CreateRequests"> <CreateRequests/></Route>
         <Route exact path="/ViewMyRequests"> <ViewMyRequests/></Route>
+        <Route exact path="/ViewMyDonations"> <ViewMyDonations/></Route>
+        <Route exact path="/Donatee/:donateeId/:donationId"> <ViewDonateeProfile/></Route>
       </Switch>
     </Box>
   </Router>

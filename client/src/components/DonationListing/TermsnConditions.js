@@ -8,8 +8,10 @@ import { Box,Button, TextField } from '@mui/material'
 import {useState } from 'react'
 import {useDispatch} from 'react-redux'
 import {updateDonation} from '../../actions/donationListing.js'
+import {updateDonorDonationDetails} from '../../actions/donorAuth.js'
 import Alert from '@mui/material/Alert'
-
+import { deepOrange } from '@material-ui/core/colors';
+import { deepPurple } from '@material-ui/core/colors';
 const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
     const dispatch = useDispatch()
@@ -18,6 +20,8 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     const [displayAlert,setDisplayAlert] = useState(false)
     const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
     const buttonValueInt = parseInt(buttonValue.substring(1))
+    const user = JSON.parse(localStorage.getItem('profile'))
+
 
     const handleDialogOpen = () => setOpenDialog(true)
     const handleDialogClose = () => {
@@ -38,6 +42,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
                 setDisplayAlert(false)
                 const amount = textFieldValue
                 dispatch(updateDonation(id, {type, amount}))
+                dispatch(updateDonorDonationDetails(user.result._id, {id, amount}))
                 setOpenDialog(false)
                 setTextFieldValue("")
             }
@@ -46,6 +51,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
         {
             const amount = buttonValueInt
             dispatch(updateDonation(id, {type, amount }))
+            dispatch(updateDonorDonationDetails(user.result._id, {id, amount }))
             setOpenDialog(false)
         }
         
@@ -67,7 +73,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
   return (
     <Box>
-      {buttonValueInt <= validAmount || (custom && !(donationValue[0] == donationValue[1]))? <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}</Button>:
+      {buttonValueInt <= validAmount || (custom && !(donationValue[0] == donationValue[1]))? <Button sx={{ width:"100%", height:"50px", backgroundColor: deepPurple[500] }} variant="contained" color="primary" onClick={handleDialogOpen}>Donate {buttonValue}</Button>:
       <Button sx={{ maxWidth: "50%" }} variant="contained" color="primary" onClick={handleDialogOpen} disabled>Donate {buttonValue} </Button>}
       <Dialog
         open={openDialog}

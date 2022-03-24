@@ -59,6 +59,8 @@ export const donorUpdateProfile = (id, formData) =>
   API.patch(`/donor/${id}/profile`, formData);
 export const donorUpdatePwd = (id, formData) =>
   API.patch(`/donor/${id}/psw`, formData);
+export const donorUpdateDonationDetails = (id, data) =>
+  API.patch(`/donor/${id}/donations`, data);
 
 //fetch donor
 export const fetchDonor = () => API.get("/donors");
@@ -84,7 +86,8 @@ export const deleteDonatee = (userID) => API.delete(`/donatee/${userID}`);
 
 //get donation listings
 export const getDonationListings = () => API.get('/donationlisting');
-export const donationValueUpdate = (userID,amount) => API.patch(`/donationlisting/${userID}`,amount);
+export const getAllDonationListings = () => API.get('/donationlisting/all');
+export const donationValueUpdate = (listingID,amount) => API.patch(`/donationlisting/${listingID}`,amount);
 export const createDonation = (form) => API.post('/donationlisting',form);
 
 

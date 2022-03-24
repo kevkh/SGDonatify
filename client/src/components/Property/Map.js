@@ -44,7 +44,7 @@ const Map = ({communityCentre, lat, long, setMarkersInView}) => {
     },[lat,long])
 
     return (
-        <Box className="map" sx={{maxWidth: "50%", height:900, ml:2}} >
+        <Box className="map" sx={{width:"auto", height:800, pl:2}} >
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyDudsRZJAg4b86eEptTGXVWdS0u0B4bifs' }}
                 center={ center }

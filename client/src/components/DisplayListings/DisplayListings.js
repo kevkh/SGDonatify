@@ -156,6 +156,7 @@ const DisplayListings = ({text}) => {
             </Grid>
         </Container>
         </div>
+
         // </Box>
                 
             // <Box sx={{my:2}}>
@@ -167,7 +168,6 @@ const DisplayListings = ({text}) => {
         //                     <AlertTitle>Error</AlertTitle>
         //                     <strong> No listings found. Please try again. </strong>
         //                 </Alert>}
-                
 
                    // {pagenatedDonationListings.length < 1 ? <CircularProgress/> :   
                    

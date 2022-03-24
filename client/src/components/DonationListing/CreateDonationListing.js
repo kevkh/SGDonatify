@@ -15,22 +15,19 @@ const CreateDonationListing = () => {
     const user = JSON.parse(localStorage.getItem('profile'))
     let history = useHistory();
     const userId = user.result._id
-    console.log(user?.result?.name)
-    console.log("See income data",user?.result?.income_docs)
-    // console.log(user.result._id)
-    // console.log(typeof user.result._id)
+    const userName = user.result.name
 
     const [postData, setPostData] = useState({
-          name: "",
-          donationValue: "",
-          dateCreated: "",
-          totalAmountCollected: 0,
-          status: "Pending",
-          createdBy: user?.result?.name,
-          createdById: userId,
-          description: "",
-          selectedFile: user?.result?.income_docs,
-          selectedImage:"",  // for img insertion
+        name: "",
+        donationValue: "",
+        dateCreated: "",
+        totalAmountCollected: 0,
+        status: "Pending",
+        createdBy: userName,
+        createdById: userId,
+        description: "",
+        selectedFile: user?.result?.income_docs,
+        selectedImage:"",  // for img insertion
     });
 
     const clear = () => {
@@ -40,12 +37,11 @@ const CreateDonationListing = () => {
             dateCreated: "",
             totalAmountCollected: 0,
             status: "Pending",
-            createdBy: "",
-            createdById: "",
+            createdBy: userName,
+            createdById: userId,
             description: "",
             selectedFile: "",
             selectedImage: "",  // for img insertion
-
         });
       };
 
@@ -65,6 +61,7 @@ const CreateDonationListing = () => {
         }
         setPostData({ ...postData})
         dispatch(createDonation({postData}))
+        alert("Donation request created")
         clear()
         history.push("/ViewMyRequests");
       }

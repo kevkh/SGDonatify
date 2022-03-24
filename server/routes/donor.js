@@ -2,7 +2,7 @@ import express from "express";
 import {
   donorUpdateProfile,
   getDonor,deleteDonor,
-  donorUpdatePwd,
+  donorUpdatePwd, donorUpdateDonationDetails
 } from "../controllers/donor.js";
 const router = express.Router();
 import donorModel from "../models/donor.js";
@@ -23,6 +23,7 @@ router.post("/signin", donorSignin);
 router.post("/signup", donorSignup);
 router.patch("/:id/profile", auth, donorUpdateProfile);
 router.patch("/:id/psw", auth, donorUpdatePwd);
+router.patch("/:id/donations", auth, donorUpdateDonationDetails);
 router.delete("/:id",deleteDonor)
 
 export default router;
