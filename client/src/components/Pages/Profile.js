@@ -106,14 +106,14 @@ const Profile = () => {
               <label>Address: </label>
               <h4>{donorProfile.address}</h4>
             </Paper>
-            <Paper>
+            {/* <Paper>
               <label>Credit Card Number: </label>
               <h4>{donorProfile.ccNum}</h4>
             </Paper>
             <Paper>
               <label>CSV: </label>
               <h4>{donorProfile.csv}</h4>
-            </Paper>
+            </Paper> */}
 
            
             <Button

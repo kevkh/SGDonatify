@@ -108,7 +108,7 @@ const DonateeAuth = () => {
                   handleChange={handleChange}
                   type="text"
                 />
-                <div className={classes.fileInput}>
+                {/* <div className={classes.fileInput}>
                   <FileBase
                     type="file"
                     multiple={false}
@@ -116,7 +116,7 @@ const DonateeAuth = () => {
                       setForm({ ...form, profile_pic: base64 })
                     }
                   />
-                </div>
+                </div> */}
               </>
             )}
 

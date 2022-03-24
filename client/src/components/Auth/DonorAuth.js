@@ -133,7 +133,7 @@ const DonorAuth = () => {
                 />
 
                 
-                <div className={classes.fileInput}>
+                {/* <div className={classes.fileInput}>
                   <FileBase
                     type="file"
                     multiple={false}
@@ -141,7 +141,7 @@ const DonorAuth = () => {
                       setForm({ ...form, profile_pic: base64 })
                     }
                   />
-                </div>
+                </div> */}
               </>
             )} 
 
