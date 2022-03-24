@@ -3,7 +3,7 @@ import { Box,Grid,Container } from '@mui/material'
 import IndividualDonationListing from './IndividualDonationListing'
 import {useSelector,useDispatch} from 'react-redux'
 import { useState, useEffect } from 'react'
-import {getDonation} from '../../actions/donationListing.js'
+import {getAllDonation} from '../../actions/donationListing.js'
 import Axios from 'axios'
 
 const ViewMyDonations = () => {
@@ -24,7 +24,7 @@ const ViewMyDonations = () => {
             setDonationDetails(response.data.donation_details)
             }
         }
-        dispatch(getDonation())
+        dispatch(getAllDonation())
         fetchDonorData()
 
     }, [])

@@ -12,6 +12,18 @@ export const getDonation =  () => async(dispatch) => {
 
 
 }
+
+export const getAllDonation =  () => async(dispatch) => {
+    try{
+        const {data}  = await api.getAllDonationListings();
+        dispatch({type:FETCH_ALL_DONATION, payload:data})
+    }catch(error){
+        console.log(error.message);
+
+    }
+
+
+}
 export const updateDonation =  (id, amount) => async(dispatch) => {
     try{
 

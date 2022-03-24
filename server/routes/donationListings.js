@@ -4,6 +4,7 @@ import {getUncompletedDonationListing, updateDonation,getAllDonationListing,crea
 const router = express.Router();
 
 router.get("/",getUncompletedDonationListing)
+router.get("/all",getAllDonationListing)
 router.patch("/:listingId",updateDonation);
 router.post("/",createDonation);
 
