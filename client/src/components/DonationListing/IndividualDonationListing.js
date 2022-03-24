@@ -19,7 +19,7 @@ const individualDonationListing = ({singleListing, index}) => {
    
       <Grid item xs={4}>
         <Card sx={{minWidth:"100%",height:"100%", my:2}}>
-        <Link to={`/DisplayListings/${singleListing._id}`} target={"_blank"} rel="noopener noreferrer" style={{ textDecoration: 'none', color:'black' }}>
+        <Link to={`/DisplayListings/${singleListing._id}`}  rel="noopener noreferrer" style={{ textDecoration: 'none', color:'black' }}>
         
             <Box sx={{ position: 'relative'}}>
             <CardActionArea>
