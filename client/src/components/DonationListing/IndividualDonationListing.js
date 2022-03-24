@@ -27,7 +27,8 @@ const individualDonationListing = ({singleListing, index}) => {
                 <CardMedia
                 component="img"
                 height="400"
-                image="https://picsum.photos/id/239/750/500"
+                src = {singleListing.selectedImage || "https://picsum.photos/id/239/750/500" }
+               
                 />
                 
             </CardActionArea>

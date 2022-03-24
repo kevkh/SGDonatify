@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const donationListingSchema = mongoose.Schema({
-    name: {type:String},
+    name: { type:String },
     donationValue: { type: Number },
     dateCreated: { type: Date},
     totalAmountCollected: {type: Number},
@@ -9,7 +9,7 @@ const donationListingSchema = mongoose.Schema({
     createdBy: {type:String},
     createdById: {type:String},
     description: {type:String},
-    selectedFile: {type:String},
+    selectedImage: {type:String},
     
   });
   

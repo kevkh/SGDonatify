@@ -23,8 +23,8 @@ export const EditDonateeProfile = () => {
     }, [])
 
     const [postData, setPostData] = useState({
-         income_docs: ""
-    })
+        income_docs: ""
+   })
 
     const [Name, setName] = useState('')
     const [Email, setEmail] = useState('')
@@ -102,7 +102,6 @@ export const EditDonateeProfile = () => {
         alert('Donatee Profile Updated')
         history.push("/donateeProfile");
         // console.log("Check Income Doc:", donateeProfile.income_docs)
-
     };
 
     return (
@@ -158,15 +157,6 @@ export const EditDonateeProfile = () => {
                             /></h2>
 
                             {/* Change to upload button  */}
-                            {/* <h2> Household Income Docs : <TextField
-                                name="income_docs"
-                                variant="outlined"
-                                fullWidth
-                                value={donateeProfile.income_docs}
-                                onChange={handleChangeIncomeDocs}
-                            /></h2> */}
-
-                        
                             <h2> Household Income Documents</h2>
                             <div className={classes.fileInput}>
                             <FileBase
@@ -177,7 +167,6 @@ export const EditDonateeProfile = () => {
                                 // onDone={ ({ base64 }) =>
                                 //          {handleChangeIncomeDocs}  
                                 // }
-
                             />
                             </div>
 

@@ -8,7 +8,6 @@ import {useSelector,useDispatch} from 'react-redux'
 import { createDonation } from '../../actions/donationListing';
 import { useParams, Link, useHistory } from 'react-router-dom'
 
-
 const CreateDonationListing = () => {
 
     const dispatch = useDispatch()
@@ -31,6 +30,7 @@ const CreateDonationListing = () => {
           createdById: userId,
           description: "",
           selectedFile: user?.result?.income_docs,
+          selectedImage:"",  // for img insertion
     });
 
     const clear = () => {
@@ -43,7 +43,8 @@ const CreateDonationListing = () => {
             createdBy: "",
             createdById: "",
             description: "",
-            selectedFile: ""
+            selectedFile: "",
+            selectedImage: "",  // for img insertion
 
         });
       };
@@ -59,9 +60,9 @@ const CreateDonationListing = () => {
         }else if(postData.description === ""){
           alert("Please enter a description!")
         }
-        // else if(postData.selectedFile === ""){
-        //   alert("Please choose a file to upload!")
-        // }
+        else if(postData.selectedImage === ""){
+          alert("Please choose an image to upload!")
+        }
         setPostData({ ...postData})
         dispatch(createDonation({postData}))
         clear()
@@ -103,15 +104,15 @@ const CreateDonationListing = () => {
           onChange={(e) => setPostData({ ...postData, description: e.target.value })}
         />
 
-        {/* <div className={classes.fileInput}>
+        <div className={classes.fileInput}>
           <FileBase
             type="file"
             multiple={false}
             onDone={({ base64 }) =>
-              setPostData({ ...postData, selectedFile: base64 })
+              setPostData({ ...postData, selectedImage: base64 })
             }
           />
-        </div> */}
+        </div>
        
           <Box sx={{ mt: 2 }}>
 
