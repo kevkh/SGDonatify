@@ -44,7 +44,7 @@ const ViewMyDonations = () => {
           <Grid item xs={4} >
             <Card sx={{height:"50px"}} style={{ display:'flex', justifyContent:'center', borderRadius:'30px' }}>
               <ArticleIcon fontSize="large" sx={{margin:1}}/>
-              <Box fontWeight="fontWeightBold" align="center" sx={{ fontSize: 'h4.fontSize', fontFamily: 'Monospace', margin:'auto 0'}}>My Requests</Box>
+              <Box fontWeight="fontWeightBold" align="center" sx={{ fontSize: 'h4.fontSize', fontFamily: 'Monospace', margin:'auto 0'}}>My Donations</Box>
             </Card>
           </Grid>
           <Grid item xs={8} sx={{display:"flex", flexDirection:"row-reverse"}}>
