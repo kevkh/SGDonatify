@@ -66,6 +66,7 @@ const IndividualDonationDetails = () => {
         const fetchUser = async () => {
             let res = await axios.get(`http://localhost:5000/donatee/${listingCreatorId}`)
             setlistingCreator(res.data)
+           
         }
 
         fetchUser()
@@ -83,6 +84,7 @@ const IndividualDonationDetails = () => {
 
         const type = 'status'
         dispatch(updateDonation(id, {type , amount }))
+       
 
     }
 
@@ -95,9 +97,8 @@ const IndividualDonationDetails = () => {
                 <Grid item xs={5}>
                     <Card>
                         <CardMedia
-                            component="img"   
-                                                                          
-                            image="https://picsum.photos/id/239/1000/1000"
+                            component="img"                                              
+                            image = {donationDetails[0]?.selectedImage || "https://picsum.photos/id/239/750/500" }
                         />
                          <Stack spacing={3} sx={{ m:3 }}>
 
