@@ -119,6 +119,7 @@ const DonateeProfile = () => {
               }}
               className={classes.purple}
               variant="contained"
+              sx={{ml:2}}
             >
               Edit Profile
             </Button>
@@ -127,6 +128,7 @@ const DonateeProfile = () => {
               to="/reset"
               className={classes.purple}
               variant="contained"
+              sx={{ml:2}}
             >
               Reset Password
             </Button>
@@ -138,6 +140,7 @@ const DonateeProfile = () => {
           to="/reset"
           className={classes.purple}
           variant="contained"
+          sx={{ml:2}}
         >
           Reset Password
         </Button>

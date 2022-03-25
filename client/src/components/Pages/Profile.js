@@ -81,7 +81,7 @@ const Profile = () => {
             </div>
           )}
 
-          <div className={classes.overlay}>
+          <div className={classes.overlay} >
             <Paper>
               <label>Name:</label>
               <h1>{donorProfile.name}</h1>
@@ -131,6 +131,7 @@ const Profile = () => {
               to="/reset"
               className={classes.purple}
               variant="contained"
+              sx={{ml:2}}
             >
               Reset Password
             </Button>
