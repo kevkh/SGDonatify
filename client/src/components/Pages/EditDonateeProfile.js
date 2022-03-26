@@ -93,6 +93,7 @@ export const EditDonateeProfile = () => {
         // e.preventDefault();
         setIncomeDocs(e.base64);
         income_docs = "data:application/pdf;base64," + e.base64
+        //income_docs = e.base64
         donateeProfile.income_docs = income_docs
         
 
