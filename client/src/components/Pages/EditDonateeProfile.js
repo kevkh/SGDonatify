@@ -3,12 +3,9 @@ import { updateProfile } from '../../actions/donateeAuth'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
+import { Paper, Button, TextField } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import useStyles from "./styles";
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { TextField, Button, Typography, Paper, FormControl, MenuItem, Select, InputLabel } from "@material-ui/core";
-import { DatePicker } from '@mui/lab';
 
 export const EditDonateeProfile = () => {
 
@@ -28,7 +25,6 @@ export const EditDonateeProfile = () => {
     const [postData, setPostData] = useState({
         income_docs: ""
    })
-   
 
     const [Name, setName] = useState('')
     const [Email, setEmail] = useState('')
@@ -74,7 +70,7 @@ export const EditDonateeProfile = () => {
     };
 
     const handleChangeDOB = (e) => {
-        //e.preventDefault();
+        e.preventDefault();
         setDOB(e.target.value);
         dob = e.target.value
         donateeProfile.dob = dob
@@ -109,7 +105,6 @@ export const EditDonateeProfile = () => {
     };
 
     return (
-        
         <div>
             <Paper>
                 <form >
@@ -137,48 +132,21 @@ export const EditDonateeProfile = () => {
                                 value={donateeProfile.phoneNumber}
                                 required
                             /></h2>
-                            {/* <h2> Gender : <TextField
-                                name="gender"                                                                                   
+                            <h2> Gender : <TextField
+                                name="gender"
                                 variant="outlined"
                                 fullWidth
                                 value={donateeProfile.gender}
                                 onChange={handleChangeGender}
-                            /></h2> */}
+                            /></h2>
 
-                            <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={donateeProfile.gender}
-                                label="Gender"
-                                onChange={handleChangeGender}
-                            >
-                                <MenuItem value={"Male"}>Male</MenuItem>
-                                <MenuItem value={"Female"}>Female</MenuItem>
-                            
-                            </Select>
-                            </FormControl>
-
-                            {/* <h2> Date of birth : <TextField
+                            <h2> Date of birth : <TextField
                                 name="dob"
                                 variant="outlined"
                                 fullWidth
                                 value={donateeProfile.dob}
                                 onChange={handleChangeDOB}
-                            /></h2> */}
-
-                            {/* Date Picker */}
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="Pick a date"
-                                value={donateeProfile.dob}
-                                onChange={
-                                handleChangeDOB
-                                }
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                            </LocalizationProvider>
+                            /></h2>
 
                             <h2> Address : <TextField
                                 name="address"
