@@ -59,11 +59,13 @@ const CreateDonationListing = () => {
         else if(postData.selectedImage === ""){
           alert("Please choose an image to upload!")
         }
-        setPostData({ ...postData})
-        dispatch(createDonation({postData}))
-        alert("Donation request created")
-        clear()
-        history.push("/ViewMyRequests");
+        else{
+          setPostData({ ...postData})
+          dispatch(createDonation({postData}))
+          alert("Donation request created")
+          clear()
+          history.push("/ViewMyRequests");
+        }
       }
 
   return (
