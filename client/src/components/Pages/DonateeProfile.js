@@ -9,7 +9,7 @@ import FileBase from "react-file-base64";
 import Check from "@mui/icons-material/Check";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { Document, Page } from 'react-pdf'
-import sample_pdf from './sample.pdf'
+// import sample_pdf from '../client/files/sample.pdf'  
 
 const DonateeProfile = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -130,12 +130,12 @@ const DonateeProfile = () => {
 
             <Paper>
               <label>Household Income Document:</label>
-              <h1>{donateeProfile.income_docs}</h1>
+              {/* <h1>{donateeProfile.income_docs}</h1> */}
             
               <object width="100%" height="400" data= {donateeProfile.income_docs} type="application/pdf">   </object>
+              
               {/* <iframe src={donateeProfile.income_docs} /> */}
-              
-              
+                        
               {/* <iframe src = {sample_pdf} /> */}
               {/* <iframe src = {donateeProfile.income_docs} /> */}
 
@@ -170,7 +170,7 @@ const DonateeProfile = () => {
               className={classes.purple}
               variant="contained"
               sx={{ml:2}}
-            >
+            >∫
               Reset Password
             </Button>
           </div>

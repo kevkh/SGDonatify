@@ -76,11 +76,15 @@ export const EditDonateeProfile = () => {
 
     const handleChangeDOB = (e) => {
         //e.preventDefault();
-        const newDate = formatISO(e)
-        setDOB(newDate);
+        const newDate = formatISO(e, "yyyy-MM-dd")
+        //const newDate = format(new Date(e), 'yyyy-MM-dd')
+        //const newDate = format(parseISO(date), "dd-MM-yyyy")
+        setDOB(newDate)
         dob = newDate
         donateeProfile.dob = dob
     };
+
+    console.log(dob) 
 
     const handleChangeAddress = (e) => {
         e.preventDefault();
@@ -96,7 +100,6 @@ export const EditDonateeProfile = () => {
         //income_docs = e.base64
         donateeProfile.income_docs = income_docs
         
-
     };
     
 
@@ -176,7 +179,7 @@ export const EditDonateeProfile = () => {
                             <DatePicker
                                 label="Pick a date"
                                 value={donateeProfile.dob}
-                                inputFormat="dd/MM/yyyy"
+                                inputFormat="yyyy-MM-dd"
                                 onChange={
                                 handleChangeDOB
                                 }

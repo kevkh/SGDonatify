@@ -61,9 +61,9 @@ const CreateDonationListing = () => {
           alert("Please enter a description!")
         }
         
-        else if(user?.result?.dob == undefined){
-          alert("Please update your DOB under your profile!")
-        }
+        // else if(user?.result?.dob == undefined){
+        //   alert("Please update your DOB under your profile!")
+        // }
         else if(user?.result?.address == undefined){
           alert("Please update your address under your profile!")
         }
