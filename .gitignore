@@ -44,4 +44,5 @@ dist
 
 #my ignore
 server/package-lock.json
+server/package-lock 2.json
 client/package-lock.json
