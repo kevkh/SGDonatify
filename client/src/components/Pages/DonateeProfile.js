@@ -20,6 +20,7 @@ const DonateeProfile = () => {
   const history = useHistory();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [donateeDOB, setdonateeDOB] =  useState(null)
 
   const uploadPic = () => {
     dispatch(updateProfile(user.result._id, donateeProfile));
@@ -29,7 +30,6 @@ const DonateeProfile = () => {
   console.log("reupload", reupload);
 
   useEffect(() => {
-    history.push('/donateeProfile')
     async function fetchData() {
       console.log(user.result._id);
       let response = await axios.get(
@@ -39,6 +39,12 @@ const DonateeProfile = () => {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+
+    setdonateeDOB(new Date(donateeProfile.dob))
+
+  }, [donateeProfile])
 
   console.log(donateeProfile.income_docs)
 
@@ -114,7 +120,7 @@ const DonateeProfile = () => {
 
             <Paper>
               <label>DOB:</label>
-              <h1>{donateeProfile.dob}</h1>
+              <h1>{donateeDOB?.getDate()}/{donateeDOB?.getMonth()+1}/{donateeDOB?.getFullYear()}</h1>
             </Paper>
 
             <Paper>

@@ -9,6 +9,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { TextField, Button, Typography, Paper, FormControl, MenuItem, Select, InputLabel } from "@material-ui/core";
 import { DatePicker } from '@mui/lab';
+import {formatISO} from 'date-fns'
 
 export const EditDonateeProfile = () => {
 
@@ -75,8 +76,9 @@ export const EditDonateeProfile = () => {
 
     const handleChangeDOB = (e) => {
         //e.preventDefault();
-        setDOB(e.target.value);
-        dob = e.target.value
+        const newDate = formatISO(e)
+        setDOB(newDate);
+        dob = newDate
         donateeProfile.dob = dob
     };
 
@@ -173,6 +175,7 @@ export const EditDonateeProfile = () => {
                             <DatePicker
                                 label="Pick a date"
                                 value={donateeProfile.dob}
+                                inputFormat="dd/MM/yyyy"
                                 onChange={
                                 handleChangeDOB
                                 }
