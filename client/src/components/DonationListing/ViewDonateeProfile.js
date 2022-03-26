@@ -32,12 +32,12 @@ const ViewDonateeProfile = () => {
     },[])
     
   return (
-      <Box sx={{display:'flex'}}  > 
-    <Stack>
-        <img src={listingCreator?.profile_pic} width="400" ></img>
-        <Typography variant="h3">{listingCreator?.name}</Typography>
+      <Box sx={{display:'flex', ml:"15%"}}  > 
+    <Stack rowGap={2} sx={{mt:7}} >
+        <img src={listingCreator?.profile_pic} width="300" ></img>
+        <Typography variant="h3">{listingCreator?.name}'s details</Typography>
     </Stack>
-   <Stack>
+   <Stack sx={{ml:5}} rowGap={2}>
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse', }}>
             <CancelSharpIcon color='error' fontSize="large" onClick={handleClose} />
         </Box>

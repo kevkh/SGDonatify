@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card'
 import { useLocation,Link, useHistory} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
-import {getDonation,updateDonation} from '../../actions/donationListing.js'
+import {getAllDonation,updateDonation} from '../../actions/donationListing.js'
 import CardMedia from '@mui/material/CardMedia';
 import {useEffect, useState} from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
@@ -15,7 +15,6 @@ import Popper from '@mui/material/Popper';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
-//import Axios from 'axios';
 
 const IndividualDonationDetails = () => {
 
@@ -32,32 +31,15 @@ const IndividualDonationDetails = () => {
     const user = JSON.parse(localStorage.getItem('profile'))
     const isAdmin = user?.result?.type === 'admin'
     const isDonor = user?.result?.type === 'donor'
-    // const createdBy = donationDetails[0]?.createdById  // donateeID that created the req  
-    // const [userProfile, setUserProfile] = useState("");
 
     const listingCreatorId = donationDetails[0]?.createdById
     const [listingCreator, setlistingCreator] = useState(null)
     const placeholderDescription = `This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. 
     This is a description. This is a description. This is a description. This is a description.This is a description. This is a description.`
 
-    // useEffect (() => {
-    //     async function fetchData() {
-    //         console.log(user.result._id);
-    //         let response = await axios.get(
-    //           `http://localhost:5000/donatee/${createdBy}`
-    //         );
-    //       //  setUserProfile(response.data);
-    //         console.log(response.data);
-    //       }
-    //     fetchData();
-    //     dispatch(getDonation())
-            
-    // },[])
-
-    // New
     useEffect (() => {
 
-        dispatch(getDonation())
+        dispatch(getAllDonation())
             
     },[])
 
@@ -66,13 +48,14 @@ const IndividualDonationDetails = () => {
         const fetchUser = async () => {
             let res = await axios.get(`http://localhost:5000/donatee/${listingCreatorId}`)
             setlistingCreator(res.data)
+           
         }
 
         fetchUser()
             
     },[donationListings])
 
-    //////
+    
 
     const handleClose = () => {
 
@@ -83,11 +66,10 @@ const IndividualDonationDetails = () => {
 
         const type = 'status'
         dispatch(updateDonation(id, {type , amount }))
+       
 
     }
 
-    console.log(donationDetails[0]?.description)
-    //console.log(createdBy)
 
     return (
         <Container disableGutters = "true" maxWidth = "xl" sx={{paddingLeft:"8px", paddingRight:"10px", mb:3}}>
@@ -95,9 +77,8 @@ const IndividualDonationDetails = () => {
                 <Grid item xs={5}>
                     <Card>
                         <CardMedia
-                            component="img"   
-                                                                          
-                            image="https://picsum.photos/id/239/1000/1000"
+                            component="img"                                              
+                            image = {donationDetails[0]?.selectedImage || "https://picsum.photos/id/239/750/500" }
                         />
                          <Stack spacing={3} sx={{ m:3 }}>
 

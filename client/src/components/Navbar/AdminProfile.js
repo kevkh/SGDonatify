@@ -66,7 +66,7 @@ const AdminProfile = ({anchorRef, logout, user, open, handleToggle, handleClose,
                           aria-labelledby="composition-button"
                           onKeyDown={handleListKeyDown}
                           >
-                            <MenuItem  onClick={handleClose} component={Link} to="/profile">MY PROFILE</MenuItem>
+                            
                             <MenuItem  onClick={handleClose} component={Link} to="/reset">RESET PASSWORD</MenuItem>
                             <MenuItem  onClick={logout}>LOGOUT</MenuItem>
                           </MenuList>
