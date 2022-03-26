@@ -8,6 +8,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import { createDonation } from '../../actions/donationListing';
 import { useParams, Link, useHistory } from 'react-router-dom'
 
+
 const CreateDonationListing = () => {
 
     const dispatch = useDispatch()
@@ -28,7 +29,10 @@ const CreateDonationListing = () => {
         description: "",
         selectedFile: user?.result?.income_docs,
         selectedImage:"",  // for img insertion
+        
     });
+
+    console.log(user?.result?.income_docs);
 
     const clear = () => {
         setPostData({
@@ -56,14 +60,30 @@ const CreateDonationListing = () => {
         }else if(postData.description === ""){
           alert("Please enter a description!")
         }
-        else if(postData.selectedImage === ""){
-          alert("Please choose an image to upload!")
+        
+        else if(user?.result?.dob == undefined){
+          alert("Please update your DOB under your profile!")
         }
-        setPostData({ ...postData})
-        dispatch(createDonation({postData}))
-        alert("Donation request created")
-        clear()
-        history.push("/ViewMyRequests");
+        else if(user?.result?.address == undefined){
+          alert("Please update your address under your profile!")
+        }
+        else if(user?.result?.gender == undefined){
+          alert("Please update your gender under your profile!")
+        }
+        else if(user?.result?.income_docs == undefined){
+          alert("Please update your income docs under your profile!")
+        }
+        else{
+          // else if(postData.selectedImage === ""){
+          //   alert("Please choose an image to upload!")
+          // }
+          setPostData({ ...postData})
+          dispatch(createDonation({postData}))
+          alert("Donation request created")
+          clear()
+          history.push("/ViewMyRequests");
+        }
+        
       }
 
   return (
@@ -97,11 +117,14 @@ const CreateDonationListing = () => {
           variant="filled"
           label="Please provide a description."
           fullWidth
+          multiline
+          rows={5}
           value={postData.description}
           onChange={(e) => setPostData({ ...postData, description: e.target.value })}
         />
 
         <div className={classes.fileInput}>
+         <b> Insert an image (Optional):  </b> <br></br> 
           <FileBase
             type="file"
             multiple={false}
@@ -112,7 +135,6 @@ const CreateDonationListing = () => {
         </div>
        
           <Box sx={{ mt: 2 }}>
-
               <Button
                   variant="contained"
                   color="primary"

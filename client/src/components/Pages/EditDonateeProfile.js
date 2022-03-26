@@ -164,9 +164,7 @@ export const EditDonateeProfile = () => {
                                 multiple={false}  
                                 value={donateeProfile.income_docs}
                                 onDone={handleChangeIncomeDocs}
-                                // onDone={ ({ base64 }) =>
-                                //          {handleChangeIncomeDocs}  
-                                // }
+                                
                             />
                             </div>
 

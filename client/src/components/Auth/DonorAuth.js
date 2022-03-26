@@ -129,7 +129,8 @@ const DonorAuth = () => {
                   name="phoneNumber"
                   label="Phone Number"
                   handleChange={handleChange}
-                  type="text"
+                  type="number"
+                  pattern="^[0-9\b]+$"
                 />
 
                 

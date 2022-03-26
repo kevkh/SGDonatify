@@ -8,6 +8,8 @@ import useStyles from "./styles";
 import FileBase from "react-file-base64";
 import Check from "@mui/icons-material/Check";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+import { Document, Page } from 'react-pdf'
+import sample_pdf from './sample.pdf'
 
 const DonateeProfile = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -16,6 +18,9 @@ const DonateeProfile = () => {
   const [reupload, setReupload] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
   const uploadPic = () => {
     dispatch(updateProfile(user.result._id, donateeProfile));
     setReupload(!reupload);
@@ -35,6 +40,12 @@ const DonateeProfile = () => {
     fetchData();
   }, []);
 
+  console.log(donateeProfile.income_docs)
+
+  // Doc load 
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
 
   return (
     <div>
@@ -97,6 +108,11 @@ const DonateeProfile = () => {
             </Paper>
 
             <Paper>
+              <label>Gender:</label>
+              <h1>{donateeProfile.gender}</h1>
+            </Paper>
+
+            <Paper>
               <label>DOB:</label>
               <h1>{donateeProfile.dob}</h1>
             </Paper>
@@ -107,9 +123,28 @@ const DonateeProfile = () => {
             </Paper>
 
             <Paper>
-              <label>Household Income Documents:</label>
-              {/* <h1>{donateeProfile.income_docs}</h1> */}
+              <label>Household Income Document:</label>
+              <h1>{donateeProfile.income_docs}</h1>
+            
               <object width="100%" height="400" data= {donateeProfile.income_docs} type="application/pdf">   </object>
+              {/* <iframe src={donateeProfile.income_docs} /> */}
+              
+              
+              {/* <iframe src = {sample_pdf} /> */}
+              {/* <iframe src = {donateeProfile.income_docs} /> */}
+
+
+              {/* RenderPDF */}
+              {/* <div>
+              <Document file= {sample_pdf} onLoadSuccess={onDocumentLoadSuccess}>
+                <Page pageNumber={pageNumber} />
+              </Document>
+              <p>
+                Page {pageNumber} of {numPages}
+              </p>
+              </div> */}
+
+
             </Paper>
             
             <Button
