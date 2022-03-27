@@ -54,6 +54,14 @@ const DisplayListings = ({text}) => {
             return dateA.getTime() > dateB.getTime() ? 1 : -1
     }
 
+    const compareText = (listingTitle, searchQuery) => {
+    const splitListingTitle = listingTitle.split(' ')
+    if (splitListingTitle.includes(searchQuery))
+        return true
+    return false
+        
+    }
+
     const sortDonations = (sort) => {
 
         switch (sort) {
@@ -78,9 +86,9 @@ const DisplayListings = ({text}) => {
     const filterDonations = (text) => {
       
         if (text == "")
-        setFilteredDonationListings(donationListings.filter((listing)=> listing.status == 'Approved'))//[...donationListings]//
+        setFilteredDonationListings(donationListings.filter((listing)=> listing.status == 'Approved'))
         else
-        setFilteredDonationListings(donationListings.filter((listing)=> listing.status == 'Approved' && listing.name.toLowerCase() == text))
+        setFilteredDonationListings(donationListings.filter((listing)=> listing.status == 'Approved' &&  compareText(listing.name.toLowerCase(), text)) ) 
         
     }
 

@@ -13,6 +13,7 @@ const ViewDonateeProfile = () => {
     const url = location.pathname.split("/")
     const Id = url[2]
     const listingId = url[3]
+    const [donateeDOB, setDonateeDOB] =  useState(null)
     
     
     const handleClose = () => {
@@ -25,11 +26,18 @@ const ViewDonateeProfile = () => {
         const fetchUser = async () => {
             let res = await Axios.get(`http://localhost:5000/donatee/${Id}`)
             setlistingCreator(res.data)
+            
         }
 
         fetchUser()
             
     },[])
+
+    useEffect (() => {
+
+        setDonateeDOB(new Date(listingCreator?.dob))
+            
+    },[listingCreator])
     
   return (
       <Box sx={{display:'flex', ml:"15%"}}  > 
@@ -44,7 +52,7 @@ const ViewDonateeProfile = () => {
        <Typography variant="h3">Email: {listingCreator?.email}</Typography>
        <Typography variant="h3">Contact Number: {listingCreator?.phoneNumber}</Typography>
        <Typography variant="h3">Sex: {listingCreator?.gender}</Typography>
-       <Typography variant="h3">Date of Birth: {listingCreator?.dob}</Typography>
+       <Typography variant="h3">Date of Birth: {donateeDOB?.getDate()}/{donateeDOB?.getMonth()+1}/{donateeDOB?.getFullYear()}</Typography>
        <Typography variant="h3">Address: {listingCreator?.address}</Typography>
        <Typography variant="h3">Household Income Documents: 
         <object width="100%" height="400" data= {listingCreator?.income_docs} type="application/pdf">   </object>
