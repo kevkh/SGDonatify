@@ -64,10 +64,10 @@ const DisplayListings = ({text}) => {
                 filteredDonationListings.sort((a,b)=>compareDate(a,b,false))
                 break
             case "Highest Amount":
-                filteredDonationListings.sort((a, b) => (a.donationValue < b.donationValue ? 1 : -1))
+                filteredDonationListings.sort((a, b) => (a.totalAmountCollected < b.totalAmountCollected ? 1 : -1))
                 break
             case "Lowest Amount":
-                filteredDonationListings.sort((a, b) => (a.donationValue > b.donationValue ? 1 : -1))
+                filteredDonationListings.sort((a, b) => (a.totalAmountCollected > b.totalAmountCollected ? 1 : -1))
                 break
             default:
                 filteredDonationListings.sort((a,b)=>compareDate(a,b,true))
