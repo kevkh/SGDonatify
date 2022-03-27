@@ -53,6 +53,7 @@ const Map = ({communityCentre, lat, long, setMarkersInView}) => {
             >
 
                 {markers} 
+             <LocationMarker lat={lat} lng={long} user />
             </GoogleMapReact>
             {locationInfo && <LocationInfoBox info={locationInfo} setLocationInfo={setLocationInfo} />}
        
