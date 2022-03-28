@@ -53,8 +53,8 @@ const UserProfile = ({anchorRef, open, handleToggle, handleClose, handleListKeyD
                          aria-labelledby="composition-button"
                          onKeyDown={handleListKeyDown2}
                          >
-                         <MenuItem onClick={handleClose2} component={Link} to ="/donor">Donor Signup</MenuItem>
-                         <MenuItem onClick={handleClose2} component={Link} to ="/donatee">Donatee Signup</MenuItem>
+                         <MenuItem onClick={handleClose2} component={Link} to = {{pathname:"/donor", state: {signUp : true} }}>Donor Signup</MenuItem>
+                         <MenuItem onClick={handleClose2} component={Link} to = {{pathname:"/donatee", state: {signUp : true} }}>Donatee Signup</MenuItem>
                          </MenuList>
                      </ClickAwayListener>
                      </Paper>
@@ -101,8 +101,8 @@ const UserProfile = ({anchorRef, open, handleToggle, handleClose, handleListKeyD
                             aria-labelledby="composition-button"
                             onKeyDown={handleListKeyDown}
                             >
-                            <MenuItem onClick={handleClose} component={Link} to ="/donor">Donor Login</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to ="/donatee">Donatee Login</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to = {{pathname:"/donor", state: {signUp : false} }}>Donor Login</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to = {{pathname:"/donatee", state: {signUp : false} }}>Donatee Login</MenuItem>
                             </MenuList>
                         </ClickAwayListener>
                         </Paper>

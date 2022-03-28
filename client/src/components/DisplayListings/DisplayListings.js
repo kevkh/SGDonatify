@@ -8,8 +8,8 @@ import Filter from './Filter'
 import { Box,Grid } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
 import Pagination from '@mui/material/Pagination';
-import Map from '../Property/Map'; // Import map
-import Loader from '../Property/Loader';
+import Map from '../Map/Map'; // Import map
+import Loader from '../Map/Loader';
 import {getDonation} from '../../actions/donationListing.js'
 import {useSelector,useDispatch} from 'react-redux'
 import IndividualDonationListing from "../DonationListing/IndividualDonationListing"

@@ -147,7 +147,7 @@ const IndividualDonationDetails = () => {
                                     <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
                                         <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
                                         <Box>
-                                            <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{donationDetails[0]?.createdBy}</Box>
+                                            <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{listingCreator?.name}</Box>
                                             <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
                                         </Box>
                                     </Box>
@@ -155,7 +155,7 @@ const IndividualDonationDetails = () => {
                               :  <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
                                    <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
                                    <Box>
-                                        <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{donationDetails[0]?.createdBy}</Box>
+                                        <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{listingCreator?.name}</Box>
                                         <Typography  variant='h5'>Posted on {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()}</Typography>
                                    </Box>
                                 </Box>

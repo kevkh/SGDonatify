@@ -8,7 +8,7 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import emailjs from "emailjs-com";
 import { donateeSignin, donateeSignup } from "../../actions/donateeAuth";
@@ -35,8 +35,10 @@ const initialState = {
 };
 
 const DonateeAuth = () => {
+  const location = useLocation()
+  const signUp = location.state?.signUp == undefined? false:location.state?.signUp
   const [form, setForm] = useState(initialState); // set a form state
-  const [isSignup, setIsSignup] = useState(false);
+  const [isSignup, setIsSignup] = useState(signUp);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();

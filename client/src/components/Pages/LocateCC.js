@@ -1,4 +1,4 @@
-import Map from "../Property/Map.js"
+import Map from "../Map/Map.js"
 import { Box, Select, Stack, Typography,Grid } from '@mui/material'
 import axios from "axios"
 import React, { useState, useEffect, useRef } from 'react'
