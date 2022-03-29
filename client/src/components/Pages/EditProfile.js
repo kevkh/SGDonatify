@@ -3,8 +3,11 @@ import { updateProfile } from '../../actions/donorAuth'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { Paper, Button, TextField, FormControl, MenuItem, Select } from "@material-ui/core";
-
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { TextField, Button, Typography, Paper, FormControl, MenuItem, Select, InputLabel } from "@material-ui/core";
+import { DatePicker } from '@mui/lab';
+import {formatISO} from 'date-fns'
 
 export const EditProfile = () => {
 
@@ -58,18 +61,83 @@ export const EditProfile = () => {
         number = e.target.value
         donorProfile.phoneNumber = number
     };
+
     const handleChangeGender = (e) => {
         e.preventDefault();
         setGender(e.target.value);
         gender = e.target.value
         donorProfile.gender = gender
     };
+
     const handleChangeDOB = (e) => {
-        e.preventDefault();
-        setDOB(e.target.value);  
-        dob = e.target.value
+        //e.preventDefault();
+        const newDate = formatISO(e, "yyyy-MM-dd")
+        //const newDate = format(new Date(e), 'yyyy-MM-dd')
+        //const newDate = format(parseISO(date), "dd-MM-yyyy")
+        setDOB(newDate)
+        dob = newDate
         donorProfile.dob = dob
     };
+
+    // const handleChangeGender = (e) => {
+    //     e.preventDefault();
+    //     setGender(e.target.value);
+    //     gender = e.target.value
+    //     donorProfile.gender = gender
+    // };
+    // const handleChangeDOB = (e) => {
+    //     e.preventDefault();
+    //     setDOB(e.target.value);  
+    //     dob = e.target.value
+    //     donorProfile.dob = dob
+    // };
+
+    // const handleChangeGender = (e) => {
+    //     e.preventDefault();
+    //     setGender(e.target.value);
+    //     gender = e.target.value
+    //     donorProfile.gender = gender
+    // };
+
+    // const handleChangeDOB = (e) => {
+    //     //e.preventDefault();
+    //     const newDate = formatISO(e, "yyyy-MM-dd")
+    //     //const newDate = format(new Date(e), 'yyyy-MM-dd')
+    //     //const newDate = format(parseISO(date), "dd-MM-yyyy")
+    //     setDOB(newDate)
+    //     dob = newDate
+    //     donorProfile.dob = dob
+    // };
+
+    <FormControl fullWidth>
+    <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+    <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={donorProfile.gender}
+        label="Gender"
+        onChange={handleChangeGender}
+    >
+        <MenuItem value={"Male"}>Male</MenuItem>
+        <MenuItem value={"Female"}>Female</MenuItem>
+    
+    </Select>
+    </FormControl>
+
+    {/* Date Picker */}
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <DatePicker
+        label="Pick a date"
+        value={donorProfile.dob}
+        inputFormat="yyyy-MM-dd"
+        onChange={
+        handleChangeDOB
+        }
+        renderInput={(params) => <TextField {...params} />}
+    />
+    </LocalizationProvider>
+
+
     const handleChangeAddress = (e) => {
         e.preventDefault();
         setAddress(e.target.value);
@@ -128,7 +196,7 @@ export const EditProfile = () => {
                                 value={donorProfile.phoneNumber}
                                 required
                             /></h2>
-                            <h2> Gender : <input
+                            {/* <h2> Gender : <input
                                 type='string'
                                 name='gender'
                                 onChange={handleChangeGender}
@@ -141,7 +209,36 @@ export const EditProfile = () => {
                                 onChange={handleChangeDOB}
                                 value={donorProfile.dob}
                                 required
-                            /></h2>
+                            /></h2> */}
+                            <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={donorProfile.gender}
+                                label="Gender"
+                                onChange={handleChangeGender}
+                            >
+                                <MenuItem value={"Male"}>Male</MenuItem>
+                                <MenuItem value={"Female"}>Female</MenuItem>
+                            
+                            </Select>
+                            </FormControl>
+
+                           
+                            {/* Date Picker */}
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Pick a date"
+                                value={donorProfile.dob}
+                                inputFormat="yyyy-MM-dd"
+                                onChange={
+                                handleChangeDOB
+                                }
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
+
                             <h2> Address : <TextField
                                 name="Address"
                                 variant="outlined"
@@ -153,18 +250,27 @@ export const EditProfile = () => {
                             <h2> Credit Card Number: <TextField
                                 name="Credit Card Number"
                                 variant="outlined"
-                                fullWidth
+                                halfWidth
                                 value={donorProfile.ccNum}
                                 onChange={handleChangeCCNum}
-                            /></h2>
+                                inputProps= {{
+                                    maxLength:16 
+                                }} />
+                                                            
+                            &nbsp;&nbsp;&nbsp;
 
-                            <h2> CSV: <TextField
+                                CSV: <TextField
                                 name="CSV"
                                 variant="outlined"
-                                fullWidth
+                                halfWidth
                                 value={donorProfile.csv}
                                 onChange={handleChangeCSV}
-                            /></h2>
+                                inputProps= {{
+                                    maxLength:3 
+                                }} />
+
+                            
+                            </h2>
 
 
                             <Button onClick={handleSubmit} color="primary" variant="contained"  >

@@ -133,6 +133,7 @@ const DonorAuth = () => {
                   label="Phone Number"
                   handleChange={handleChange}
                   type="number"
+                  maxLength = "8"
                   pattern="^[0-9\b]+$"
                 />
 

@@ -17,6 +17,8 @@ const Profile = () => {
   const [reupload, setReupload] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [donorDOB, setdonorDOB] =  useState(null)
+
   const uploadPic = () => {
     dispatch(updateProfile(user.result._id, donorProfile));
     setReupload(!reupload);
@@ -35,6 +37,12 @@ const Profile = () => {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+
+    setdonorDOB(new Date(donorProfile.dob))
+
+  }, [donorProfile])
 
 
   return (
@@ -100,7 +108,7 @@ const Profile = () => {
             </Paper>
             <Paper>
               <label>Date of birth:</label>
-              <h4>{donorProfile.dob}</h4>
+              <h1>{donorDOB?.getDate()}/{donorDOB?.getMonth()+1}/{donorDOB?.getFullYear()}</h1>
             </Paper>
             <Paper>
               <label>Address: </label>
