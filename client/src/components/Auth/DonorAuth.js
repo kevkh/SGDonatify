@@ -38,7 +38,7 @@ const initialState = {
   address: "",
   ccNum: "",
   csv: "",
-  donation_details: ""
+  donation_details: {}
 };
 
 const DonorAuth = () => {

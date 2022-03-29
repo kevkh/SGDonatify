@@ -16,6 +16,6 @@ const donorSchema = mongoose.Schema({
   csv: {type: String },
   donation_details: {type: Object },
 
-}); 
+}, { minimize: false }); 
 
 export default mongoose.model("Donor", donorSchema);
