@@ -60,6 +60,7 @@ export const donorSignup = async (req, res) => {
     address,
     ccNum,
     csv,
+    donation_details
     
   } = req.body;
 
@@ -95,6 +96,7 @@ export const donorSignup = async (req, res) => {
       address,
       ccNum,
       csv,
+      donation_details
 
     });
 
@@ -131,6 +133,7 @@ export const donorUpdateProfile = async (req, res) => {
     address,
     ccNum,
     csv,
+    donation_details
 
   } = req.body;
 
@@ -155,6 +158,7 @@ export const donorUpdateProfile = async (req, res) => {
     ccNum,
     csv,
     _id: id,
+    donation_details
 
   };
 
