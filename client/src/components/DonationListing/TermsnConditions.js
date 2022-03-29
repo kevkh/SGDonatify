@@ -21,7 +21,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
     const buttonValueInt = parseInt(buttonValue.substring(1))
     const user = JSON.parse(localStorage.getItem('profile'))
-
+    const validCC = user.result.ccNum != '' && user.result.csv != ''
 
     const handleDialogOpen = () => setOpenDialog(true)
     const handleDialogClose = () => {
@@ -32,9 +32,9 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     }
 
     const handleDialogCloseandUpdateDonation = () => {
+      if (validCC){
       const type = "totalAmountCollected"
-        if (custom)
-        {
+        if (custom) {
             if (!checkCustomAmount())
                 setDisplayAlert(true)
             else
@@ -47,13 +47,17 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
                 setTextFieldValue("")
             }
         }
-        else
-        {
+        else{
             const amount = buttonValueInt
             dispatch(updateDonation(id, {type, amount }))
             dispatch(updateDonorDonationDetails(user.result._id, {id, amount }))
             setOpenDialog(false)
         }
+    }
+    else{
+      alert('Credit card number and csv must be updated')
+      setOpenDialog(false)
+    }
         
     }
 
