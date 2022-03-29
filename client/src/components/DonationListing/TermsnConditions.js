@@ -5,13 +5,15 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { Box,Button, TextField } from '@mui/material'
-import {useState } from 'react'
+import {useState, useEffect } from 'react'
 import {useDispatch} from 'react-redux'
 import {updateDonation} from '../../actions/donationListing.js'
 import {updateDonorDonationDetails} from '../../actions/donorAuth.js'
 import Alert from '@mui/material/Alert'
 import { deepOrange } from '@material-ui/core/colors';
 import { deepPurple } from '@material-ui/core/colors';
+import Axios from 'axios'
+
 const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
 
     const dispatch = useDispatch()
@@ -21,7 +23,7 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     const validAmount = parseInt(donationValue[1]) - parseInt(donationValue[0])
     const buttonValueInt = parseInt(buttonValue.substring(1))
     const user = JSON.parse(localStorage.getItem('profile'))
-    const validCC = user.result.ccNum != '' && user.result.csv != ''
+    const [validCC, setValidCC] = useState(null) 
 
     const handleDialogOpen = () => setOpenDialog(true)
     const handleDialogClose = () => {
@@ -74,6 +76,18 @@ const TermsnConditions = ({custom, id, buttonValue, donationValue}) => {
     }
 
     const closeDisplayAlert = () => setDisplayAlert(false)
+
+    useEffect (() => {
+
+      const fetchDonor = async () => {
+
+      const response = await Axios.get(`http://localhost:5000/donor/${user.result._id}`)
+      setValidCC(response.data.ccNum != '' && response.data.csv != '')
+      }
+
+      fetchDonor()
+
+    },[])
 
   return (
     <Box>
