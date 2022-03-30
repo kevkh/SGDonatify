@@ -23,11 +23,11 @@ useEffect(() => {
     async function fetchData() {
       console.log(user.result._id);
       let response = await axios.get(
-        `http://localhost:5000/donatee/${user.result._id}`
+        `http://localhost:5000/donatee/${singleListing.createdById}`
+   
       );
-      //setDonateeProfile(response.data);
-      console.log(response.data)
-      
+      setDonateeProfile(response.data);
+      //console.log(response.data)
     }
     fetchData();
   }, []);
@@ -45,7 +45,7 @@ useEffect(() => {
 
                   {/* Display Donatee's Profile Pic */}
                   <Avatar sx={{ my: 1,ml:1, width: '75px', height: '75px' }}
-                          //src={donateeProfile.profile_pic} 
+                          src={donateeProfile.profile_pic} 
                           />            
 
                   <Typography variant="h6"  sx={{color:'white', 
