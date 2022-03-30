@@ -14,23 +14,19 @@ const classes = useStyles();
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oc", "Nov", "Dec"]
 const date = new Date(singleListing.dateCreated)
 
-// Fetch donatee info
-const user = JSON.parse(localStorage.getItem("profile"));  // currently fetching admin 
-const [donateeProfile, setDonateeProfile] = useState("");
+
+const images= [
+    "https://i.picsum.photos/id/528/200/200.jpg?hmac=PsanXgBpbVkZomXAZNZvSK7VAIwkqbc0O9EMxtlgO_8",
+    "https://i.picsum.photos/id/652/200/200.jpg?hmac=m_Z74HS-9l6n785rv5t2r3riTmdwuq-Z0rMJz9iHg5g",
+    "https://i.picsum.photos/id/324/200/200.jpg?hmac=qhw4ORwk8T1r-Rxd2QREZORSVvc6l_R1S6F3Pl9mR_c",
+    "https://i.picsum.photos/id/47/200/200.jpg?hmac=dF66rvzPwuJCh4L7IjS6I0D5xrpPvqhAjbE7FstnEnY",
+    "https://i.picsum.photos/id/621/200/200.jpg?hmac=nKMlm18QmBAMa_wHA70nsMBpYKk0pU0C832236i2oMM"
+]
 
 
-useEffect(() => {
-    async function fetchData() {
-      console.log(user.result._id);
-      let response = await axios.get(
-        `http://localhost:5000/donatee/${singleListing.createdById}`
-   
-      );
-      setDonateeProfile(response.data);
-      //console.log(response.data)
-    }
-    fetchData();
-  }, []);
+
+
+
 
 
   return (
@@ -44,8 +40,9 @@ useEffect(() => {
               <Stack sx={{ ml: 1,mr:3 }}>
 
                   {/* Display Donatee's Profile Pic */}
-                  <Avatar sx={{ my: 1,ml:1, width: '75px', height: '75px' }}
-                          src={donateeProfile.profile_pic} 
+                  <Avatar sx={{ my: 1,ml:1, width: '90px', height: '90px' }}
+                        variant="square" 
+                          src={singleListing.selectedImage || images[Math.floor(Math.random() * images.length)]}
                           />            
 
                   <Typography variant="h6"  sx={{color:'white', 
