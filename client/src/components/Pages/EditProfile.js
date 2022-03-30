@@ -166,6 +166,7 @@ export const EditProfile = () => {
         console.log(donorProfile.name);
         alert('Donor Profile Updated')
         history.push("/profile");
+        window.location.reload();
 
     };
 

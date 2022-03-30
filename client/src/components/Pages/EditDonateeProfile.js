@@ -113,6 +113,7 @@ export const EditDonateeProfile = () => {
         // console.log(donateeProfile.name);
         alert('Donatee Profile Updated')
         history.push("/donateeProfile");
+        window.location.reload();
         // console.log("Check Income Doc:", donateeProfile.income_docs)
     };
 
