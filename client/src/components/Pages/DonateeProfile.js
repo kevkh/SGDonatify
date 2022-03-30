@@ -194,7 +194,7 @@ const DonateeProfile = () => {
               <label>Household Income Document:</label>
               {/* <h1>{donateeProfile.income_docs}</h1> */}
             
-              <object width="100%" height="400" data= {donateeProfile.income_docs} type="application/pdf">   </object>
+              <object width="100%" height="700" data= {donateeProfile.income_docs} type="application/pdf">   </object>
               
               {/* <iframe src={donateeProfile.income_docs} />              */}
               {/* <iframe src = {sample_pdf} /> */}

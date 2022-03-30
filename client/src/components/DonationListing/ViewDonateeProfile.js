@@ -55,7 +55,7 @@ const ViewDonateeProfile = () => {
        <Typography variant="h3">Date of Birth: {donateeDOB?.getDate()}/{donateeDOB?.getMonth()+1}/{donateeDOB?.getFullYear()}</Typography>
        <Typography variant="h3">Address: {listingCreator?.address}</Typography>
        <Typography variant="h3">Household Income Documents: 
-        <object width="100%" height="400" data= {listingCreator?.income_docs} type="application/pdf">   </object>
+        <object width="100%" height="900" data= {listingCreator?.income_docs} type="application/pdf">   </object>
        </Typography>
    </Stack>
 

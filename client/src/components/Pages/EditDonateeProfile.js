@@ -198,7 +198,7 @@ export const EditDonateeProfile = () => {
                             /></h2>
 
                             {/* Change to upload button  */}
-                            <h2> Household Income Documents</h2>
+                            <h2> Household Income Document: (Insert Only 1 PDF file)</h2>
                             <div className={classes.fileInput}>
                             <FileBase
                                 type="file"
@@ -208,10 +208,12 @@ export const EditDonateeProfile = () => {
                                 
                             />
                             </div>
+                            <br></br>
 
                             <Button onClick={handleSubmit} color="primary" variant="contained"  >
                                 Update
                             </Button>
+                            &nbsp;&nbsp;&nbsp;
                             <Button component={Link} to={{
                                 pathname: `/donateeProfile`,    
                             }} color="primary" variant="contained">             
