@@ -116,7 +116,7 @@ const Profile = () => {
             </Paper>
             <Paper>
               <label>Credit Card Number: </label>
-              <h4>{donorProfile.ccNum.substring(0,11) + "****"}</h4>
+              <h4>{donorProfile.ccNum?.substring(0,11) + "****"}</h4>
             </Paper>
             <Paper>
               <label>CSV: </label>
