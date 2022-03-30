@@ -21,7 +21,7 @@ const IndividualDonationListing = ({singleListing, index, showDonatedAmount, don
     return (
    
       <Grid item xs={4}>
-        <Card sx={{minWidth:"100%",height:"100%", my:2}}>
+        <Card sx={{minWidth:"100%",height:"100%", my:2, '&:hover': { color: "white", backgroundColor: "gray"}}}>
         <Link to={`/DisplayListings/${singleListing._id}`}  rel="noopener noreferrer" style={{ textDecoration: 'none', color:'black' }}>
         
             <Box sx={{ position: 'relative'}}>

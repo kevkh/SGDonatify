@@ -144,7 +144,7 @@ const IndividualDonationDetails = () => {
                         <Grid sx={{mt: 1}}>
                             { isAdmin
                               ? <Link to={`/Donatee/${listingCreatorId}/${id}`} style={{ textDecoration: 'none', color:'black' }}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 }}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row',gap:3, my:1 ,  '&:hover': { color: "white", backgroundColor: "gray"}}}>
                                         <Avatar  sx={{ height: '70px', width: '70px' }} src={listingCreator?.profile_pic} />
                                         <Box>
                                             <Box fontWeight="fontWeightBold" sx={{ fontSize: 'h5.fontSize', fontFamily: 'Monospace'}}>{listingCreator?.name}</Box>
