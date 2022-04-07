@@ -14,9 +14,5 @@ How to start?
 
 
 
--------------------------------------------------------------------------------------------------------------
-14/2 Bug fixes & Updates:
-- Some routing logic in navbar.js not updated (Will fix tonight)
-- Donatee profile also has some fetching error (will fix tonight)
 
 
